@@ -34,13 +34,11 @@ jobs:
     - name: Bootstrap
       shell: pwsh
       run: ./actions_bootstrap.ps1
-    - name: Retrieve Google API Key
-      shell: pwsh
-      env:
-        GoogleAPIKey: ${{ secrets.GoogleAPIKey }}
     - name: Test and Build
       shell: pwsh
       run: Invoke-Build -File .\src\pwshPlaces.build.ps1
+      env:
+        GoogleAPIKey: ${{ secrets.GoogleAPIKey }}
     - name: Upload pester results
       uses: actions/upload-artifact@v2
       with:
