@@ -2,7 +2,7 @@
 Module Name: pwshPlaces
 Module Guid: 9a9914bd-d115-4f42-bb5d-19c5e5561a3f
 Download Help Link: NA
-Help Version: 0.0.2
+Help Version: 0.0.9
 Locale: en-US
 ---
 
@@ -11,7 +11,19 @@ Locale: en-US
 tbd
 
 ## pwshPlaces Cmdlets
-### [Get-HelloWorld](Get-HelloWorld.md)
-Short description
+### [Find-GMapPlace](Find-GMapPlace.md)
+Find Place request takes a text input and returns a place. The input can be any kind of Places text data, such as a name, address, or phone number.
+
+### [Get-GMapPlaceDetail](Get-GMapPlaceDetail.md)
+Request more details about a particular establishment or point of interest
+
+### [Invoke-GMapGeoCode](Invoke-GMapGeoCode.md)
+Engages Geocoding API to return address and geographic coordinates based on provided query parameters.
+
+### [Search-GMapNearbyPlace](Search-GMapNearbyPlace.md)
+Nearby Search lets you search for places within a specified area. You can refine your search request by supplying keywords, type of place you are searching for and other parameters.
+
+### [Search-GMapText](Search-GMapText.md)
+A text search that returns information about a set of places based on provided string.
 
 

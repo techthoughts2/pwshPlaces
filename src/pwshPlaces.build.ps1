@@ -184,7 +184,11 @@ Add-BuildTask AnalyzeTests -After Analyze {
         $scriptAnalyzerParams = @{
             Path        = $script:TestsPath
             Setting     = 'PSScriptAnalyzerSettings.psd1'
-            ExcludeRule = 'PSUseDeclaredVarsMoreThanAssignments'
+            ExcludeRule = @(
+                'PSUseDeclaredVarsMoreThanAssignments'
+                'PSAvoidOverwritingBuiltInCmdlets'
+                'PSUseShouldProcessForStateChangingFunctions'
+            )
             Recurse     = $true
             Verbose     = $false
         }
@@ -244,7 +248,7 @@ Add-BuildTask Test {
     if (Test-Path -Path $script:UnitTestsPath) {
 
         $pesterConfiguration = [PesterConfiguration]::new()
-        $pesterConfiguration.run.Path = $script:TestsPath
+        $pesterConfiguration.run.Path = $script:UnitTestsPath
         $pesterConfiguration.Run.PassThru = $true
         $pesterConfiguration.Run.Exit = $false
         $pesterConfiguration.CodeCoverage.Enabled = $true
@@ -502,7 +506,7 @@ Add-BuildTask InfraTest {
 
 
         $pesterConfiguration = [PesterConfiguration]::new()
-        $pesterConfiguration.run.Path = 'Tests\Infrastructure'
+        $pesterConfiguration.run.Path = $script:InfraTestsPath
         $pesterConfiguration.Run.PassThru = $true
         $pesterConfiguration.Run.Exit = $false
         $pesterConfiguration.CodeCoverage.Enabled = $false
