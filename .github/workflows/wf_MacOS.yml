@@ -35,6 +35,7 @@ jobs:
       shell: pwsh
       run: ./actions_bootstrap.ps1
     - name: Retrieve Google API Key
+      shell: pwsh
       env:
         GoogleAPIKey: ${{ secrets.GoogleAPIKey }}
     - name: Test and Build

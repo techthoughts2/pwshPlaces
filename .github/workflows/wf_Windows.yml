@@ -41,6 +41,7 @@ jobs:
       shell: powershell
       run: ./actions_bootstrap.ps1
     - name: Retrieve Google API Key
+      shell: powershell
       env:
         GoogleAPIKey: ${{ secrets.GoogleAPIKey }}
     - name: Test and Build
