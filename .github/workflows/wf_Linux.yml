@@ -5,13 +5,18 @@
 # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions
 # https://github.com/actions/upload-artifact#where-does-the-upload-go
 name: pwshPlaces-Linux-Build
-on: [push, pull_request]
-  paths-ignore:
-    - '!docs/**'
-    - '!media/**'
-    - '!README.md'
-    - '!LICENSE'
-    - '!.github'
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'media/**'
+      - 'LICENSE'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - 'media/**'
+      - 'LICENSE'
+
 jobs:
   test:
     name: Run Tests
