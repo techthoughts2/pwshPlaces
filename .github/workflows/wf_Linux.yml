@@ -37,7 +37,7 @@ jobs:
       run: ./actions_bootstrap.ps1
     - name: Test and Build
       shell: pwsh
-      run: Invoke-Build -File .\src\tbd.build.ps1
+      run: Invoke-Build -File .\src\pwshPlaces.build.ps1
     - name: Upload pester results
       uses: actions/upload-artifact@v2
       with:
