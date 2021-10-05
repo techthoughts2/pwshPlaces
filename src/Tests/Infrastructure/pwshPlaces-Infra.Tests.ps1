@@ -23,10 +23,10 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     Language       = 'en'
                 }
                 $eval = Find-GMapPlace @findGMapPlaceSplat
-                $eval.place_id | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
-                $eval.name     | Should -BeExactly "Krause's Cafe"
-                $eval.Open     | Should -Not -BeNullOrEmpty
-                $eval.rating   | Should -Not -BeNullOrEmpty
+                $eval.place_id  | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
+                $eval.name      | Should -BeExactly "Krause's Cafe"
+                $eval.Open      | Should -Not -BeNullOrEmpty
+                $eval.rating    | Should -Not -BeNullOrEmpty
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
         } #context_Find-GMapPlace
@@ -59,12 +59,12 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
         Context 'Invoke-GMapGeoCode' {
             It 'should return the expected results for lat long lookup' {
                 $eval = Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, USA'
-                $eval.place_id.Count | Should -BeGreaterOrEqual 1
+                ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 1
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
             It 'should return the expected results for reverse geocoding' {
                 $eval = Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235'
-                $eval.place_id.Count | Should -BeGreaterThan 1
+                ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 1
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
             It 'should return expected results for place lookup' {
@@ -92,7 +92,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     AllSearchResults = $true
                 }
                 $eval = Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
-                $eval.place_id.Count | Should -BeGreaterOrEqual 20
+                ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 2
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
         } #context_Search-GMapNearbyPlace
@@ -111,7 +111,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     AllSearchResults = $true
                 }
                 $eval = Search-GMapText @searchGMapTextSplat
-                $eval.place_id.Count | Should -BeGreaterOrEqual 20
+                ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 20
             } #it
         } #context_Search-GMapText
     } #context_GoogleMaps

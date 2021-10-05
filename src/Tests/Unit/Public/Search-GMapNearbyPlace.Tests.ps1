@@ -85,7 +85,7 @@ InModuleScope 'pwshPlaces' {
 
             It 'should return expected results if no issues are encountered' {
                 $eval = Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -RankByDistance
-                $eval.Count | Should -BeExactly 2
+                ($eval | Measure-Object).Count | Should -BeExactly 2
                 $eval[0].Latitude | Should -BeExactly '29.7013856'
                 $eval[0].Longitude | Should -BeExactly '-98.1249258'
             } #it

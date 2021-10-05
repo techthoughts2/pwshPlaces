@@ -54,7 +54,7 @@ InModuleScope 'pwshPlaces' {
                     $geoLatLong
                 } #endMock
                 $eval = Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -Language 'en' -RegionBias 'us'
-                $eval.Count | Should -BeExactly 2
+                ($eval | Measure-Object).Count | Should -BeExactly 2
                 $eval[0].Latitude | Should -BeExactly '29.7012853'
                 $eval[0].Longitude | Should -BeExactly '-98.1250235'
             } #it

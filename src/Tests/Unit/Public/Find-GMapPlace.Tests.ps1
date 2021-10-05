@@ -51,7 +51,7 @@ InModuleScope 'pwshPlaces' {
 
             It 'should return expected results if no issues are encountered' {
                 $eval = Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
-                $eval.Count | Should -BeExactly 1
+                ($eval | Measure-Object).Count | Should -BeExactly 1
                 $eval[0].Latitude | Should -BeExactly '29.7013856'
                 $eval[0].Longitude | Should -BeExactly '-98.1249258'
             } #it

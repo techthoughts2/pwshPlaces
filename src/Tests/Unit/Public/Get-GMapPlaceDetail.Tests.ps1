@@ -51,7 +51,7 @@ InModuleScope 'pwshPlaces' {
 
             It 'should return expected results if no issues are encountered' {
                 $eval = Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
-                $eval.Count | Should -BeExactly 1
+                ($eval | Measure-Object).Count | Should -BeExactly 1
                 $eval.place_id              | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
                 $eval.name                  | Should -BeExactly 'Krause''s Cafe'
                 $eval.website               | Should -BeExactly 'https://www.krausescafe.com/'
