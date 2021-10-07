@@ -17,7 +17,7 @@ InModuleScope 'pwshPlaces' {
     #-------------------------------------------------------------------------
     $WarningPreference = "SilentlyContinue"
     #-------------------------------------------------------------------------
-    Describe 'Format-GMapPlaceDetail' -Tag Unit {
+    Describe 'Format-BingGeoCode' -Tag Unit {
         BeforeAll {
             $WarningPreference = 'SilentlyContinue'
             $ErrorActionPreference = 'SilentlyContinue'
@@ -30,21 +30,18 @@ InModuleScope 'pwshPlaces' {
             # } #beforeEach
 
             It 'should return the expected results' {
-                $eval = ($placeDetailsGMap.result | Format-GMapPlaceDetail)
-                $eval.place_id              | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
-                $eval.name                  | Should -BeExactly 'Krause''s Cafe'
-                $eval.website               | Should -BeExactly 'https://www.krausescafe.com/'
-                $eval.Address               | Should -BeExactly '148 S Castell Ave, New Braunfels, TX 78130, United States'
-                $eval.Phone                 | Should -BeExactly '(830) 625-2807'
-                $eval.Open                  | Should -BeExactly 'False'
-                $eval.GoogleMapsURL         | Should -BeExactly 'https://maps.google.com/?cid=6720415583914850961'
-                $eval.rating                | Should -BeExactly '4.3'
-                $eval.user_ratings_total    | Should -BeExactly '3697'
-                $eval.price_level           | Should -BeExactly '2'
-                $eval.Latitude              | Should -BeExactly '29.7013856'
-                $eval.Longitude             | Should -BeExactly '-98.1249258'
+                $eval = ($geoBingAddress.resourceSets.resources | Format-BingGeoCode)
+                $eval.name              | Should -BeExactly '148 S Castell Ave, New Braunfels, TX 78130'
+                $eval.formatted_address | Should -BeExactly '148 S Castell Ave, New Braunfels, TX 78130'
+                $eval.Street            | Should -BeExactly '148 S Castell Ave'
+                $eval.City              | Should -BeExactly 'New Braunfels'
+                $eval.Country           | Should -BeExactly 'United States'
+                $eval.PostalCode        | Should -BeExactly '78130'
+                $eval.Latitude          | Should -BeExactly '29.701293'
+                $eval.Longitude         | Should -BeExactly '-98.12502'
+                $eval.entityType        | Should -BeExactly 'Address'
             } #it
 
         } #context_Success
-    } #describe_Format-GMapPlaceDetail
+    } #describe_Format-BingGeoCode
 } #inModule

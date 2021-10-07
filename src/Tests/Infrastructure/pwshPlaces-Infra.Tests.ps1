@@ -115,4 +115,18 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
             } #it
         } #context_Search-GMapText
     } #context_GoogleMaps
+    Context 'Bing Maps Function Tests' {
+        Context 'Invoke-BingGeoCode' {
+            It 'should return the expected results for lat long lookup' {
+                $eval = Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130
+                ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
+                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+            } #it
+            It 'should return the expected results for reverse geocoding' {
+                $eval = Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245'
+                ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
+                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+            } #it
+        } #context_Invoke-GMapGeoCode
+    } #context_BingMaps
 } #describe_infra_tests

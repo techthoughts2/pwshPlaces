@@ -39,6 +39,8 @@ jobs:
       run: Invoke-Build -File .\src\pwshPlaces.build.ps1
       env:
         GoogleAPIKey: ${{ secrets.GoogleAPIKey }}
+      env:
+        BingAPIKey: ${{ secrets.BingAPIKey }}
     - name: Upload pester results
       uses: actions/upload-artifact@v2
       with:

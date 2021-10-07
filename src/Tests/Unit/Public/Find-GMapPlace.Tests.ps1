@@ -21,7 +21,7 @@ InModuleScope 'pwshPlaces' {
         } #beforeAll
         BeforeEach {
             Mock -CommandName Invoke-RestMethod -MockWith {
-                $findplaceBasic
+                $findGMapPlaceBasic
             } #endMock
         }
         Context 'Error' {

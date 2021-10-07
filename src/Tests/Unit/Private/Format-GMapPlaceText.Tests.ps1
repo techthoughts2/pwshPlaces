@@ -30,7 +30,7 @@ InModuleScope 'pwshPlaces' {
             # } #beforeEach
 
             It 'should return the expected results' {
-                $eval = ($textSearch.results[0] | Format-GMapPlaceText )
+                $eval = ($textSearchGMap.results[0] | Format-GMapPlaceText )
                 $eval.place_id              | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
                 $eval.name                  | Should -BeExactly 'Krause''s Cafe'
                 $eval.Address               | Should -BeExactly '148 S Castell Ave, New Braunfels, TX 78130, United States'

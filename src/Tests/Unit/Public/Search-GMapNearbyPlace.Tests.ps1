@@ -23,7 +23,7 @@ InModuleScope 'pwshPlaces' {
         } #beforeAll
         BeforeEach {
             Mock -CommandName Invoke-RestMethod -MockWith {
-                $nearby
+                $nearbyGMap
             } #endMock
         }
         Context 'Error' {
@@ -53,7 +53,7 @@ InModuleScope 'pwshPlaces' {
                 $mockInvoke = {
                     $script:mockCalled++
                     if ($script:mockCalled -eq 1) {
-                        return $nearby
+                        return $nearbyGMap
                     }
                     elseif ($script:mockCalled -eq 2) {
                         throw 'Fake Error'
@@ -111,7 +111,7 @@ InModuleScope 'pwshPlaces' {
                 $mockInvoke = {
                     $script:mockCalled++
                     if ($script:mockCalled -eq 1) {
-                        return $nearby
+                        return $nearbyGMap
                     }
                     elseif ($script:mockCalled -eq 2) {
                         $mockObj = [PSCustomObject]@{

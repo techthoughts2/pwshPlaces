@@ -2,7 +2,7 @@
 Module Name: pwshPlaces
 Module Guid: 9a9914bd-d115-4f42-bb5d-19c5e5561a3f
 Download Help Link: NA
-Help Version: 0.5.0
+Help Version: 0.5.1
 Locale: en-US
 ---
 
@@ -16,6 +16,9 @@ Find Place request takes a text input and returns a place. The input can be any 
 
 ### [Get-GMapPlaceDetail](Get-GMapPlaceDetail.md)
 Request more details about a particular establishment or point of interest
+
+### [Invoke-BingGeoCode](Invoke-BingGeoCode.md)
+Engages Bing Maps API to return address and geographic coordinates based on provided query parameters.
 
 ### [Invoke-GMapGeoCode](Invoke-GMapGeoCode.md)
 Engages Geocoding API to return address and geographic coordinates based on provided query parameters.

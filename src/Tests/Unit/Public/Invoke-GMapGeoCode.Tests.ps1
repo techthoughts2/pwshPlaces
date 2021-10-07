@@ -21,7 +21,7 @@ InModuleScope 'pwshPlaces' {
         } #beforeAll
         BeforeEach {
             Mock -CommandName Invoke-RestMethod -MockWith {
-                $geoAddress
+                $geoGMapAddress
             } #endMock
         }
         Context 'Error' {
@@ -51,7 +51,7 @@ InModuleScope 'pwshPlaces' {
 
             It 'should return expected results if no issues are encountered' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
-                    $geoLatLong
+                    $geoGMapLatLong
                 } #endMock
                 $eval = Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -Language 'en' -RegionBias 'us'
                 ($eval | Measure-Object).Count | Should -BeExactly 2

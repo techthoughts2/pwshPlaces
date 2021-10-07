@@ -30,7 +30,7 @@ InModuleScope 'pwshPlaces' {
             # } #beforeEach
 
             It 'should return the expected results' {
-                $eval = ($geoAddress.results | Format-GMapGeoCode)
+                $eval = ($geoGMapAddress.results | Format-GMapGeoCode)
                 $eval.place_id          | Should -BeExactly 'ChIJK34phme9XIYRqstHW_gHr2w'
                 $eval.formatted_address | Should -BeExactly '148 S Castell Ave, New Braunfels, TX 78130, USA'
                 $eval.StreetNumber      | Should -BeExactly '148'

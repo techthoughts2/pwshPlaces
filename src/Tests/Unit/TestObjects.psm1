@@ -1,6 +1,8 @@
-﻿#region findPlace
+﻿#region Gmap
 
-$findplaceBasic = [PSCustomObject]@{
+#region findPlace
+
+$findGMapPlaceBasic = [PSCustomObject]@{
     candidates = [PSCustomObject]@{
         business_status       = 'OPERATIONAL'
         formatted_address     = '148 S Castell Ave, New Braunfels, TX 78130, United States'
@@ -40,7 +42,7 @@ $findplaceBasic = [PSCustomObject]@{
     status     = 'OK'
 }
 
-$findplaceAtmosphere = [PSCustomObject]@{
+$findGMapPlaceAtmosphere = [PSCustomObject]@{
     candidates = [PSCustomObject]@{
         business_status       = 'OPERATIONAL'
         formatted_address     = '148 S Castell Ave, New Braunfels, TX 78130, United States'
@@ -83,7 +85,7 @@ $findplaceAtmosphere = [PSCustomObject]@{
     status     = 'OK'
 }
 
-$findplaceContact = [PSCustomObject]@{
+$findGMapPlaceContact = [PSCustomObject]@{
     candidates = [PSCustomObject]@{
         business_status       = 'OPERATIONAL'
         formatted_address     = '148 S Castell Ave, New Braunfels, TX 78130, United States'
@@ -126,7 +128,7 @@ $findplaceContact = [PSCustomObject]@{
     status     = 'OK'
 }
 
-$findplaceAll = [PSCustomObject]@{
+$findGMapPlaceAll = [PSCustomObject]@{
     candidates = [PSCustomObject]@{
         business_status       = 'OPERATIONAL'
         formatted_address     = '148 S Castell Ave, New Braunfels, TX 78130, United States'
@@ -176,7 +178,7 @@ $findplaceAll = [PSCustomObject]@{
 
 #region GeoCode
 
-$geoAddress = [PSCustomObject]@{
+$geoGMapAddress = [PSCustomObject]@{
     results = [PSCustomObject]@{
         address_components = @(
             [PSCustomObject]@{
@@ -283,7 +285,7 @@ $geoAddress = [PSCustomObject]@{
     status  = 'OK'
 }
 
-$geoLatLong = [PSCustomObject]@{
+$geoGMapLatLong = [PSCustomObject]@{
     plus_code = [PSCustomObject]@{
         compound_code = 'PV2F+GX New Braunfels, TX, USA'
         global_code   = '76X3PV2F+GX'
@@ -471,7 +473,7 @@ $geoLatLong = [PSCustomObject]@{
     status    = 'OK'
 }
 
-$geoPlaceID = [PSCustomObject]@{
+$geoGMapPlaceID = [PSCustomObject]@{
     results = [PSCustomObject]@{
         address_components = @(
             [PSCustomObject]@{
@@ -580,7 +582,7 @@ $geoPlaceID = [PSCustomObject]@{
 
 #endregion
 
-$nearby = [PSCustomObject]@{
+$nearbyGMap = [PSCustomObject]@{
     html_attributions = ''
     next_page_token   = 'toooooken'
     status            = 'OK'
@@ -673,7 +675,7 @@ $nearby = [PSCustomObject]@{
     )
 }
 
-$textSearch = [PSCustomObject]@{
+$textSearchGMap = [PSCustomObject]@{
     html_attributions = ''
     next_page_token   = 'toooooken'
     status            = 'OK'
@@ -767,7 +769,7 @@ $textSearch = [PSCustomObject]@{
     )
 }
 
-$placeDetails = [PSCustomObject]@{
+$placeDetailsGMap = [PSCustomObject]@{
     html_attributions = ''
     result            = [PSCustomObject]@{
         address_components     = @(
@@ -969,5 +971,85 @@ $placeDetails = [PSCustomObject]@{
     }
     status            = 'OK'
 }
+
+#endregion
+
+#region BingMap
+
+#region GeoCode
+
+$geoBingAddress = [PSCustomObject]@{
+    authenticationResultCode = 'ValidCredentials'
+    brandLogoUri             = 'http://dev.virtualearth.net/Branding/logo_powered_by.png'
+    copyright                = 'Copyright © 2021 Microsoft and its suppliers. All rights reserved. This API
+                                cannot be accessed and the content and any results may not be used, reproduced
+                                or transmitted in any manner without express written permission from Microsoft
+                                Corporation.'
+    resourceSets             = [PSCustomObject]@{
+        estimatedTotal = 1
+        resources      = [PSCustomObject]@{
+            '__type'      = 'Location:http://schemas.microsoft.com/search/local/ws/rest/v1'
+            bbox          = @(
+                '29.6974302824293',
+                '-98.1309490484719',
+                '29.7051557175707',
+                '-98.1190909515281'
+            )
+            name          = '148 S Castell Ave, New Braunfels, TX 78130'
+            point         = [PSCustomObject]@{
+                type        = 'Point'
+                coordinates = @(
+                    29.701293
+                    -98.12502
+                )
+            }
+            address       = [PSCustomObject]@{
+                addressLine      = '148 S Castell Ave'
+                adminDistrict    = 'TX'
+                adminDistrict2   = 'Comal County'
+                countryRegion    = 'United States'
+                formattedAddress = '148 S Castell Ave, New Braunfels, TX 78130'
+                locality         = 'New Braunfels'
+                postalCode       = '78130'
+            }
+            confidence    = 'High'
+            entityType    = 'Address'
+            geocodePoints = @(
+                [PSCustomObject]@{
+                    type              = 'Point'
+                    coordinates       = @(
+                        29.701293
+                        -98.12502
+                    )
+                    calculationMethod = 'Rooftop'
+                    usageTypes        = @(
+                        'Display'
+                    )
+                }
+                [PSCustomObject]@{
+                    type              = 'Point'
+                    coordinates       = @(
+                        29.7015261
+                        -98.124818
+                    )
+                    calculationMethod = 'Rooftop'
+                    usageTypes        = @(
+                        'Route'
+                    )
+                }
+            )
+            matchCodes    = @(
+                'Good'
+            )
+        }
+    }
+    statusCode               = '200'
+    statusDescription        = 'OK'
+    traceId                  = 'xxxxxxxxxxxxxxxxx|XXXXXXX|0.0.0.1|Ref A:XXXXXXXXXXXXX Ref B: XXXXXXXXX Ref C: 2021-10-06T03:08:54Z'
+}
+
+#endregion
+
+#endregion
 
 Export-ModuleMember -Variable '*'
