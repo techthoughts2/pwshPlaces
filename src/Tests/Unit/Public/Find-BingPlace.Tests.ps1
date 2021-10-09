@@ -14,14 +14,14 @@ Import-Module $PathToManifest -Force
 #-------------------------------------------------------------------------
 
 InModuleScope 'pwshPlaces' {
-    Describe 'Invoke-BingGeoCode' -Tag Unit {
+    Describe 'Find-BingPlace' -Tag Unit {
         BeforeAll {
             $WarningPreference = 'SilentlyContinue'
             $ErrorActionPreference = 'SilentlyContinue'
         } #beforeAll
         BeforeEach {
             Mock -CommandName Invoke-RestMethod -MockWith {
-                $geoBingAddress
+                $findBingPlace
             } #endMock
         }
         Context 'Error' {
@@ -30,7 +30,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 } | Should -Throw
+                { Find-BingPlace -Query 'cafe' } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -41,7 +41,7 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us
+                Find-BingPlace -Query 'cafe'
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -60,40 +60,47 @@ InModuleScope 'pwshPlaces' {
                         statusDescription = 'OK'
                     }
                 } #endMock
-                Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us
+                Find-BingPlace -Query 'cafe'
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
             It 'should return expected results if no issues are encountered' {
-                $eval = Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us
-                $eval.Latitude | Should -BeExactly '29.701293'
-                $eval.Longitude | Should -BeExactly '-98.12502'
+                $eval = Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+                ($eval | Measure-Object).Count | Should -BeExactly 1
+                $eval.Latitude | Should -BeExactly '29.7015113830566'
+                $eval.Longitude | Should -BeExactly '-98.1247940063477'
             } #it
 
-            It 'should call the API with the expected parameters with address' {
+            #  jake- put all the things here
+            It 'should call the API with the expected parameters when all options are provided' {
                 Mock -CommandName Invoke-RestMethod {
-                    $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/Locations?output=json*'
-                    $Uri | Should -BeLike '*addressLine=*'
-                    $Uri | Should -BeLike '*locality=*'
-                    $Uri | Should -BeLike '*adminDistrict=*'
-                    $Uri | Should -BeLike '*postalCode=*'
-                    $Uri | Should -BeLike '*countryRegion=*'
+                    $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/LocalSearch?output=json*'
+                    $Uri | Should -BeLike '*query=*'
+                    $Uri | Should -BeLike '*userLocation=*'
+                    $Uri | Should -BeLike '*culture=en*'
                     $Uri | Should -BeLike '*maxResults=*'
-                    $Uri | Should -BeLike '*culture=*'
                 } -Verifiable
-                Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20
+                Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
                 Assert-VerifiableMock
             } #it
 
-            It 'should call the API with the expected parameters with location' {
+            It 'should call the API with the expected parameters with circle' {
                 Mock -CommandName Invoke-RestMethod {
-                    $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/Locations/29.7030,-98.1245?output=json*'
+                    $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/LocalSearch?output=json*userCircularMapView=*'
                 } -Verifiable
-                Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245'
+                Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+                Assert-VerifiableMock
+            } #it
+
+            It 'should call the API with the expected parameters with rectangle' {
+                Mock -CommandName Invoke-RestMethod {
+                    $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/LocalSearch?output=json*userMapView=*'
+                } -Verifiable
+                Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -Region us
                 Assert-VerifiableMock
             } #it
 
         } #context_Success
-    } #describe_Invoke-BingGeoCode
+    } #describe_Find-BingPlace
 } #inModule

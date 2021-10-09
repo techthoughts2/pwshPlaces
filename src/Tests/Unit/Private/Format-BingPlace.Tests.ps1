@@ -17,7 +17,7 @@ InModuleScope 'pwshPlaces' {
     #-------------------------------------------------------------------------
     $WarningPreference = "SilentlyContinue"
     #-------------------------------------------------------------------------
-    Describe 'Format-BingGeoCode' -Tag Unit {
+    Describe 'Format-BingPlace' -Tag Unit {
         BeforeAll {
             $WarningPreference = 'SilentlyContinue'
             $ErrorActionPreference = 'SilentlyContinue'
@@ -30,18 +30,16 @@ InModuleScope 'pwshPlaces' {
             # } #beforeEach
 
             It 'should return the expected results' {
-                $eval = ($geoBingAddress.resourceSets.resources | Format-BingGeoCode)
-                $eval.name              | Should -BeExactly '148 S Castell Ave, New Braunfels, TX 78130'
-                $eval.FormattedAddress  | Should -BeExactly '148 S Castell Ave, New Braunfels, TX 78130'
-                $eval.Street            | Should -BeExactly '148 S Castell Ave'
-                $eval.City              | Should -BeExactly 'New Braunfels'
-                $eval.Country           | Should -BeExactly 'United States'
-                $eval.PostalCode        | Should -BeExactly '78130'
-                $eval.Latitude          | Should -BeExactly '29.701293'
-                $eval.Longitude         | Should -BeExactly '-98.12502'
-                $eval.entityType        | Should -BeExactly 'Address'
+                $eval = ($findBingPlace.resourceSets.resources | Format-BingPlace)
+                $eval.name                  | Should -BeExactly 'Krause''s Cafe'
+                $eval.formattedAddress      | Should -BeExactly '148 S Castell Ave, New Braunfels, TX, 78130'
+                $eval.PhoneNumber           | Should -BeExactly '(830) 625-2807'
+                $eval.Website               | Should -BeExactly 'https://www.krausescafe.com/'
+                $eval.Latitude              | Should -BeExactly '29.7015113830566'
+                $eval.Longitude             | Should -BeExactly '-98.1247940063477'
+                $eval.entityType            | Should -BeExactly 'Restaurant'
             } #it
 
         } #context_Success
-    } #describe_Format-BingGeoCode
+    } #describe_Format-BingPlace
 } #inModule

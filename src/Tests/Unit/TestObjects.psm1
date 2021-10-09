@@ -1050,6 +1050,56 @@ $geoBingAddress = [PSCustomObject]@{
 
 #endregion
 
+$findBingPlace = [PSCustomObject]@{
+    authenticationResultCode = 'ValidCredentials'
+    brandLogoUri             = 'http://dev.virtualearth.net/Branding/logo_powered_by.png'
+    copyright                = 'Copyright © 2021 Microsoft and its suppliers. All rights reserved. This API
+                                cannot be accessed and the content and any results may not be used, reproduced
+                                or transmitted in any manner without express written permission from Microsoft
+                                Corporation.'
+    resourceSets             = [PSCustomObject]@{
+        estimatedTotal = 1
+        resources      = [PSCustomObject]@{
+            '__type'      = 'Location:http://schemas.microsoft.com/search/local/ws/rest/v1'
+            name          = "Krause's Cafe"
+            point         = [PSCustomObject]@{
+                type        = 'Point'
+                coordinates = @(
+                    29.7015113830566
+                    -98.1247940063477
+                )
+            }
+            address       = [PSCustomObject]@{
+                addressLine      = '148 S Castell Ave'
+                adminDistrict    = 'TX'
+                countryRegion    = 'US'
+                formattedAddress = '148 S Castell Ave, New Braunfels, TX, 78130'
+                locality         = 'New Braunfels'
+                postalCode       = '78130'
+            }
+            PhoneNumber   = '(830) 625-2807'
+            Website       = 'https://www.krausescafe.com/'
+            entityType    = 'Restaurant'
+            geocodePoints = @(
+                [PSCustomObject]@{
+                    type              = 'Point'
+                    coordinates       = @(
+                        29.7013301849365
+                        -98.1249465942383
+                    )
+                    calculationMethod = 'Rooftop'
+                    usageTypes        = @(
+                        'Display'
+                    )
+                }
+            )
+        }
+    }
+    statusCode               = '200'
+    statusDescription        = 'OK'
+    traceId                  = 'xxxxxxxxxxxxxxxxx|XXXXXXX|0.0.0.1|Ref A:XXXXXXXXXXXXX Ref B: XXXXXXXXX Ref C: 2021-10-06T03:08:54Z'
+}
+
 #endregion
 
 Export-ModuleMember -Variable '*'

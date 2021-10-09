@@ -128,5 +128,19 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
         } #context_Invoke-GMapGeoCode
+        Context 'Find-BingPlace' {
+            It 'should return the expected results' {
+                $findBingPlaceSplat = @{
+                    Query          = 'cafe'
+                    PointLatitude  = '29.7049806'
+                    PointLongitude = '-98.068343'
+                    Language       = 'en'
+                    MaxResults     = 20
+                }
+                $eval = Find-BingPlace @findBingPlaceSplat
+                ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
+                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+            } #it
+        } #context_Find-BingPlace
     } #context_BingMaps
 } #describe_infra_tests

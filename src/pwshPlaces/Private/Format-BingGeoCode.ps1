@@ -39,7 +39,7 @@ function Format-BingGeoCode {
         $updateTypeDataSplat = @{
             TypeName   = 'Bing.GeoCode'
             MemberType = 'ScriptProperty'
-            MemberName = 'formatted_address'
+            MemberName = 'FormattedAddress'
             Value      = { $this.address.formattedAddress }
             Force      = $true
         }
@@ -102,7 +102,7 @@ function Format-BingGeoCode {
         # set a default display of the above properties, all other properties are still there just not displayed
         $updateTypeDataSplat = @{
             TypeName                  = 'Bing.GeoCode'
-            DefaultDisplayPropertySet = 'name', 'formatted_address', 'Street', 'City', 'Country', 'PostalCode', 'Latitude', 'Longitude', 'entityType'
+            DefaultDisplayPropertySet = 'name', 'FormattedAddress', 'Street', 'City', 'Country', 'PostalCode', 'Latitude', 'Longitude', 'entityType'
             DefaultKeyPropertySet     = 'name'
             Force                     = $true
         }

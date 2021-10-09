@@ -12,7 +12,7 @@
     RootModule        = 'pwshPlaces.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.5.1'
+    ModuleVersion     = '0.5.2'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -70,6 +70,7 @@
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     FunctionsToExport = @(
+        'Find-BingPlace'
         'Find-GMapPlace'
         'Get-GMapPlaceDetail'
         'Invoke-BingGeoCode'
@@ -106,12 +107,19 @@
                 'API',
                 'Area',
                 'Atmosphere',
+                'Bing',
+                'BingMap'
+                'BingMaps',
                 'Contact',
                 'Find',
+                'FindLocation',
                 'FindPlace',
                 'Geo',
+                'Geoencode',
+                'Geoencoding',
                 'Geolocation',
                 'Google',
+                'GoogleMap',
                 'GoogleMaps',
                 'GMap',
                 'GMaps',
@@ -121,7 +129,9 @@
                 'Place',
                 'Places',
                 'Map',
+                'MapAPI',
                 'Maps',
+                'MapsAPI',
                 'Rating',
                 'Ratings',
                 'Search',

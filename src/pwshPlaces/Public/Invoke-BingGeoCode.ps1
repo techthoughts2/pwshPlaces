@@ -157,7 +157,7 @@ function Invoke-BingGeoCode {
     }
     if ($Language) {
         Write-Debug -Message ('Language: {0}' -f $Language)
-        $fLanguage = '&language={0}' -f $Language
+        $fLanguage = '&culture={0}' -f $Language
         $uri += $fLanguage
     }
 
@@ -180,7 +180,11 @@ function Invoke-BingGeoCode {
     }
 
     if ($results.statusDescription -ne 'OK') {
-        Write-Warning -Message 'Did not get a succcessful return from Bing Geocode API endpoint'
+        Write-Warning -Message 'Did not get a succcessful return from Bing Location API endpoint'
+        $finalResults = $results
+    }
+    elseif (-not ($results.resourceSets.estimatedTotal -ge 1)) {
+        Write-Warning -Message 'No results returned from query'
         $finalResults = $results
     }
     else {

@@ -45,4 +45,6 @@ Culture Parameter
     &c=
 User Context Parameters
     https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/user-context-parameters
+Types
+    https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/type-identifiers/
 #>

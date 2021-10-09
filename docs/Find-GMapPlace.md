@@ -106,7 +106,7 @@ Returns place information for the query location biased by rectangular two lat/l
 Find-GMapPlace -Query '+18306252807' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Contact -Atmosphere -Language en
 ```
 
-Returns place information for the query location biased by provided lat/long point with additional Contact and Atmosphere fields with results in Enlgish.
+Returns place information for the query location biased by provided lat/long point with additional Contact and Atmosphere fields with results in English.
 
 ### EXAMPLE 9
 ```
@@ -121,7 +121,7 @@ $findGMapPlaceSplat = @{
 Find-GMapPlace @findGMapPlaceSplat
 ```
 
-Returns place information for the query location biased by provided lat/long point with additional Contact and Atmosphere fields with results in Enlgish.
+Returns place information for the query location biased by provided lat/long point with additional Contact and Atmosphere fields with results in English.
 
 ## PARAMETERS
 
