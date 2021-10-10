@@ -14,6 +14,10 @@
 
     Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
 .EXAMPLE
+    Invoke-BingGeoCode -Query 'The Alamo'
+
+    Searches for provided query and if a match is found will return Geocoding (latitude/longitude lookup) of the results.
+.EXAMPLE
     Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20
 
     Performs Geocoding (latitude/longitude lookup) on provided address. Results are biased to the United States country. Results are returned in English. Up to 20 results are returned.
@@ -44,6 +48,8 @@
     Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
 .PARAMETER Longitude
     Geographic coordinate that specifies the east–west position of a point on the Earths surface.
+.PARAMETER Query
+    A string that contains information about a location, such as an address or landmark name.
 .PARAMETER Language
     The language in which to return results.
 .PARAMETER MaxResults
@@ -55,6 +61,10 @@
 
     Example:
         http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}
+
+    While the Bing Location API does support a text query option, I have found it to be fairly unreliable.
+    For GeoCode info stick to Addresses and Lat/Long for reverse Geocoding.
+    For Text Queries use other Bing Maps functions.
 .COMPONENT
     pwshPlaces
 .LINK
@@ -114,6 +124,12 @@ function Invoke-BingGeoCode {
         [ValidateNotNullOrEmpty()]
         [string]$Longitude,
 
+        [Parameter(Mandatory = $true,
+            ParameterSetName = 'textquery',
+            HelpMessage = 'A string that contains information about a location, such as an address or landmark name')]
+        [ValidateNotNullOrEmpty()]
+        [string]$Query,
+
         [Parameter(Mandatory = $false,
             HelpMessage = 'The language in which to return results')]
         [languages]$Language,
@@ -148,6 +164,13 @@ function Invoke-BingGeoCode {
             $uri = '{0}{1}' -f $bingMapsBaseURI, $latLong
             Write-Debug -Message ('Base function URI: {0}' -f $uri)
         } #location
+        'textquery' {
+            Write-Debug -Message 'Query specified'
+            $uri = '{0}{1}' -f $bingMapsBaseURI, 'v1/Locations?output=json'
+            Write-Debug -Message ('Base function URI: {0}' -f $uri)
+            $fQuery = '&query={0}' -f [uri]::EscapeDataString($Query)
+            $uri += $fQuery
+        } #textquery
     } #switch_parametersetname
 
     if ($MaxResults) {

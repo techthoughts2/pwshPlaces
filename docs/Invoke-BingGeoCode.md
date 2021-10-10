@@ -24,6 +24,11 @@ Invoke-BingGeoCode -Latitude <String> -Longitude <String> [-Language <languages>
  [<CommonParameters>]
 ```
 
+### textquery
+```
+Invoke-BingGeoCode -Query <String> [-Language <languages>] [-MaxResults <Int32>] [<CommonParameters>]
+```
+
 ## DESCRIPTION
 Geocoding is the process of converting addresses addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
 This function can take in an address and return coordinate information.
@@ -47,6 +52,13 @@ Performs Reverse geocoding (address lookup) on provided coordinates and can retu
 
 ### EXAMPLE 3
 ```
+Invoke-BingGeoCode -Query 'The Alamo'
+```
+
+Searches for provided query and if a match is found will return Geocoding (latitude/longitude lookup) of the results.
+
+### EXAMPLE 4
+```
 Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20
 ```
 
@@ -55,7 +67,7 @@ Results are biased to the United States country.
 Results are returned in English.
 Up to 20 results are returned.
 
-### EXAMPLE 4
+### EXAMPLE 5
 ```
 $invokeBingGeoCodeSplat = @{
     AddressLine = '148 S Castell Ave'
@@ -184,6 +196,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Query
+A string that contains information about a location, such as an address or landmark name.
+
+```yaml
+Type: String
+Parameter Sets: textquery
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Language
 The language in which to return results.
 
@@ -230,6 +257,10 @@ Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
 Example:
     http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}
+
+While the Bing Location API does support a text query option, I have found it to be fairly unreliable.
+For GeoCode info stick to Addresses and Lat/Long for reverse Geocoding.
+For Text Queries use other Bing Maps functions.
 
 ## RELATED LINKS
 

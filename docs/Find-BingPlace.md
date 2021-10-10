@@ -105,8 +105,7 @@ Returns place information for the query location biased by provided lat/long poi
 ## PARAMETERS
 
 ### -Query
-Text input that identifies the search target, such as a name, address, or phone number.
-Phone numbers must be in international format (prefixed by a plus sign ("+"), followed by the country code, then the phone number itself)
+A string that contains information about a location, such as an address or landmark name.
 
 ```yaml
 Type: String
