@@ -156,5 +156,17 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
         } #context_Find-BingPlace
+        Context 'Find-BingTimeZone' {
+            It 'should return the expected results' {
+                $findBingTimeZoneSplat = @{
+                    PointLatitude  = '29.70'
+                    PointLongitude = '-98.11'
+                }
+                $eval = Find-BingTimeZone @findBingTimeZoneSplat
+                $eval.TimeZoneName  | Should -BeExactly 'Central Standard Time'
+                $eval.TimeZoneShort | Should -BeExactly 'CST'
+                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+            } #it
+        } #context_Find-BingPlace
     } #context_BingMaps
 } #describe_infra_tests

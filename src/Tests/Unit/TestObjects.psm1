@@ -1100,6 +1100,71 @@ $findBingPlace = [PSCustomObject]@{
     traceId                  = 'xxxxxxxxxxxxxxxxx|XXXXXXX|0.0.0.1|Ref A:XXXXXXXXXXXXX Ref B: XXXXXXXXX Ref C: 2021-10-06T03:08:54Z'
 }
 
+$findBingTimeZone = [PSCustomObject]@{
+    authenticationResultCode = 'ValidCredentials'
+    brandLogoUri             = 'http://dev.virtualearth.net/Branding/logo_powered_by.png'
+    copyright                = 'Copyright © 2021 Microsoft and its suppliers. All rights reserved. This API
+                                cannot be accessed and the content and any results may not be used, reproduced
+                                or transmitted in any manner without express written permission from Microsoft
+                                Corporation.'
+    resourceSets             = [PSCustomObject]@{
+        estimatedTotal = 1
+        resources      = [PSCustomObject]@{
+            '__type'           = 'RESTTimeZone:http://schemas.microsoft.com/search/local/ws/rest/v1'
+            timeZoneAtLocation = [PSCustomObject]@{
+                placeName = 'New Braunfels, TX'
+                timeZone  = [PSCustomObject]@{
+                    genericName       = 'Central Standard Time'
+                    abbreviation      = 'CST'
+                    ianaTimeZoneId    = 'America/Chicago'
+                    windowsTimeZoneId = 'Central Standard Time'
+                    utcOffset         = '-6:00'
+                    convertedTime     = [PSCustomObject]@{
+                        localTime           = '10/10/21 10:58:29'
+                        utcOffsetWithDst    = '-5:00'
+                        timeZoneDisplayName = 'Central Daylight Time'
+                        timeZoneDisplayAbbr = 'CDT'
+                    }
+                }
+            }
+        }
+    }
+    statusCode               = '200'
+    statusDescription        = 'OK'
+    traceId                  = 'xxxxxxxxxxxxxxxxx|XXXXXXX|0.0.0.1|Ref A:XXXXXXXXXXXXX Ref B: XXXXXXXXX Ref C: 2021-10-06T03:08:54Z'
+}
+
+$findBingTimeZonePoint = [PSCustomObject]@{
+    authenticationResultCode = 'ValidCredentials'
+    brandLogoUri             = 'http://dev.virtualearth.net/Branding/logo_powered_by.png'
+    copyright                = 'Copyright © 2021 Microsoft and its suppliers. All rights reserved. This API
+                                cannot be accessed and the content and any results may not be used, reproduced
+                                or transmitted in any manner without express written permission from Microsoft
+                                Corporation.'
+    resourceSets             = [PSCustomObject]@{
+        estimatedTotal = 1
+        resources      = [PSCustomObject]@{
+            '__type' = 'RESTTimeZone:http://schemas.microsoft.com/search/local/ws/rest/v1'
+            timeZone = [PSCustomObject]@{
+                genericName       = 'Central Standard Time'
+                abbreviation      = 'CST'
+                ianaTimeZoneId    = 'America/Chicago'
+                windowsTimeZoneId = 'Central Standard Time'
+                utcOffset         = '-6:00'
+                convertedTime     = [PSCustomObject]@{
+                    localTime           = '10/10/21 10:58:29'
+                    utcOffsetWithDst    = '-5:00'
+                    timeZoneDisplayName = 'Central Daylight Time'
+                    timeZoneDisplayAbbr = 'CDT'
+                }
+            }
+        }
+    }
+    statusCode               = '200'
+    statusDescription        = 'OK'
+    traceId                  = 'xxxxxxxxxxxxxxxxx|XXXXXXX|0.0.0.1|Ref A:XXXXXXXXXXXXX Ref B: XXXXXXXXX Ref C: 2021-10-06T03:08:54Z'
+}
+
 #endregion
 
 Export-ModuleMember -Variable '*'

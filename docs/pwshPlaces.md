@@ -2,7 +2,7 @@
 Module Name: pwshPlaces
 Module Guid: 9a9914bd-d115-4f42-bb5d-19c5e5561a3f
 Download Help Link: NA
-Help Version: 0.5.4
+Help Version: 0.5.5
 Locale: en-US
 ---
 
@@ -13,6 +13,9 @@ tbd
 ## pwshPlaces Cmdlets
 ### [Find-BingPlace](Find-BingPlace.md)
 Returns a list of business entities centered around a location or a geographic region
+
+### [Find-BingTimeZone](Find-BingTimeZone.md)
+Retrieve time zone information for any point on Earth
 
 ### [Find-GMapPlace](Find-GMapPlace.md)
 Find Place request takes a text input and returns a place. The input can be any kind of Places text data, such as a name, address, or phone number.
