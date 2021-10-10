@@ -1,116 +1,120 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingPlace.md
+online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md
 schema: 2.0.0
 ---
 
-# Find-BingPlace
+# Search-BingNearbyPlace
 
 ## SYNOPSIS
-Returns a list of business entities centered around a location or a geographic region
+Nearby Search lets you search for different place types within a specified area.
 
 ## SYNTAX
 
-### textquery (Default)
+### PlaceType (Default)
 ```
-Find-BingPlace -Query <String> [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>]
- [<CommonParameters>]
+Search-BingNearbyPlace -Type <typeIdentifier> [-RegionBias <ccTLD>] [-Language <languages>]
+ [-MaxResults <Int32>] [<CommonParameters>]
 ```
 
 ### Rectangle
 ```
-Find-BingPlace [-Query <String>] -SouthLatitude <String> -WestLongitude <String> -NorthLatitude <String>
- -EastLongitude <String> [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>]
- [<CommonParameters>]
+Search-BingNearbyPlace [-Type <typeIdentifier>] -SouthLatitude <String> -WestLongitude <String>
+ -NorthLatitude <String> -EastLongitude <String> [-RegionBias <ccTLD>] [-Language <languages>]
+ [-MaxResults <Int32>] [<CommonParameters>]
 ```
 
 ### Circle
 ```
-Find-BingPlace [-Query <String>] [-CircleLatitude <String>] [-CircleLongitude <String>]
+Search-BingNearbyPlace [-Type <typeIdentifier>] [-CircleLatitude <String>] [-CircleLongitude <String>]
  [-CircleRadius <String>] [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>]
  [<CommonParameters>]
 ```
 
 ### Point
 ```
-Find-BingPlace [-Query <String>] [-PointLatitude <String>] [-PointLongitude <String>] [-RegionBias <ccTLD>]
- [-Language <languages>] [-MaxResults <Int32>] [<CommonParameters>]
+Search-BingNearbyPlace [-Type <typeIdentifier>] [-PointLatitude <String>] [-PointLongitude <String>]
+ [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Performs a find place request with provided parameters.
-A text search is performed that returns a list of business entities.
+Performs a nearby search request with provided parameters.
+Nearby search is useful for finding place types near a specific geographic location.
 By default the location bias is IP based.
-Location bias and language can be controlled via parameters.
+Location bias can be controlled via parameters.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Find-BingPlace -Query "Krause's cafe"
+Search-BingNearbyPlace -Type Attractions
 ```
 
-Returns place information for the query location biased by IP.
+Performs a nearby search biased by IP and returns Attraction places types.
 
 ### EXAMPLE 2
 ```
-Find-BingPlace -Query "Krause's cafe" -Language es
+Search-BingNearbyPlace -Type Restaurants -MaxResults 20
 ```
 
-Returns place information for the query location biased by IP and returns a few portion of the results in Spanish.
+Performs a nearby search biased by IP and returns Restaurant places types with a maximum of 20 results returned.
 
 ### EXAMPLE 3
 ```
-Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343'
 ```
 
-Returns place information for the query location biased by provided lat/long point.
+Performs a nearby search near the provided Lat/Long and returns CafeRestaurant places types.
 
 ### EXAMPLE 4
 ```
-Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+Search-BingNearbyPlace -Type BreweriesAndBrewPubs -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
 ```
 
-Returns place information for the query location biased by circle lat/long/radius.
+Performs a nearby search biased by circle lat/long/radius and returns Bars and Pubs places types.
 
 ### EXAMPLE 5
 ```
-Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+Search-BingNearbyPlace -Type Parks -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
 ```
 
-Returns place information for the query location biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
+Performs a nearby search biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
+Park places types are returned.
 
 ### EXAMPLE 6
 ```
-Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
+Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
 ```
 
-Returns place information for the query location biased by provided lat/long point with a maximum of 20 results in English.
+Performs a nearby search near the provided Lat/Long and returns Museum places types.
+Results are returned in english with a maximum of 20 results returned.
 
 ### EXAMPLE 7
 ```
-$findBingPlaceSplat = @{
-    Query          = 'cafe'
+$searchBingNearbyPlaceSplat = @{
+    Type           = 'Museums'
     PointLatitude  = '29.7049806'
     PointLongitude = '-98.068343'
     Language       = 'en'
     MaxResults     = 20
 }
-Find-BingPlace @findBingPlaceSplat
+Search-BingNearbyPlace @searchBingNearbyPlaceSplat
 ```
 
-Returns place information for the query location biased by provided lat/long point with a maximum of 20 results in English.
+Performs a nearby search near the provided Lat/Long and returns Museum places types.
+Results are returned in english with a maximum of 20 results returned.
 
 ## PARAMETERS
 
-### -Query
-A string that contains information about a location, such as an address or landmark name.
+### -Type
+Restricts the results to places matching the specified type
 
 ```yaml
-Type: String
-Parameter Sets: textquery
+Type: typeIdentifier
+Parameter Sets: PlaceType
 Aliases:
+Accepted values: AmusementParks, AntiqueStores, Attractions, BanksAndCreditUnions, Bars, BarsGrillsAndPubs, BelgianRestaurants, Bookstores, BreweriesAndBrewPubs, BritishRestaurants, BuffetRestaurants, CDAndRecordStores, CafeRestaurants, CaribbeanRestaurants, Carnivals, Casinos, ChildrensClothingStores, ChineseRestaurants, CigarAndTobaccoShops, CocktailLounges, CoffeeAndTea, ComicBookStores, Delicatessens, DeliveryService, DepartmentStores, Diners, DiscountStores, Donuts, FastFood, FleaMarketsAndBazaars, FrenchRestaurants, FrozenYogurt, FurnitureStores, GermanRestaurants, GreekRestaurants, Grocers, Grocery, HawaiianRestaurants, HomeImprovementStores, Hospitals, HotelsAndMotels, HungarianRestaurants, IceCreamAndFrozenDesserts, IndianRestaurants, ItalianRestaurants, JapaneseRestaurants, JewelryAndWatchesStores, Juices, KitchenwareStores, KoreanRestaurants, LandmarksAndHistoricalSites, LiquorStores, MallsAndShoppingCenters, MensClothingStores, MexicanRestaurants, MiddleEasternRestaurants, MiniatureGolfCourses, MovieTheaters, Museums, MusicStores, OutletStores, Parking, Parks, PetShops, PetSupplyStores, Pizza, PolishRestaurants, PortugueseRestaurants, Pretzels, Restaurants, RussianAndUkrainianRestaurants, Sandwiches, SchoolAndOfficeSupplyStores, SeafoodRestaurants, ShoeStores, SightseeingTours, SpanishRestaurants, SportingGoodsStores, SportsBars, SteakHouseRestaurants, Supermarkets, SushiRestaurants, TakeAway, Taverns, ThaiRestaurants, TouristInformation, ToyAndGameStores, TurkishRestaurants, VegetarianAndVeganRestaurants, VietnameseRestaurants, VitaminAndSupplementStores, WomensClothingStores, Zoos
 
 Required: True
 Position: Named
@@ -120,9 +124,10 @@ Accept wildcard characters: False
 ```
 
 ```yaml
-Type: String
+Type: typeIdentifier
 Parameter Sets: Rectangle, Circle, Point
 Aliases:
+Accepted values: AmusementParks, AntiqueStores, Attractions, BanksAndCreditUnions, Bars, BarsGrillsAndPubs, BelgianRestaurants, Bookstores, BreweriesAndBrewPubs, BritishRestaurants, BuffetRestaurants, CDAndRecordStores, CafeRestaurants, CaribbeanRestaurants, Carnivals, Casinos, ChildrensClothingStores, ChineseRestaurants, CigarAndTobaccoShops, CocktailLounges, CoffeeAndTea, ComicBookStores, Delicatessens, DeliveryService, DepartmentStores, Diners, DiscountStores, Donuts, FastFood, FleaMarketsAndBazaars, FrenchRestaurants, FrozenYogurt, FurnitureStores, GermanRestaurants, GreekRestaurants, Grocers, Grocery, HawaiianRestaurants, HomeImprovementStores, Hospitals, HotelsAndMotels, HungarianRestaurants, IceCreamAndFrozenDesserts, IndianRestaurants, ItalianRestaurants, JapaneseRestaurants, JewelryAndWatchesStores, Juices, KitchenwareStores, KoreanRestaurants, LandmarksAndHistoricalSites, LiquorStores, MallsAndShoppingCenters, MensClothingStores, MexicanRestaurants, MiddleEasternRestaurants, MiniatureGolfCourses, MovieTheaters, Museums, MusicStores, OutletStores, Parking, Parks, PetShops, PetSupplyStores, Pizza, PolishRestaurants, PortugueseRestaurants, Pretzels, Restaurants, RussianAndUkrainianRestaurants, Sandwiches, SchoolAndOfficeSupplyStores, SeafoodRestaurants, ShoeStores, SightseeingTours, SpanishRestaurants, SportingGoodsStores, SportsBars, SteakHouseRestaurants, Supermarkets, SushiRestaurants, TakeAway, Taverns, ThaiRestaurants, TouristInformation, ToyAndGameStores, TurkishRestaurants, VegetarianAndVeganRestaurants, VietnameseRestaurants, VitaminAndSupplementStores, WomensClothingStores, Zoos
 
 Required: False
 Position: Named
@@ -330,7 +335,7 @@ Example:
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingPlace.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingPlace.md)
+[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md)
 
 [https://docs.microsoft.com/bingmaps/rest-services/locations/local-search](https://docs.microsoft.com/bingmaps/rest-services/locations/local-search)
 

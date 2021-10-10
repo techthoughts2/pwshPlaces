@@ -74,6 +74,8 @@
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-point
 .LINK
+    https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-query
+.LINK
     https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes
 .LINK
     https://www.microsoft.com/maps/product/terms.html

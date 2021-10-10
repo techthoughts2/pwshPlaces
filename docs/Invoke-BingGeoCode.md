@@ -270,6 +270,8 @@ For Text Queries use other Bing Maps functions.
 
 [https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-point](https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-point)
 
+[https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-query](https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-query)
+
 [https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes](https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes)
 
 [https://www.microsoft.com/maps/product/terms.html](https://www.microsoft.com/maps/product/terms.html)

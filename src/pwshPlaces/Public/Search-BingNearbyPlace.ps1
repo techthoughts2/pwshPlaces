@@ -1,46 +1,46 @@
 ﻿<#
 .SYNOPSIS
-    Returns a list of business entities centered around a location or a geographic region
+    Nearby Search lets you search for different place types within a specified area.
 .DESCRIPTION
-    Performs a find place request with provided parameters.
-    A text search is performed that returns a list of business entities.
+    Performs a nearby search request with provided parameters.
+    Nearby search is useful for finding place types near a specific geographic location.
     By default the location bias is IP based.
-    Location bias and language can be controlled via parameters.
+    Location bias can be controlled via parameters.
 .EXAMPLE
-    Find-BingPlace -Query "Krause's cafe"
+    Search-BingNearbyPlace -Type Attractions
 
-    Returns place information for the query location biased by IP.
+    Performs a nearby search biased by IP and returns Attraction places types.
 .EXAMPLE
-    Find-BingPlace -Query "Krause's cafe" -Language es
+    Search-BingNearbyPlace -Type Restaurants -MaxResults 20
 
-    Returns place information for the query location biased by IP and returns a few portion of the results in Spanish.
+    Performs a nearby search biased by IP and returns Restaurant places types with a maximum of 20 results returned.
 .EXAMPLE
-    Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+    Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343'
 
-    Returns place information for the query location biased by provided lat/long point.
+    Performs a nearby search near the provided Lat/Long and returns CafeRestaurant places types.
 .EXAMPLE
-    Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+    Search-BingNearbyPlace -Type BreweriesAndBrewPubs -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
 
-    Returns place information for the query location biased by circle lat/long/radius.
+    Performs a nearby search biased by circle lat/long/radius and returns Bars and Pubs places types.
 .EXAMPLE
-    Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+    Search-BingNearbyPlace -Type Parks -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
 
-    Returns place information for the query location biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
+    Performs a nearby search biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle. Park places types are returned.
 .EXAMPLE
-    Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
+    Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
 
-    Returns place information for the query location biased by provided lat/long point with a maximum of 20 results in English.
+    Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in english with a maximum of 20 results returned.
 .EXAMPLE
-    $findBingPlaceSplat = @{
-        Query          = 'cafe'
+    $searchBingNearbyPlaceSplat = @{
+        Type           = 'Museums'
         PointLatitude  = '29.7049806'
         PointLongitude = '-98.068343'
         Language       = 'en'
         MaxResults     = 20
     }
-    Find-BingPlace @findBingPlaceSplat
+    Search-BingNearbyPlace @searchBingNearbyPlaceSplat
 
-    Returns place information for the query location biased by provided lat/long point with a maximum of 20 results in English.
+    Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in english with a maximum of 20 results returned.
 .PARAMETER Query
     A string that contains information about a location, such as an address or landmark name.
 .PARAMETER PointLatitude
@@ -75,7 +75,7 @@
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingPlace.md
+    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/local-search
 .LINK
@@ -87,19 +87,19 @@
 .LINK
     https://privacy.microsoft.com/en-us/privacystatement
 #>
-function Find-BingPlace {
+function Search-BingNearbyPlace {
     [CmdletBinding(
         PositionalBinding = $false,
-        DefaultParameterSetName = 'textquery')]
+        DefaultParameterSetName = 'PlaceType')]
     param (
+
         [Parameter(Mandatory = $true,
-            ParameterSetName = 'textquery',
-            HelpMessage = 'A string that contains information about a location, such as an address or landmark name')]
+            ParameterSetName = 'PlaceType',
+            HelpMessage = 'Restricts the results to places matching the specified type')]
         [Parameter(ParameterSetName = 'Point', Mandatory = $false)]
         [Parameter(ParameterSetName = 'Circle', Mandatory = $false)]
         [Parameter(ParameterSetName = 'Rectangle', Mandatory = $false)]
-        [ValidateNotNullOrEmpty()]
-        [string]$Query,
+        [typeIdentifier]$Type,
 
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Point',
@@ -175,8 +175,8 @@ function Find-BingPlace {
     $uri = '{0}{1}' -f $bingMapsBaseURI, 'v1/LocalSearch?output=json'
     Write-Debug -Message ('Base function URI: {0}' -f $uri)
 
-    $fQuery = '&query={0}' -f [uri]::EscapeDataString($Query)
-    $uri += $fQuery
+    $fType = '&type={0}' -f [uri]::EscapeDataString($type)
+    $uri += $fType
 
     switch ($PSCmdlet.ParameterSetName) {
         'Point' {
@@ -246,5 +246,4 @@ function Find-BingPlace {
 
     return $finalResults
 
-} #Find-BingPlace
-
+} #Search-BingNearbyPlace

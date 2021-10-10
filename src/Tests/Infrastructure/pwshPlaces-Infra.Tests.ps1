@@ -142,5 +142,19 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
         } #context_Find-BingPlace
+        Context 'Search-BingNearbyPlace' {
+            It 'should return the expected results' {
+                $searchBingNearbyPlaceSplat = @{
+                    Type           = 'Museums'
+                    PointLatitude  = '29.7049806'
+                    PointLongitude = '-98.068343'
+                    Language       = 'en'
+                    MaxResults     = 20
+                }
+                $eval = Search-BingNearbyPlace @searchBingNearbyPlaceSplat
+                ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
+                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+            } #it
+        } #context_Find-BingPlace
     } #context_BingMaps
 } #describe_infra_tests
