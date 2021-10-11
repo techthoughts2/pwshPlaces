@@ -30,10 +30,10 @@ pwshPlaces enables you to leverage the Google Maps and/or Bing Maps API(s) to pe
 * [Find-BingPlace](docs/Find-BingPlace.md)
 * [Find-BingTimeZone](docs/Find-BingTimeZone.md)
 * [Find-GMapPlace](docs/Find-GMapPlace.md)
-* [Get-GMapPlaceDetail](docs/Get-GMapPlaceDetail)
-* [Invoke-BingGeoCode](docs/Invoke-BingGeoCode)
+* [Get-GMapPlaceDetail](docs/Get-GMapPlaceDetail.md)
+* [Invoke-BingGeoCode](docs/Invoke-BingGeoCode.md)
 * [Invoke-GMapGeoCode](docs/Invoke-GMapGeoCode.md)
-* [Search-BingNearbyPlace](docs/Search-BingNearbyPlace)
+* [Search-BingNearbyPlace](docs/Search-BingNearbyPlace.md)
 * [Search-GMapNearbyPlace](docs/Search-GMapNearbyPlace.md)
 * [Search-GMapText](docs/Search-GMapText.md)
 
