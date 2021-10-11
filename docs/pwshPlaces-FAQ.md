@@ -21,20 +21,20 @@ No. If you prefer one Map provider over another you can just get that API key. F
 
 ### How do I get a Maps API key
 
-- [How to get a Google Maps API Key](/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
-- [How to get a Bing Maps API Key](/BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
+- [How to get a Google Maps API Key](GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
+- [How to get a Bing Maps API Key](BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
 
 ### Does the Google Maps API key cost money
 
 The Google Maps API has $200 free monthly usage for all users. This should be more than sufficient for most people.
 
-You can dive into more details by [Understanding Google Maps API pricing](/GoogleMapsAPI.md#understanding-google-maps-api-pricing)
+You can dive into more details by [Understanding Google Maps API pricing](GoogleMapsAPI.md#understanding-google-maps-api-pricing)
 
 ### Does the Bing Maps API key cost money
 
 The Basic API key gives you up to 125,000 billable transactions per calendar year and less than 50,000 cumulative billable transactions with any 24-hour period. This should be more than sufficient for most people.
 
-You can dive into more details by [Understanding Bing Maps API pricing](/BingMapsAPI.md#understanding-bing-maps-api-pricing)
+You can dive into more details by [Understanding Bing Maps API pricing](BingMapsAPI.md#understanding-bing-maps-api-pricing)
 
 ### How do load my API keys into pwshPlaces
 
