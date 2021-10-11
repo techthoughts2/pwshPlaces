@@ -145,7 +145,7 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## OUTPUTS
 
-### Output from this cmdlet (if any)
+### GMap.PlaceDetail
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 

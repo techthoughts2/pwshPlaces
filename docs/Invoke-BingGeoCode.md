@@ -251,7 +251,7 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## OUTPUTS
 
-### Output from this cmdlet (if any)
+### Bing.GeoCode
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 

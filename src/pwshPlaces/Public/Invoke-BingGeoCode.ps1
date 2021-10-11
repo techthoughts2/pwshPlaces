@@ -55,7 +55,7 @@
 .PARAMETER MaxResults
     Specifies the maximum number of locations to return in the response. If not specified the default is 5.
 .OUTPUTS
-    Output from this cmdlet (if any)
+    Bing.GeoCode
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 

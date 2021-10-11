@@ -95,7 +95,7 @@
 .PARAMETER AllSearchResults
     By default 20 results are returned from a standard search. Using this switch increases the search results from 20 to the maximum of 60. This does increase the number of API calls.
 .OUTPUTS
-    Output from this cmdlet (if any)
+    GMap.PlaceText
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 

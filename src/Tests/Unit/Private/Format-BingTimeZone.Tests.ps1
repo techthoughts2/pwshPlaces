@@ -14,9 +14,6 @@ Import-Module $PathToManifest -Force
 #-------------------------------------------------------------------------
 
 InModuleScope 'pwshPlaces' {
-    #-------------------------------------------------------------------------
-    $WarningPreference = "SilentlyContinue"
-    #-------------------------------------------------------------------------
     Describe 'Format-BingTimeZone' -Tag Unit {
         BeforeAll {
             $WarningPreference = 'SilentlyContinue'
@@ -52,6 +49,7 @@ InModuleScope 'pwshPlaces' {
                 $eval.TimeZoneCurrentShort      | Should -BeExactly 'CDT'
                 $eval.UTCOffSetDST              | Should -BeExactly '-5:00'
             } #it
+
         } #context_Success
     } #describe_Format-BingTimeZone
 } #inModule

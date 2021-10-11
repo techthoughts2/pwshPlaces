@@ -14,9 +14,6 @@ Import-Module $PathToManifest -Force
 #-------------------------------------------------------------------------
 
 InModuleScope 'pwshPlaces' {
-    #-------------------------------------------------------------------------
-    $WarningPreference = "SilentlyContinue"
-    #-------------------------------------------------------------------------
     Describe 'Format-BingPlace' -Tag Unit {
         BeforeAll {
             $WarningPreference = 'SilentlyContinue'

@@ -35,7 +35,7 @@
 .PARAMETER RegionBias
     The region code, specified as a ccTLD ("top-level domain") two-character value. This parameter will only influence, not fully restrict, results from the geocoder.
 .OUTPUTS
-    Output from this cmdlet (if any)
+    GMap.GeoCode
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 

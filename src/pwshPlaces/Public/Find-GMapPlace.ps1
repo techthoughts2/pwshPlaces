@@ -80,7 +80,7 @@
 .PARAMETER Language
     The language in which to return results.
 .OUTPUTS
-    Output from this cmdlet (if any)
+    GMap.Place
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
