@@ -122,12 +122,12 @@ $scrapePath = $env:Temp
 
 $locale = Invoke-GMapGeoCode -Address 'New Braunfels'
 
-$areaRestaraunts = Search-GMapNearbyPlace -Latitude $locale.Latitude -Longitude $locale.Longitude -Radius 10000 -RankByProminence -Type restaurant -AllSearchResults
+$areaRestaurants = Search-GMapNearbyPlace -Latitude $locale.Latitude -Longitude $locale.Longitude -Radius 10000 -RankByProminence -Type restaurant -AllSearchResults
 
-ConvertTo-Clixml -InputObject $areaRestaraunts -Depth 100 | Out-File "$scrapePath\localRestaraunts.xml"
+ConvertTo-Clixml -InputObject $areaRestaurants -Depth 100 | Out-File "$scrapePath\localRestaurants.xml"
 #--------------------------------------------------------------
 # where should we eat today?
-$myLocalRestaurants = Get-Content -Path "$scrapePath\localRestaraunts.xml" -Raw | ConvertFrom-Clixml
+$myLocalRestaurants = Get-Content -Path "$scrapePath\localRestaurants.xml" -Raw | ConvertFrom-Clixml
 
 Get-Random $myLocalRestaurants
 ```

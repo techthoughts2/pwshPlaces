@@ -29,7 +29,7 @@
 .EXAMPLE
     Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
 
-    Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in english with a maximum of 20 results returned.
+    Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in English with a maximum of 20 results returned.
 .EXAMPLE
     $searchBingNearbyPlaceSplat = @{
         Type           = 'Museums'
@@ -40,17 +40,17 @@
     }
     Search-BingNearbyPlace @searchBingNearbyPlaceSplat
 
-    Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in english with a maximum of 20 results returned.
+    Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in English with a maximum of 20 results returned.
 .PARAMETER Query
     A string that contains information about a location, such as an address or landmark name.
 .PARAMETER PointLatitude
     Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earths surface.
+    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER CircleLatitude
     Prefer results in a specified area by specifying a radius plus lat/long - north–south position of a point on the Earth's surface.
 .PARAMETER CircleLongitude
-    Prefer results in a specified area by specifying a radius plus lat/long - east–west position of a point on the Earths surface.
+    Prefer results in a specified area by specifying a radius plus lat/long - east–west position of a point on the Earth's surface.
 .PARAMETER CircleRadius
     Prefer results in a specified area by specifying a radius plus lat/long - radius in meters
 .PARAMETER SouthLatitude

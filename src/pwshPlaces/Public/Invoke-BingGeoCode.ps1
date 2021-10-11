@@ -2,7 +2,7 @@
 .SYNOPSIS
     Engages Bing Maps API to return address and geographic coordinates based on provided query parameters.
 .DESCRIPTION
-    Geocoding is the process of converting addresses addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
+    Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
     This function can take in an address and return coordinate information.
     You can also provide coordinates to return multiple nearby address results.
 .EXAMPLE
@@ -47,13 +47,13 @@
 .PARAMETER Latitude
     Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
 .PARAMETER Longitude
-    Geographic coordinate that specifies the east–west position of a point on the Earths surface.
+    Geographic coordinate that specifies the east–west position of a point on the Earth's surface.
 .PARAMETER Query
     A string that contains information about a location, such as an address or landmark name.
 .PARAMETER Language
     The language in which to return results.
 .PARAMETER MaxResults
-    Specifies the maximum number of locations to return in the response. If not specified the default is 5.
+    Specifies the maximum number of locations to return in the response. If not specified, the default is 5.
 .OUTPUTS
     Bing.GeoCode
 .NOTES
@@ -62,7 +62,7 @@
     Example:
         http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}
 
-    While the Bing Location API does support a text query option, I have found it to be fairly unreliable.
+    While the Bing Location API does support a text query option, I have found it to be unreliable.
     For GeoCode info stick to Addresses and Lat/Long for reverse Geocoding.
     For Text Queries use other Bing Maps functions.
 .COMPONENT

@@ -2,7 +2,7 @@
 .SYNOPSIS
     Engages Geocoding API to return address and geographic coordinates based on provided query parameters.
 .DESCRIPTION
-    Geocoding is the process of converting addresses addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
+    Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
     This function can take in an address and return coordinate information.
     You can also provide coordinates to return multiple nearby address results.
     If you know the exact google placeID this can also be provided to return Geocoding information about that location.
@@ -27,7 +27,7 @@
 .PARAMETER Latitude
     Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
 .PARAMETER Longitude
-    Geographic coordinate that specifies the east–west position of a point on the Earths surface.
+    Geographic coordinate that specifies the east–west position of a point on the Earth's surface.
 .PARAMETER PlaceID
     The place ID of the place for which you wish to obtain the human-readable address. The place ID is a unique identifier that can be used with other Google APIs.
 .PARAMETER Language

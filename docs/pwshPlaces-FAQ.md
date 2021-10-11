@@ -40,7 +40,7 @@ You can dive into more details by [Understanding Bing Maps API pricing](BingMaps
 
 ```powershell
 # Set your API Keys in the pwshPlaces.psm1 file
-# using the approriate variable names:
+# using the appropriate variable names:
 
 $env:GoogleAPIKey = 'yourGoogleAPIKey'
 $env:BingAPIKey = 'yourBingAPIKey'

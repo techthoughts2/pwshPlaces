@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -PointLongitude
-Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earths surface.
+Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String

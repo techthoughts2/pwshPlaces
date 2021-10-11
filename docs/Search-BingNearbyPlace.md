@@ -88,7 +88,7 @@ Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude
 ```
 
 Performs a nearby search near the provided Lat/Long and returns Museum places types.
-Results are returned in english with a maximum of 20 results returned.
+Results are returned in English with a maximum of 20 results returned.
 
 ### EXAMPLE 7
 ```
@@ -103,7 +103,7 @@ Search-BingNearbyPlace @searchBingNearbyPlaceSplat
 ```
 
 Performs a nearby search near the provided Lat/Long and returns Museum places types.
-Results are returned in english with a maximum of 20 results returned.
+Results are returned in English with a maximum of 20 results returned.
 
 ## PARAMETERS
 
@@ -152,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -PointLongitude
-Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earths surface.
+Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -182,7 +182,7 @@ Accept wildcard characters: False
 ```
 
 ### -CircleLongitude
-Prefer results in a specified area by specifying a radius plus lat/long - east-west position of a point on the Earths surface.
+Prefer results in a specified area by specifying a radius plus lat/long - east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String

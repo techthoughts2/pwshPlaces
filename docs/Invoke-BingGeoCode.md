@@ -30,7 +30,7 @@ Invoke-BingGeoCode -Query <String> [-Language <languages>] [-MaxResults <Int32>]
 ```
 
 ## DESCRIPTION
-Geocoding is the process of converting addresses addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
+Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
 This function can take in an address and return coordinate information.
 You can also provide coordinates to return multiple nearby address results.
 
@@ -182,7 +182,7 @@ Accept wildcard characters: False
 ```
 
 ### -Longitude
-Geographic coordinate that specifies the east-west position of a point on the Earths surface.
+Geographic coordinate that specifies the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -229,7 +229,7 @@ Accept wildcard characters: False
 
 ### -MaxResults
 Specifies the maximum number of locations to return in the response.
-If not specified the default is 5.
+If not specified, the default is 5.
 
 ```yaml
 Type: Int32
@@ -258,7 +258,7 @@ Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 Example:
     http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}
 
-While the Bing Location API does support a text query option, I have found it to be fairly unreliable.
+While the Bing Location API does support a text query option, I have found it to be unreliable.
 For GeoCode info stick to Addresses and Lat/Long for reverse Geocoding.
 For Text Queries use other Bing Maps functions.
 

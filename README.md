@@ -49,14 +49,14 @@ To use pwshPlaces you will require a Google Maps or Bing Maps API key. To use al
 
 > 🙄 Not another module that requires an API Key!
 
-Both of these APIs are *easy to create* and have *no cost* pricing tiers which should meet your needs. I have provided detailed guides on how to get your API keys:
+Both of these Map API keys are *easy to create* and have *no cost* pricing tiers which should meet your needs. I have provided detailed guides on how to get your API keys:
 
 * [How to get a Google Maps API Key](docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
 * [How to get a Bing Maps API Key](docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
 
 ```powershell
 # Set your API Keys in the pwshPlaces.psm1 file
-# using the approriate variable names:
+# using the appropriate variable names:
 
 $env:GoogleAPIKey = 'yourGoogleAPIKey'
 $env:BingAPIKey = 'yourBingAPIKey'

@@ -37,7 +37,7 @@ Search-GMapNearbyPlace -Latitude <String> -Longitude <String> -Radius <String> [
 ## DESCRIPTION
 Performs a nearby search request with provided parameters.
 Nearby search is useful for finding places near a specific geographic location.
-By default 20 results are returned from a standard search.
+By default, 20 results are returned from a standard search.
 You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
 
 ## EXAMPLES
@@ -85,7 +85,7 @@ Search-GMapNearbyPlace -Latitude '26.1202' -Longitude '127.7025' -Radius 10000 -
 ```
 
 Performs a nearby search and returns only amusement parks places near provided coordinates within a range of 10000 meters.
-Results are ranked by prominence and returned in Engish.
+Results are ranked by prominence and returned in English.
 
 ### EXAMPLE 7
 ```
@@ -138,7 +138,7 @@ Accept wildcard characters: False
 ```
 
 ### -Longitude
-Geographic coordinate that specifies the east-west position of a point on the Earths surface.
+Geographic coordinate that specifies the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String

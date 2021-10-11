@@ -4,7 +4,7 @@
 .DESCRIPTION
     Performs a nearby search request with provided parameters.
     Nearby search is useful for finding places near a specific geographic location.
-    By default 20 results are returned from a standard search.
+    By default, 20 results are returned from a standard search.
     You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000
@@ -29,7 +29,7 @@
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '26.1202' -Longitude '127.7025' -Radius 10000 -RankByProminence -Type amusement_park -Language en
 
-    Performs a nearby search and returns only amusement parks places near provided coordinates within a range of 10000 meters. Results are ranked by prominence and returned in Engish.
+    Performs a nearby search and returns only amusement parks places near provided coordinates within a range of 10000 meters. Results are ranked by prominence and returned in English.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -RankByProminence -Keyword 'pasta' -Type restaurant -Language en -OpenNow -MaxPrice 4 -MinPrice 2 -AllSearchResults
 
@@ -54,7 +54,7 @@
 .PARAMETER Latitude
     Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
 .PARAMETER Longitude
-    Geographic coordinate that specifies the east–west position of a point on the Earths surface.
+    Geographic coordinate that specifies the east–west position of a point on the Earth's surface.
 .PARAMETER Radius
     Distance (in meters) within which to return place results. Instructs the Places service to prefer showing results within that circle; results outside of the defined area may still be displayed.
 .PARAMETER RankByProminence

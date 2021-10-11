@@ -16,7 +16,7 @@
 .PARAMETER PointLatitude
     Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earths surface.
+    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER RegionBias
     The region code, specified as a ccTLD ("top-level domain") two-character value.
 .PARAMETER Language

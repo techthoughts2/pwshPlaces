@@ -43,7 +43,7 @@ Search-GMapText [-Query <String>] -Latitude <String> -Longitude <String> [-Type 
 Text based search for finding places based on a provided string and optional parameters.
 Text search is especially useful for making ambiguous queries when searching for places.
 Returned results can be heavily biased based on factors such as including a location in
-the query iteself, or by providing direct location information in optional parameters.
+the query itself, or by providing direct location information in optional parameters.
 By default 20 results are returned from a standard search.
 You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
 
@@ -86,7 +86,7 @@ Places results are biased to the region of Spain.
 Search-GMapText -Query "italian restaurants in New York" -MinPrice 4
 ```
 
-Performs a text search with the provided query and returns expensive restaraunt options.
+Performs a text search with the provided query and returns expensive restaurant options.
 Since a location is provided in the query, places results will be biased by that location.
 
 ### EXAMPLE 6
@@ -144,7 +144,7 @@ Only restaurant places are returned.
 Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates.
 Places data is returned in English.
 Results with a cheap to moderate price are returned.
-Only restaraunts that are currently open are returned.
+Only restaurants that are currently open are returned.
 The maximum of 60 places results is returned.
 
 ### EXAMPLE 12
@@ -169,7 +169,7 @@ Only restaurant places are returned.
 Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates.
 Places data is returned in English.
 Results with a cheap to moderate price are returned.
-Only restaraunts that are currently open are returned.
+Only restaurants that are currently open are returned.
 The maximum of 60 places results is returned.
 
 ## PARAMETERS
@@ -229,7 +229,7 @@ Accept wildcard characters: False
 ```
 
 ### -Longitude
-Geographic coordinate that specifies the east-west position of a point on the Earths surface.
+Geographic coordinate that specifies the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String

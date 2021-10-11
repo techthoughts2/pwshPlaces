@@ -4,7 +4,7 @@
 .DESCRIPTION
     Performs a find place request with provided parameters.
     A text search is performed unless a properly formatted phone number is provided in which case
-    a phonenumber search is completed. By default the location bias and language is IP based.
+    a phonenumber search is completed. By default, the location bias and language is IP based.
     Location bias and language can be controlled via parameters. The information returned in a normal
     call contains all basic field types. Additional field types including contact and atmosphere information
     can be called for but these carry an additional cost. The Find Place return does not return
@@ -58,11 +58,11 @@
 .PARAMETER PointLatitude
     Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earths surface.
+    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER CircleLatitude
     Prefer results in a specified area by specifying a radius plus lat/long - north–south position of a point on the Earth's surface.
 .PARAMETER CircleLongitude
-    Prefer results in a specified area by specifying a radius plus lat/long - east–west position of a point on the Earths surface.
+    Prefer results in a specified area by specifying a radius plus lat/long - east–west position of a point on the Earth's surface.
 .PARAMETER CircleRadius
     Prefer results in a specified area by specifying a radius plus lat/long - radius in meters
 .PARAMETER SouthLatitude

@@ -4,7 +4,7 @@
 .DESCRIPTION
     Performs a find place request with provided parameters.
     A text search is performed that returns a list of business entities.
-    By default the location bias is IP based.
+    By default, the location bias is IP based.
     Location bias and language can be controlled via parameters.
 .EXAMPLE
     Find-BingPlace -Query "Krause's cafe"
@@ -13,7 +13,7 @@
 .EXAMPLE
     Find-BingPlace -Query "Krause's cafe" -Language es
 
-    Returns place information for the query location biased by IP and returns a few portion of the results in Spanish.
+    Returns place information for the query location biased by IP and returns a few portions of the results in Spanish.
 .EXAMPLE
     Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
 
@@ -46,11 +46,11 @@
 .PARAMETER PointLatitude
     Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earths surface.
+    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER CircleLatitude
     Prefer results in a specified area by specifying a radius plus lat/long - north–south position of a point on the Earth's surface.
 .PARAMETER CircleLongitude
-    Prefer results in a specified area by specifying a radius plus lat/long - east–west position of a point on the Earths surface.
+    Prefer results in a specified area by specifying a radius plus lat/long - east–west position of a point on the Earth's surface.
 .PARAMETER CircleRadius
     Prefer results in a specified area by specifying a radius plus lat/long - radius in meters
 .PARAMETER SouthLatitude

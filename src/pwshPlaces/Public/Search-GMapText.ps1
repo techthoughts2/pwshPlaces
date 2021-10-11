@@ -5,7 +5,7 @@
     Text based search for finding places based on a provided string and optional parameters.
     Text search is especially useful for making ambiguous queries when searching for places.
     Returned results can be heavily biased based on factors such as including a location in
-    the query iteself, or by providing direct location information in optional parameters.
+    the query itself, or by providing direct location information in optional parameters.
     By default 20 results are returned from a standard search.
     You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
 .EXAMPLE
@@ -27,7 +27,7 @@
 .EXAMPLE
     Search-GMapText -Query "italian restaurants in New York" -MinPrice 4
 
-    Performs a text search with the provided query and returns expensive restaraunt options. Since a location is provided in the query, places results will be biased by that location.
+    Performs a text search with the provided query and returns expensive restaurant options. Since a location is provided in the query, places results will be biased by that location.
 .EXAMPLE
     Search-GMapText -Query "main plaza New Braunfels" -Type restaurant
 
@@ -51,7 +51,7 @@
 .EXAMPLE
     Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -Language en -OpenNow -MinPrice 1 -MaxPrice 2 -AllSearchResults
 
-    Performs a text search with the provided query. Only restaurant places are returned. Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates. Places data is returned in English. Results with a cheap to moderate price are returned. Only restaraunts that are currently open are returned. The maximum of 60 places results is returned.
+    Performs a text search with the provided query. Only restaurant places are returned. Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates. Places data is returned in English. Results with a cheap to moderate price are returned. Only restaurants that are currently open are returned. The maximum of 60 places results is returned.
 .EXAMPLE
     $searchGMapTextSplat = @{
         Query            = 'Coco'
@@ -67,13 +67,13 @@
     }
     Search-GMapText @searchGMapTextSplat
 
-    Performs a text search with the provided query. Only restaurant places are returned. Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates. Places data is returned in English. Results with a cheap to moderate price are returned. Only restaraunts that are currently open are returned. The maximum of 60 places results is returned.
+    Performs a text search with the provided query. Only restaurant places are returned. Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates. Places data is returned in English. Results with a cheap to moderate price are returned. Only restaurants that are currently open are returned. The maximum of 60 places results is returned.
 .PARAMETER Query
     Text string on which to search
 .PARAMETER Latitude
     Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
 .PARAMETER Longitude
-    Geographic coordinate that specifies the east–west position of a point on the Earths surface.
+    Geographic coordinate that specifies the east–west position of a point on the Earth's surface.
 .PARAMETER Radius
     Distance (in meters) within which to return place results. Instructs the Places service to prefer showing results within that circle; results outside of the defined area may still be displayed.
 .PARAMETER RankByProminence

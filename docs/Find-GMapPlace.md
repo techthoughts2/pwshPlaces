@@ -40,7 +40,7 @@ Find-GMapPlace [-Query <String>] [-PointLatitude <String>] [-PointLongitude <Str
 Performs a find place request with provided parameters.
 A text search is performed unless a properly formatted phone number is provided in which case
 a phonenumber search is completed.
-By default the location bias and language is IP based.
+By default, the location bias and language is IP based.
 Location bias and language can be controlled via parameters.
 The information returned in a normal
 call contains all basic field types.
@@ -169,7 +169,7 @@ Accept wildcard characters: False
 ```
 
 ### -PointLongitude
-Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earths surface.
+Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -199,7 +199,7 @@ Accept wildcard characters: False
 ```
 
 ### -CircleLongitude
-Prefer results in a specified area by specifying a radius plus lat/long - east-west position of a point on the Earths surface.
+Prefer results in a specified area by specifying a radius plus lat/long - east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String

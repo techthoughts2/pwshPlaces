@@ -41,7 +41,7 @@ Log into the [Bing Maps Dev Center Portal](https://www.bingmapsportal.com) - if 
 #### 2. Create a Bing Maps Basic API Key
 
 - Under My account tab click *My Keys*
-  - Create a new api key
+  - Create a new API key
 
 ![Bing Maps API Key Choices](../media/create_bing_maps_api_key.PNG 'Bing Map API Key Choice')
 ![Bing Maps Dev Center New API Key](../media/bing_map_create_api_key.PNG 'New Bing Maps API Key')
@@ -71,12 +71,12 @@ $scrapePath = $env:Temp
 
 $locale = Invoke-BingGeoCode -Query 'New Braunfels, TX'
 
-$areaRestaraunts = Search-BingNearbyPlace -Type Restaurants -PointLatitude $locale.Latitude -PointLongitude $locale.Longitude -MaxResults 20
+$areaRestaurants = Search-BingNearbyPlace -Type Restaurants -PointLatitude $locale.Latitude -PointLongitude $locale.Longitude -MaxResults 20
 
-ConvertTo-Clixml -InputObject $areaRestaraunts -Depth 100 | Out-File "$scrapePath\localRestaraunts.xml"
+ConvertTo-Clixml -InputObject $areaRestaurants -Depth 100 | Out-File "$scrapePath\localRestaurants.xml"
 #--------------------------------------------------------------
 # where should we eat today?
-$myLocalRestaurants = Get-Content -Path "$scrapePath\localRestaraunts.xml" -Raw | ConvertFrom-Clixml
+$myLocalRestaurants = Get-Content -Path "$scrapePath\localRestaurants.xml" -Raw | ConvertFrom-Clixml
 
 Get-Random $myLocalRestaurants
 ```

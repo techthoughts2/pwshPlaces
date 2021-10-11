@@ -29,7 +29,7 @@ Invoke-GMapGeoCode -PlaceID <String> [-Language <languages>] [-RegionBias <ccTLD
 ```
 
 ## DESCRIPTION
-Geocoding is the process of converting addresses addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
+Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
 This function can take in an address and return coordinate information.
 You can also provide coordinates to return multiple nearby address results.
 If you know the exact google placeID this can also be provided to return Geocoding information about that location.
@@ -99,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -Longitude
-Geographic coordinate that specifies the east-west position of a point on the Earths surface.
+Geographic coordinate that specifies the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String
