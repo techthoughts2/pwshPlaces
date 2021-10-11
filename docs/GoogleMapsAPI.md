@@ -39,7 +39,7 @@ Google Maps API Keys are created and managed through Google Cloud Platform (GCP)
 #### 1. Create a new GCP project
 
 Log into your [GCP console](https://console.cloud.google.com/home/) and create a new project:
-![alt text](../media/gcp_new_project.PNG 'Title')
+![Google Cloud (GCP) new project](../media/gcp_new_project.PNG 'New GCP Project')
 
 #### 2. Enable the Places API and the Geocoding API
 

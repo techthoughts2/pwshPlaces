@@ -30,7 +30,7 @@
     Copyright         = '(c) Jake Morrison. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description       = 'tbd'
+    Description       = 'Search for places, establishments, points of interest, and other detailed information about points around the globe using the Google Maps and/or Bing Maps API(s)'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''

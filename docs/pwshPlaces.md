@@ -8,7 +8,7 @@ Locale: en-US
 
 # pwshPlaces Module
 ## Description
-tbd
+Search for places, establishments, points of interest, and other detailed information about points around the globe using the Google Maps and/or Bing Maps API(s)
 
 ## pwshPlaces Cmdlets
 ### [Find-BingPlace](Find-BingPlace.md)
