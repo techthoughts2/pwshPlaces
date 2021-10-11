@@ -1,0 +1,54 @@
+# https://help.github.com/en/actions/automating-your-workflow-with-github-actions
+# https://help.github.com/en/actions/automating-your-workflow-with-github-actions/virtual-environments-for-github-hosted-runners
+# https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners
+# https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#using-a-specific-shell
+# https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions
+# https://github.com/actions/upload-artifact#where-does-the-upload-go
+name: pwshPlaces-Windows-pwsh-Build
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'media/**'
+      - 'LICENSE'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - 'media/**'
+      - 'LICENSE'
+jobs:
+  test:
+    name: Run Tests
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+    - name: Display the path
+      shell: pwsh
+      run: echo ${env:PATH}
+    - name: Version Display
+      shell: pwsh
+      run: $PSVersionTable
+    - name: Bootstrap
+      shell: pwsh
+      run: ./actions_bootstrap.ps1
+    - name: Test and Build
+      shell: pwsh
+      run: Invoke-Build -File .\src\pwshPlaces.build.ps1
+      env:
+        GoogleAPIKey: ${{ secrets.GoogleAPIKey }}
+        BingAPIKey: ${{ secrets.BingAPIKey }}
+    - name: Upload pester results
+      uses: actions/upload-artifact@v2
+      with:
+        name: pester-results
+        path: .\src\Artifacts\testOutput
+        if-no-files-found: warn
+    - name: Upload zip module archive build
+      uses: actions/upload-artifact@v2
+      with:
+        name: zip-archive
+        path: .\src\Archive
+        if-no-files-found: warn

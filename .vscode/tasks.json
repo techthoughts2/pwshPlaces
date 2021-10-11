@@ -1,0 +1,141 @@
+// Available variables which can be used inside of strings.
+// ${workspaceRoot}: the root folder of the team
+// ${file}: the current opened file
+// ${relativeFile}: the current opened file relative to workspaceRoot
+// ${fileBasename}: the current opened file's basename
+// ${fileDirname}: the current opened file's dirname
+// ${fileExtname}: the current opened file's extension
+// ${cwd}: the current working directory of the spawned process
+// If you are using InvokeBuild you can enhance this tasks.json using the New-VSCodeTask command:
+// Install-Script New-VSCodeTask
+// New-VSCodeTask.ps1 -BuildFile .\src\YourModuleName.build.ps1
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+
+    // Start PowerShell
+    "windows": {
+        "options": {
+            "shell": {
+                //"executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                // "executable": "C:\\Program Files\\PowerShell\\6\\pwsh.exe",
+                "executable": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+                "args": [ "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command" ]
+            }
+        }
+    },
+    "linux": {
+        "options": {
+            "shell": {
+                "executable": "/usr/bin/pwsh",
+                "args": [ "-NoProfile", "-Command" ]
+            }
+        }
+    },
+    "osx": {
+        "options": {
+            "shell": {
+                "executable": "/usr/local/bin/pwsh",
+                "args": [ "-NoProfile", "-Command" ]
+            }
+        }
+    },
+
+    // Associate with test task runner
+    "tasks": [
+        {
+            "label": "PesterTest",
+            "type": "shell",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": [ "$pester" ],
+            "command": "Invoke-Pester '${workspaceFolder}/src/Tests/Unit' -PesterOption @{IncludeVSCodeMarker=$true}",
+        },
+        {
+            "label": ".",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "$PSVersionTable;Invoke-Build -Task . -File '${workspaceFolder}/src/pwshPlaces.build.ps1'",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "TestLocal",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task TestLocal -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "HelpLocal",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task HelpLocal -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task Clean -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "ValidateRequirements",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task ValidateRequirements -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "Analyze",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task Analyze -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "AnalyzeTests",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task AnalyzeTests -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "FormattingCheck",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task FormattingCheck -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task Test -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "DevCC",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task DevCC -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task Build -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "BuildNoInfra",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task BuildNoInfra -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        },
+        {
+            "label": "InfraTest",
+            "type": "shell",
+            "problemMatcher": "$msCompile",
+            "command": "Invoke-Build -Task InfraTest -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+        }
+	]
+}
+
