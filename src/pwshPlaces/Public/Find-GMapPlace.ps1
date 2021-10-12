@@ -10,35 +10,35 @@
     can be called for but these carry an additional cost. The Find Place return does not return
     all fields of these more expensive calls and has a limited return. See notes for details.
 .EXAMPLE
-    Find-GMapPlace -Query "Krause's cafe"
+    Find-GMapPlace -Query "Krause's cafe" -GoogleAPIKey $googleAPIKey
 
     Returns place information for the query location biased by IP.
 .EXAMPLE
-    Find-GMapPlace -Query "Krause's cafe" -Language es
+    Find-GMapPlace -Query "Krause's cafe" -Language es -GoogleAPIKey $googleAPIKey
 
     Returns place information for the query location biased by IP and returns results in Spanish.
 .EXAMPLE
-    Find-GMapPlace -Query '+18306252807'
+    Find-GMapPlace -Query '+18306252807' -GoogleAPIKey $googleAPIKey
 
     Returns place information for the query location biased by IP.
 .EXAMPLE
-    Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+    Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -GoogleAPIKey $googleAPIKey
 
     Returns place information for the query location biased by provided lat/long point.
 .EXAMPLE
-    Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en
+    Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -GoogleAPIKey $googleAPIKey
 
     Returns place information for the query location biased by provided lat/long point and returns results in English.
 .EXAMPLE
-    Find-GMapPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '8046'
+    Find-GMapPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '8046' -GoogleAPIKey $googleAPIKey
 
     Returns place information for the query location biased by circle lat/long/radius.
 .EXAMPLE
-    Find-GMapPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+    Find-GMapPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -GoogleAPIKey $googleAPIKey
 
     Returns place information for the query location biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
 .EXAMPLE
-    Find-GMapPlace -Query '+18306252807' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Contact -Atmosphere -Language en
+    Find-GMapPlace -Query '+18306252807' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Contact -Atmosphere -Language en -GoogleAPIKey $googleAPIKey
 
     Returns place information for the query location biased by provided lat/long point with additional Contact and Atmosphere fields with results in English.
 .EXAMPLE
@@ -49,6 +49,7 @@
         Contact        = $true
         Atmosphere     = $true
         Language       = 'en'
+        GoogleAPIKey   = $googleAPIKey
     }
     Find-GMapPlace @findGMapPlaceSplat
 
@@ -79,6 +80,8 @@
     Returns atmosphere related information including reviews and pricing about the result - atmosphere fields are billed at a higher rate.
 .PARAMETER Language
     The language in which to return results.
+.PARAMETER GoogleAPIKey
+    Google API Key
 .OUTPUTS
     GMap.Place
 .NOTES
@@ -111,6 +114,9 @@
 
     Example:
         https://maps.googleapis.com/maps/api/place/findplacefromtext/json?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key=YOUR_API_KEY
+
+    How to get a Google API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
     Caution: Place Search requests and Place Details requests do not return the same fields.
     Place Search requests return a subset of the fields that are returned by Place Details requests.
@@ -217,7 +223,12 @@ function Find-GMapPlace {
 
         [Parameter(Mandatory = $false,
             HelpMessage = 'The language in which to return results')]
-        [languages]$Language
+        [languages]$Language,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Google API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$GoogleAPIKey
     )
 
     Write-Debug -Message ($PSCmdlet.ParameterSetName)
@@ -280,7 +291,7 @@ function Find-GMapPlace {
     Write-Verbose -Message ('Querying Google API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:GoogleAPIKey
+    $fAPIKey = '&key={0}' -f $GoogleAPIKey
     $uri += $fAPIKey
     Write-Debug -Message ('Final URI: {0}' -f $uri)
 

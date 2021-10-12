@@ -14,13 +14,14 @@ Retrieve time zone information for any point on Earth
 
 ### textquery
 ```
-Find-BingTimeZone -Query <String> [-RegionBias <ccTLD>] [-Language <languages>] [<CommonParameters>]
+Find-BingTimeZone -Query <String> [-RegionBias <ccTLD>] [-Language <languages>] -BingMapsAPIKey <String>
+ [<CommonParameters>]
 ```
 
 ### Point
 ```
 Find-BingTimeZone -PointLatitude <String> -PointLongitude <String> [-RegionBias <ccTLD>]
- [-Language <languages>] [<CommonParameters>]
+ [-Language <languages>] -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,14 +31,14 @@ Given a pair of coordinates or a place name query the Time Zone API will return 
 
 ### EXAMPLE 1
 ```
-Find-BingTimeZone -Query 'New Braunfels, TX'
+Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey
 ```
 
 Returns Time Zone information for matches found for the provided query.
 
 ### EXAMPLE 2
 ```
-Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11
+Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $bingAPIKey
 ```
 
 Returns Time Zone information for the provided coordinates.
@@ -121,6 +122,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -BingMapsAPIKey
+Bing Maps API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -135,6 +151,9 @@ Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
 Example:
     https://dev.virtualearth.net/REST/v1/TimeZone/{point}?datetime={datetime_utc}&key={BingMapsAPIKey}
+
+How to get a Bing Maps API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
 
 ## RELATED LINKS
 

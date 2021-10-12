@@ -54,16 +54,6 @@ Both of these Map API keys are *easy to create* and have *no cost* pricing tiers
 * [How to get a Google Maps API Key](docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
 * [How to get a Bing Maps API Key](docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
 
-```powershell
-# Set your API Keys in the pwshPlaces.psm1 file
-# using the appropriate variable names:
-
-$env:GoogleAPIKey = 'yourGoogleAPIKey'
-$env:BingAPIKey = 'yourBingAPIKey'
-```
-
-If you don't want to adjust the ```.psm1``` then simply ensure that these environment variables are populated in your current session.
-
 ### Install pwshPlaces
 
 ```powershell
@@ -76,50 +66,50 @@ Install-Module -Name pwshPlaces -Repository PSGallery -Scope CurrentUser
 ```powershell
 ######################################################################################
 # Google Maps
-$env:GoogleAPIKey = 'yourGoogleAPIKey'
+$googleAPIKey = 'yourGoogleAPIKey'
 ######################################################################################
 # I want to find a specific place
-Find-GMapPlace -Query "Krause's cafe"
-Find-GMapPlace -Query '+18306252807'
-Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+Find-GMapPlace -Query "Krause's cafe" -GoogleAPIKey $googleAPIKey
+Find-GMapPlace -Query '+18306252807' -GoogleAPIKey $googleAPIKey
+Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -GoogleAPIKey $googleAPIKey
 #-------------------------------------------------------------------------------------
 # I want to search for a type of place
-Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults
-Search-GMapText -Query "italian restaurants in New York" -MinPrice 4
+Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults -GoogleAPIKey $googleAPIKey
+Search-GMapText -Query "italian restaurants in New York" -MinPrice 4 -GoogleAPIKey $googleAPIKey
 #-------------------------------------------------------------------------------------
 # I want to search for nearby places
-Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000
-Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 10000 -RankByProminence -Keyword 'butcher' -Type store
+Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -GoogleAPIKey $googleAPIKey
+Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 10000 -RankByProminence -Keyword 'butcher' -Type store -GoogleAPIKey $googleAPIKey
 #-------------------------------------------------------------------------------------
 # I want to get very detailed information about a place - place ID retrieved from other commands
-Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere
+Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -GoogleAPIKey $googleAPIKey
 #-------------------------------------------------------------------------------------
 # I want to GeoCode an address
-Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States'
+Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States' -GoogleAPIKey $googleAPIKey
 #-------------------------------------------------------------------------------------
 # I want to reverse GeoCode a location
-Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235'
+Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -GoogleAPIKey $googleAPIKey
 ######################################################################################
 # Bing Maps
-$env:BingAPIKey = 'yourBingAPIKey'
+$bingAPIKey = 'yourBingAPIKey'
 ######################################################################################
 # I want to find a specific place
-Find-BingPlace -Query "Krause's cafe"
-Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+Find-BingPlace -Query "Krause's cafe" -BingMapsAPIKey $bingAPIKey
+Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -BingMapsAPIKey $bingAPIKey
 #-------------------------------------------------------------------------------------
 # I want to search for nearby places
-Search-BingNearbyPlace -Type Attractions
-Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+Search-BingNearbyPlace -Type Attractions -BingMapsAPIKey $bingAPIKey
+Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343' -BingMapsAPIKey $bingAPIKey
 #-------------------------------------------------------------------------------------
 # I want to GeoCode an address
-Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130
+Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -BingMapsAPIKey $bingAPIKey
 #-------------------------------------------------------------------------------------
 # I want to reverse GeoCode a location
-Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245'
+Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245' -BingMapsAPIKey $bingAPIKey
 #-------------------------------------------------------------------------------------
 # I want to determine the Time Zone of a specific place
-Find-BingTimeZone -Query 'New Braunfels, TX'
-Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11
+Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey
+Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $bingAPIKey
 #-------------------------------------------------------------------------------------
 ```
 

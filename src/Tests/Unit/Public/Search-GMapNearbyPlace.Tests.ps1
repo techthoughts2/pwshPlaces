@@ -25,6 +25,7 @@ InModuleScope 'pwshPlaces' {
             Mock -CommandName Invoke-RestMethod -MockWith {
                 $nearbyGMap
             } #endMock
+            $googleAPIKey = 'xxxxxxxxxx'
         }
         Context 'Error' {
 
@@ -32,7 +33,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 } | Should -Throw
+                { Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -GoogleAPIKey $googleAPIKey } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -43,7 +44,16 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3
+                $searchGMapNearbyPlaceSplat = @{
+                    Latitude     = '29.7013856'
+                    Longitude    = '-98.1249258'
+                    Radius       = 1000
+                    Type         = 'restaurant'
+                    MinPrice     = 1
+                    MaxPrice     = 3
+                    GoogleAPIKey = $googleAPIKey
+                }
+                Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -77,14 +87,20 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #mock_invoke
                 Mock -CommandName Invoke-RestMethod -MockWith $mockInvoke
-                { Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3 -AllSearchResults } | Should -Throw
+                { Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3 -AllSearchResults -GoogleAPIKey $googleAPIKey } | Should -Throw
             } #it
 
         } #context_Error
         Context 'Success' {
 
             It 'should return expected results if no issues are encountered' {
-                $eval = Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -RankByDistance
+                $searchGMapNearbyPlaceSplat = @{
+                    Latitude       = '29.7049806'
+                    Longitude      = '-98.068343'
+                    RankByDistance = $true
+                    GoogleAPIKey   = $googleAPIKey
+                }
+                $eval = Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
                 ($eval | Measure-Object).Count | Should -BeExactly 2
                 $eval[0].Latitude | Should -BeExactly '29.7013856'
                 $eval[0].Longitude | Should -BeExactly '-98.1249258'
@@ -102,7 +118,20 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike '*maxprice=*'
                     $Uri | Should -BeLike '*minprice=*'
                 } -Verifiable
-                Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -RankByProminence -Keyword 'pasta' -Type restaurant -Language en -OpenNow -MaxPrice 4 -MinPrice 2
+                $searchGMapNearbyPlaceSplat = @{
+                    Latitude         = '29.7049806'
+                    Longitude        = '-98.068343'
+                    Radius           = 5000
+                    RankByProminence = $true
+                    Keyword          = 'pasta'
+                    Type             = 'restaurant'
+                    Language         = 'en'
+                    OpenNow          = $true
+                    MaxPrice         = 4
+                    MinPrice         = 2
+                    GoogleAPIKey     = $googleAPIKey
+                }
+                Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
                 Assert-VerifiableMock
             } #it
 
@@ -140,7 +169,17 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #mock_invoke
                 Mock -CommandName Invoke-RestMethod -MockWith $mockInvoke
-                Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3 -AllSearchResults
+                $searchGMapNearbyPlaceSplat = @{
+                    Latitude         = '29.7013856'
+                    Longitude        = '-98.1249258'
+                    Radius           = 1000
+                    Type             = 'restaurant'
+                    MinPrice         = 1
+                    MaxPrice         = 3
+                    AllSearchResults = $true
+                    GoogleAPIKey     = $googleAPIKey
+                }
+                Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
                 Assert-MockCalled -CommandName Invoke-RestMethod -Times 3
                 Assert-VerifiableMock
             } #it

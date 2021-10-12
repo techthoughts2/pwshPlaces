@@ -6,30 +6,31 @@
     This function can take in an address and return coordinate information.
     You can also provide coordinates to return multiple nearby address results.
 .EXAMPLE
-    Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130
+    Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -BingMapsAPIKey $bingAPIKey
 
     Performs Geocoding (latitude/longitude lookup) on provided address.
 .EXAMPLE
-    Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245'
+    Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245' -BingMapsAPIKey $bingAPIKey
 
     Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
 .EXAMPLE
-    Invoke-BingGeoCode -Query 'The Alamo'
+    Invoke-BingGeoCode -Query 'The Alamo' -BingMapsAPIKey $bingAPIKey
 
     Searches for provided query and if a match is found will return Geocoding (latitude/longitude lookup) of the results.
 .EXAMPLE
-    Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20
+    Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 
     Performs Geocoding (latitude/longitude lookup) on provided address. Results are biased to the United States country. Results are returned in English. Up to 20 results are returned.
 .EXAMPLE
     $invokeBingGeoCodeSplat = @{
-        AddressLine = '148 S Castell Ave'
-        City        = 'New Braunfels'
-        State       = 'TX'
-        PostalCode  = 78130
-        Country     = 'us'
-        Language    = 'en'
-        MaxResults  = 20
+        AddressLine    = '148 S Castell Ave'
+        City           = 'New Braunfels'
+        State          = 'TX'
+        PostalCode     = 78130
+        Country        = 'us'
+        Language       = 'en'
+        MaxResults     = 20
+        BingMapsAPIKey = $bingAPIKey
     }
     Invoke-BingGeoCode @invokeBingGeoCodeSplat
 
@@ -54,6 +55,8 @@
     The language in which to return results.
 .PARAMETER MaxResults
     Specifies the maximum number of locations to return in the response. If not specified, the default is 5.
+.PARAMETER BingMapsAPIKey
+    Bing Maps API Key
 .OUTPUTS
     Bing.GeoCode
 .NOTES
@@ -61,6 +64,9 @@
 
     Example:
         http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}
+
+    How to get a Bing Maps API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
 
     While the Bing Location API does support a text query option, I have found it to be unreliable.
     For GeoCode info stick to Addresses and Lat/Long for reverse Geocoding.
@@ -139,7 +145,12 @@ function Invoke-BingGeoCode {
         [Parameter(Mandatory = $false,
             HelpMessage = 'Specifies the maximum number of locations to return in the response')]
         [ValidateRange(1, 20)]
-        [int]$MaxResults
+        [int]$MaxResults,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Bing Maps API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$BingMapsAPIKey
     )
 
     switch ($PSCmdlet.ParameterSetName) {
@@ -189,7 +200,7 @@ function Invoke-BingGeoCode {
     Write-Verbose -Message ('Querying Bing API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:BingAPIKey
+    $fAPIKey = '&key={0}' -f $BingMapsAPIKey
     $uri += $fAPIKey
     Write-Debug -Message ('Final URI: {0}' -f $uri)
 

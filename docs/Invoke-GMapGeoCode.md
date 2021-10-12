@@ -14,18 +14,20 @@ Engages Geocoding API to return address and geographic coordinates based on prov
 
 ### Address
 ```
-Invoke-GMapGeoCode -Address <String> [-Language <languages>] [-RegionBias <ccTLD>] [<CommonParameters>]
+Invoke-GMapGeoCode -Address <String> [-Language <languages>] [-RegionBias <ccTLD>] -GoogleAPIKey <String>
+ [<CommonParameters>]
 ```
 
 ### Location
 ```
 Invoke-GMapGeoCode -Latitude <String> -Longitude <String> [-Language <languages>] [-RegionBias <ccTLD>]
- [<CommonParameters>]
+ -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ### PlaceID
 ```
-Invoke-GMapGeoCode -PlaceID <String> [-Language <languages>] [-RegionBias <ccTLD>] [<CommonParameters>]
+Invoke-GMapGeoCode -PlaceID <String> [-Language <languages>] [-RegionBias <ccTLD>] -GoogleAPIKey <String>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,28 +40,28 @@ If you know the exact google placeID this can also be provided to return Geocodi
 
 ### EXAMPLE 1
 ```
-Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States'
+Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States' -GoogleAPIKey $googleAPIKey
 ```
 
 Performs Geocoding (latitude/longitude lookup) on provided address.
 
 ### EXAMPLE 2
 ```
-Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235'
+Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -GoogleAPIKey $googleAPIKey
 ```
 
 Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
 
 ### EXAMPLE 3
 ```
-Invoke-GMapGeoCode -Latitude '37.621313' -Longitude '-122.378955' -Language es
+Invoke-GMapGeoCode -Latitude '37.621313' -Longitude '-122.378955' -Language es -GoogleAPIKey $googleAPIKey
 ```
 
 Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results in Spanish.
 
 ### EXAMPLE 4
 ```
-Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w'
+Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w' -GoogleAPIKey $googleAPIKey
 ```
 
 Returns Geocoding information about the provided place.
@@ -162,6 +164,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -GoogleAPIKey
+Google API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -198,6 +215,9 @@ Reverse geocoding (address lookup)
         location_type
     Example:
         https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+
+How to get a Google API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
 This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 

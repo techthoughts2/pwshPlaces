@@ -4,23 +4,24 @@
 .DESCRIPTION
     Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, website, user rating and reviews.
 .EXAMPLE
-    Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU'
+    Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -GoogleAPIKey $googleAPIKey
 
     Returns detailed place information about provided place ID.
 .EXAMPLE
-    Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -Contact
+    Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -Contact -GoogleAPIKey $googleAPIKey
 
     Returns detailed place information about provided place ID including detailed contact information.
 .EXAMPLE
-    Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -Language en
+    Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -Language en -GoogleAPIKey $googleAPIKey
 
     Returns detailed place information about provided place ID including detailed contact, review, rating, and pricing information. Results are returned in English.
 .EXAMPLE
     $getGMapPlaceDetailsSplat = @{
-        PlaceID    = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
-        Contact    = $true
-        Atmosphere = $true
-        Language   = 'en'
+        PlaceID      = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
+        Contact      = $true
+        Atmosphere   = $true
+        Language     = 'en'
+        GoogleAPIKey = $googleAPIKey
     }
     Get-GMapPlaceDetail @getGMapPlaceDetailsSplat
 
@@ -35,6 +36,8 @@
     The language in which to return results.
 .PARAMETER RegionBias
     The region code, specified as a ccTLD ("top-level domain") two-character value.
+.PARAMETER GoogleAPIKey
+    Google API Key
 .OUTPUTS
     GMap.PlaceDetail
 .NOTES
@@ -61,6 +64,9 @@
 
     Example:
         https://maps.googleapis.com/maps/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number&place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&key=YOUR_API_KEY
+
+    How to get a Google API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
     This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 .COMPONENT
@@ -101,7 +107,12 @@ function Get-GMapPlaceDetail {
 
         [Parameter(Mandatory = $false,
             HelpMessage = 'The region code, specified as a ccTLD')]
-        [ccTLD]$RegionBias
+        [ccTLD]$RegionBias,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Google API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$GoogleAPIKey
     )
 
     Write-Debug -Message ($PSCmdlet.ParameterSetName)
@@ -140,7 +151,7 @@ function Get-GMapPlaceDetail {
     Write-Verbose -Message ('Querying Google API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:GoogleAPIKey
+    $fAPIKey = '&key={0}' -f $GoogleAPIKey
     $uri += $fAPIKey
     Write-Debug -Message ('Final URI: {0}' -f $uri)
 

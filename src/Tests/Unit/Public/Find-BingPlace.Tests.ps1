@@ -23,6 +23,7 @@ InModuleScope 'pwshPlaces' {
             Mock -CommandName Invoke-RestMethod -MockWith {
                 $findBingPlace
             } #endMock
+            $bingAPIKey = 'xxxxxxxxxx'
         }
         Context 'Error' {
 
@@ -30,7 +31,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Find-BingPlace -Query 'cafe' } | Should -Throw
+                { Find-BingPlace -Query 'cafe' -BingMapsAPIKey $bingAPIKey } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -41,7 +42,7 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Find-BingPlace -Query 'cafe'
+                Find-BingPlace -Query 'cafe' -BingMapsAPIKey $bingAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -60,13 +61,19 @@ InModuleScope 'pwshPlaces' {
                         statusDescription = 'OK'
                     }
                 } #endMock
-                Find-BingPlace -Query 'cafe'
+                Find-BingPlace -Query 'cafe' -BingMapsAPIKey $bingAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
             It 'should return expected results if no issues are encountered' {
-                $eval = Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+                $findBingPlaceSplat = @{
+                    Query          = 'cafe'
+                    PointLatitude  = '29.7049806'
+                    PointLongitude = '-98.068343'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                $eval = Find-BingPlace @findBingPlaceSplat
                 ($eval | Measure-Object).Count | Should -BeExactly 1
                 $eval.Latitude | Should -BeExactly '29.7015113830566'
                 $eval.Longitude | Should -BeExactly '-98.1247940063477'
@@ -81,7 +88,15 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike '*culture=en*'
                     $Uri | Should -BeLike '*maxResults=*'
                 } -Verifiable
-                Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
+                $findBingPlaceSplat = @{
+                    Query          = 'cafe'
+                    PointLatitude  = '29.7049806'
+                    PointLongitude = '-98.068343'
+                    Language       = 'en'
+                    MaxResults     = 20
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                Find-BingPlace @findBingPlaceSplat
                 Assert-VerifiableMock
             } #it
 
@@ -89,7 +104,14 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod {
                     $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/LocalSearch?output=json*userCircularMapView=*'
                 } -Verifiable
-                Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+                $findBingPlaceSplat = @{
+                    Query           = 'cafe'
+                    CircleLatitude  = '29.7049806'
+                    CircleLongitude = '-98.068343'
+                    CircleRadius    = '5000'
+                    BingMapsAPIKey  = $bingAPIKey
+                }
+                Find-BingPlace @findBingPlaceSplat
                 Assert-VerifiableMock
             } #it
 
@@ -97,7 +119,16 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod {
                     $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/LocalSearch?output=json*userMapView=*'
                 } -Verifiable
-                Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -Region us
+                $findBingPlaceSplat = @{
+                    Query          = 'cafe'
+                    SouthLatitude  = '39.8592387'
+                    WestLongitude  = '-75.295486'
+                    NorthLatitude  = '40.0381942'
+                    EastLongitude  = '-75.0064087'
+                    RegionBias     = 'us'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                Find-BingPlace @findBingPlaceSplat
                 Assert-VerifiableMock
             } #it
 

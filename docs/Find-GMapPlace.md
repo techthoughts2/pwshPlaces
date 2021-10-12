@@ -15,25 +15,28 @@ The input can be any kind of Places text data, such as a name, address, or phone
 
 ### textquery (Default)
 ```
-Find-GMapPlace -Query <String> [-Contact] [-Atmosphere] [-Language <languages>] [<CommonParameters>]
+Find-GMapPlace -Query <String> [-Contact] [-Atmosphere] [-Language <languages>] -GoogleAPIKey <String>
+ [<CommonParameters>]
 ```
 
 ### Rectangle
 ```
 Find-GMapPlace [-Query <String>] -SouthLatitude <String> -WestLongitude <String> -NorthLatitude <String>
- -EastLongitude <String> [-Contact] [-Atmosphere] [-Language <languages>] [<CommonParameters>]
+ -EastLongitude <String> [-Contact] [-Atmosphere] [-Language <languages>] -GoogleAPIKey <String>
+ [<CommonParameters>]
 ```
 
 ### Circle
 ```
 Find-GMapPlace [-Query <String>] [-CircleLatitude <String>] [-CircleLongitude <String>]
- [-CircleRadius <String>] [-Contact] [-Atmosphere] [-Language <languages>] [<CommonParameters>]
+ [-CircleRadius <String>] [-Contact] [-Atmosphere] [-Language <languages>] -GoogleAPIKey <String>
+ [<CommonParameters>]
 ```
 
 ### Point
 ```
 Find-GMapPlace [-Query <String>] [-PointLatitude <String>] [-PointLongitude <String>] [-Contact] [-Atmosphere]
- [-Language <languages>] [<CommonParameters>]
+ [-Language <languages>] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -54,56 +57,56 @@ See notes for details.
 
 ### EXAMPLE 1
 ```
-Find-GMapPlace -Query "Krause's cafe"
+Find-GMapPlace -Query "Krause's cafe" -GoogleAPIKey $googleAPIKey
 ```
 
 Returns place information for the query location biased by IP.
 
 ### EXAMPLE 2
 ```
-Find-GMapPlace -Query "Krause's cafe" -Language es
+Find-GMapPlace -Query "Krause's cafe" -Language es -GoogleAPIKey $googleAPIKey
 ```
 
 Returns place information for the query location biased by IP and returns results in Spanish.
 
 ### EXAMPLE 3
 ```
-Find-GMapPlace -Query '+18306252807'
+Find-GMapPlace -Query '+18306252807' -GoogleAPIKey $googleAPIKey
 ```
 
 Returns place information for the query location biased by IP.
 
 ### EXAMPLE 4
 ```
-Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -GoogleAPIKey $googleAPIKey
 ```
 
 Returns place information for the query location biased by provided lat/long point.
 
 ### EXAMPLE 5
 ```
-Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en
+Find-GMapPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -GoogleAPIKey $googleAPIKey
 ```
 
 Returns place information for the query location biased by provided lat/long point and returns results in English.
 
 ### EXAMPLE 6
 ```
-Find-GMapPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '8046'
+Find-GMapPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '8046' -GoogleAPIKey $googleAPIKey
 ```
 
 Returns place information for the query location biased by circle lat/long/radius.
 
 ### EXAMPLE 7
 ```
-Find-GMapPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+Find-GMapPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -GoogleAPIKey $googleAPIKey
 ```
 
 Returns place information for the query location biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
 
 ### EXAMPLE 8
 ```
-Find-GMapPlace -Query '+18306252807' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Contact -Atmosphere -Language en
+Find-GMapPlace -Query '+18306252807' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Contact -Atmosphere -Language en -GoogleAPIKey $googleAPIKey
 ```
 
 Returns place information for the query location biased by provided lat/long point with additional Contact and Atmosphere fields with results in English.
@@ -117,6 +120,7 @@ $findGMapPlaceSplat = @{
     Contact        = $true
     Atmosphere     = $true
     Language       = 'en'
+    GoogleAPIKey   = $googleAPIKey
 }
 Find-GMapPlace @findGMapPlaceSplat
 ```
@@ -334,6 +338,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -GoogleAPIKey
+Google API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -379,6 +398,9 @@ Rectangular: A string specifying two lat/lng pairs in decimal degrees
 
 Example:
     https://maps.googleapis.com/maps/api/place/findplacefromtext/json?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key=YOUR_API_KEY
+
+How to get a Google API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
 Caution: Place Search requests and Place Details requests do not return the same fields.
 Place Search requests return a subset of the fields that are returned by Place Details requests.

@@ -23,6 +23,7 @@ InModuleScope 'pwshPlaces' {
             Mock -CommandName Invoke-RestMethod -MockWith {
                 $findBingTimeZone
             } #endMock
+            $bingAPIKey = 'xxxxxxxxxx'
         }
         Context 'Error' {
 
@@ -30,7 +31,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Find-BingTimeZone -Query 'New Braunfels, TX' } | Should -Throw
+                { Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -41,7 +42,7 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11
+                Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $bingAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -60,13 +61,18 @@ InModuleScope 'pwshPlaces' {
                         statusDescription = 'OK'
                     }
                 } #endMock
-                Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11
+                $findBingTimeZoneSplat = @{
+                    PointLatitude  = 29.70
+                    PointLongitude = '-98.11'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                Find-BingTimeZone @findBingTimeZoneSplat
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
             It 'should return expected results if no issues are encountered with query' {
-                $eval = Find-BingTimeZone -Query 'New Braunfels, TX'
+                $eval = Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey
                 ($eval | Measure-Object).Count  | Should -BeExactly 1
                 $eval.TimeZoneName              | Should -BeExactly 'Central Standard Time'
                 $eval.TimeZoneShort             | Should -BeExactly 'CST'
@@ -82,7 +88,12 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     $findBingTimeZonePoint
                 } #endMock
-                $eval = Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11
+                $findBingTimeZoneSplat = @{
+                    PointLatitude  = 29.70
+                    PointLongitude = '-98.11'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                $eval = Find-BingTimeZone @findBingTimeZoneSplat
                 ($eval | Measure-Object).Count  | Should -BeExactly 1
                 $eval.TimeZoneName              | Should -BeExactly 'Central Standard Time'
                 $eval.TimeZoneShort             | Should -BeExactly 'CST'
@@ -101,7 +112,14 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike '*userRegion=*'
                     $Uri | Should -BeLike '*culture=en*'
                 } -Verifiable
-                Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -Language en -RegionBias us
+                $findBingTimeZoneSplat = @{
+                    PointLatitude  = 29.70
+                    PointLongitude = '-98.11'
+                    Language       = 'en'
+                    RegionBias     = 'us'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                Find-BingTimeZone @findBingTimeZoneSplat
                 Assert-VerifiableMock
             } #it
 

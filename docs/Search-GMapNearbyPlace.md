@@ -17,21 +17,21 @@ You can refine your search request by supplying keywords, type of place you are 
 ```
 Search-GMapNearbyPlace -Latitude <String> -Longitude <String> -Radius <String> [-Keyword <String>]
  [-Type <placeTypes>] [-Language <languages>] [-OpenNow] [-MaxPrice <String>] [-MinPrice <String>]
- [-AllSearchResults] [<CommonParameters>]
+ [-AllSearchResults] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ### Distance
 ```
 Search-GMapNearbyPlace -Latitude <String> -Longitude <String> [-RankByDistance] [-Keyword <String>]
  [-Type <placeTypes>] [-Language <languages>] [-OpenNow] [-MaxPrice <String>] [-MinPrice <String>]
- [-AllSearchResults] [<CommonParameters>]
+ [-AllSearchResults] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ### Area
 ```
 Search-GMapNearbyPlace -Latitude <String> -Longitude <String> -Radius <String> [-RankByProminence]
  [-Keyword <String>] [-Type <placeTypes>] [-Language <languages>] [-OpenNow] [-MaxPrice <String>]
- [-MinPrice <String>] [-AllSearchResults] [<CommonParameters>]
+ [-MinPrice <String>] [-AllSearchResults] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,21 +44,21 @@ You can increase this to a maximum of 60 places results by providing the AllSear
 
 ### EXAMPLE 1
 ```
-Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000
+Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a nearby search and returns all places types near provided coordinates within a range of 5000 meters.
 
 ### EXAMPLE 2
 ```
-Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 10000 -RankByProminence -Keyword 'butcher' -Type store
+Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 10000 -RankByProminence -Keyword 'butcher' -Type store -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a nearby search and returns all store place types that match the keyword of butcher within the specified geographic range.
 
 ### EXAMPLE 3
 ```
-Search-GMapNearbyPlace -Latitude '38.9072' -Longitude '-77.0369' -Radius 10000 -RankByProminence -Type embassy -AllSearchResults
+Search-GMapNearbyPlace -Latitude '38.9072' -Longitude '-77.0369' -Radius 10000 -RankByProminence -Type embassy -AllSearchResults -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a nearby search and returns all embassy place types near provided coordinates within a range of 10000 meters.
@@ -66,7 +66,7 @@ The maximum of 60 places results is returned.
 
 ### EXAMPLE 4
 ```
-Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3
+Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3 -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a nearby search and returns only restaurants places near provided coordinates within a range of 1000 meters.
@@ -74,14 +74,14 @@ Restaurant will be in the cheap to moderately expensive price range.
 
 ### EXAMPLE 5
 ```
-Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -RankByDistance
+Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -RankByDistance -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a nearby search and returns all places types near provided coordinates ranked by distance from the coordinates.
 
 ### EXAMPLE 6
 ```
-Search-GMapNearbyPlace -Latitude '26.1202' -Longitude '127.7025' -Radius 10000 -RankByProminence -Type amusement_park -Language en
+Search-GMapNearbyPlace -Latitude '26.1202' -Longitude '127.7025' -Radius 10000 -RankByProminence -Type amusement_park -Language en -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a nearby search and returns only amusement parks places near provided coordinates within a range of 10000 meters.
@@ -89,7 +89,7 @@ Results are ranked by prominence and returned in English.
 
 ### EXAMPLE 7
 ```
-Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -RankByProminence -Keyword 'pasta' -Type restaurant -Language en -OpenNow -MaxPrice 4 -MinPrice 2 -AllSearchResults
+Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -RankByProminence -Keyword 'pasta' -Type restaurant -Language en -OpenNow -MaxPrice 4 -MinPrice 2 -AllSearchResults -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a nearby search and returns only restaurants places near provided coordinates that match the keyword of pasta within a range of 5000 meters.
@@ -111,6 +111,7 @@ $searchGMapNearbyPlaceSplat = @{
     MaxPrice         = 4
     MinPrice         = 2
     AllSearchResults = $true
+    GoogleAPIKey     = $googleAPIKey
 }
 Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
 ```
@@ -310,6 +311,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -GoogleAPIKey
+Google API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -340,6 +356,9 @@ Optional parameters
     sessiontoken
 
 Example: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=YOUR_API_KEY'
+
+How to get a Google API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
 Nearby Search and Text Search return all of the available data fields for the selected place (a subset of the supported fields), and you will be billed accordingly There is no way to constrain Nearby Search or Text Search to only return specific fields.
 To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.

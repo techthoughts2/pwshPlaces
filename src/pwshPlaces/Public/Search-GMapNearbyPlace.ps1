@@ -7,31 +7,31 @@
     By default, 20 results are returned from a standard search.
     You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
 .EXAMPLE
-    Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000
+    Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -GoogleAPIKey $googleAPIKey
 
     Performs a nearby search and returns all places types near provided coordinates within a range of 5000 meters.
 .EXAMPLE
-    Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 10000 -RankByProminence -Keyword 'butcher' -Type store
+    Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 10000 -RankByProminence -Keyword 'butcher' -Type store -GoogleAPIKey $googleAPIKey
 
     Performs a nearby search and returns all store place types that match the keyword of butcher within the specified geographic range.
 .EXAMPLE
-    Search-GMapNearbyPlace -Latitude '38.9072' -Longitude '-77.0369' -Radius 10000 -RankByProminence -Type embassy -AllSearchResults
+    Search-GMapNearbyPlace -Latitude '38.9072' -Longitude '-77.0369' -Radius 10000 -RankByProminence -Type embassy -AllSearchResults -GoogleAPIKey $googleAPIKey
 
     Performs a nearby search and returns all embassy place types near provided coordinates within a range of 10000 meters. The maximum of 60 places results is returned.
 .EXAMPLE
-    Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3
+    Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3 -GoogleAPIKey $googleAPIKey
 
     Performs a nearby search and returns only restaurants places near provided coordinates within a range of 1000 meters. Restaurant will be in the cheap to moderately expensive price range.
 .EXAMPLE
-    Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -RankByDistance
+    Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -RankByDistance -GoogleAPIKey $googleAPIKey
 
     Performs a nearby search and returns all places types near provided coordinates ranked by distance from the coordinates.
 .EXAMPLE
-    Search-GMapNearbyPlace -Latitude '26.1202' -Longitude '127.7025' -Radius 10000 -RankByProminence -Type amusement_park -Language en
+    Search-GMapNearbyPlace -Latitude '26.1202' -Longitude '127.7025' -Radius 10000 -RankByProminence -Type amusement_park -Language en -GoogleAPIKey $googleAPIKey
 
     Performs a nearby search and returns only amusement parks places near provided coordinates within a range of 10000 meters. Results are ranked by prominence and returned in English.
 .EXAMPLE
-    Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -RankByProminence -Keyword 'pasta' -Type restaurant -Language en -OpenNow -MaxPrice 4 -MinPrice 2 -AllSearchResults
+    Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -RankByProminence -Keyword 'pasta' -Type restaurant -Language en -OpenNow -MaxPrice 4 -MinPrice 2 -AllSearchResults -GoogleAPIKey $googleAPIKey
 
     Performs a nearby search and returns only restaurants places near provided coordinates that match the keyword of pasta within a range of 5000 meters. Restaurant will be in the moderately expensive to expensive price range. Only places that are currently opened are returned. Results will be returned in English.
 .EXAMPLE
@@ -47,6 +47,7 @@
         MaxPrice         = 4
         MinPrice         = 2
         AllSearchResults = $true
+        GoogleAPIKey     = $googleAPIKey
     }
     Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
 
@@ -75,6 +76,8 @@
     Restricts results to only those places within the specified range. Valid values range between 0 (most affordable) to 4 (most expensive), inclusive.
 .PARAMETER AllSearchResults
     By default 20 results are returned from a standard search. Using this switch increases the search results from 20 to the maximum of 60. This does increase the number of API calls.
+.PARAMETER GoogleAPIKey
+    Google API Key
 .OUTPUTS
     GMap.NearbyPlace
 .NOTES
@@ -98,6 +101,9 @@
         sessiontoken
 
     Example: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=YOUR_API_KEY'
+
+    How to get a Google API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
     Nearby Search and Text Search return all of the available data fields for the selected place (a subset of the supported fields), and you will be billed accordingly There is no way to constrain Nearby Search or Text Search to only return specific fields. To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.
 
@@ -187,7 +193,12 @@ function Search-GMapNearbyPlace {
 
         [Parameter(Mandatory = $false,
             HelpMessage = 'TBD')]
-        [switch]$AllSearchResults
+        [switch]$AllSearchResults,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Google API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$GoogleAPIKey
     )
 
     $uri = '{0}{1}' -f $googleMapsBaseURI, 'place/nearbysearch/json?'
@@ -252,7 +263,7 @@ function Search-GMapNearbyPlace {
     Write-Verbose -Message ('Querying Google API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:GoogleAPIKey
+    $fAPIKey = '&key={0}' -f $GoogleAPIKey
     $uri += $fAPIKey
     Write-Debug -Message ('Final URI: {0}' -f $uri)
 

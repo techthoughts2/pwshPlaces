@@ -9,47 +9,47 @@
     By default 20 results are returned from a standard search.
     You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
 .EXAMPLE
-    Search-GMapText -Query "Krause's Cafe"
+    Search-GMapText -Query "Krause's Cafe" -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query. Since no address or location information is provided places results are biased by your IP location.
 .EXAMPLE
-    Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults
+    Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query and returns places that are classified as type: bakery. Since no address or location information is provided places results are biased by your IP location.
 .EXAMPLE
-    Search-GMapText -Query "pizza restaurants in New York"
+    Search-GMapText -Query "pizza restaurants in New York" -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query. Since a location is provided in the query, places results will be biased by that location.
 .EXAMPLE
-    Search-GMapText -Query "Airport" -RegionBias es
+    Search-GMapText -Query "Airport" -RegionBias es -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query. Places results are biased to the region of Spain.
 .EXAMPLE
-    Search-GMapText -Query "italian restaurants in New York" -MinPrice 4
+    Search-GMapText -Query "italian restaurants in New York" -MinPrice 4 -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query and returns expensive restaurant options. Since a location is provided in the query, places results will be biased by that location.
 .EXAMPLE
-    Search-GMapText -Query "main plaza New Braunfels" -Type restaurant
+    Search-GMapText -Query "main plaza New Braunfels" -Type restaurant -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query and returns only restaurants. Since a location is provided in the query, places results will be biased by that location.
 .EXAMPLE
-    Search-GMapText -Query 'Cafe' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en
+    Search-GMapText -Query 'Cafe' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query. Results are returned based on the provided coordiantes within a 5000 meter range. Places results are returned in English.
 .EXAMPLE
-    Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en -Type restaurant
+    Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en -Type restaurant -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query. Only restaurant places are returned. Results are returned based on the provided coordiantes within a 5000 meter range. Places results are returned in English.
 .EXAMPLE
-    Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 500 -RankByProminence
+    Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 500 -RankByProminence -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query. Results are returned based on the provided coordiantes within a 500 meter range. Places results are ranked by their prominence.
 .EXAMPLE
-    Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant
+    Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query. Only restaurant places are returned. Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates.
 .EXAMPLE
-    Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -Language en -OpenNow -MinPrice 1 -MaxPrice 2 -AllSearchResults
+    Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -Language en -OpenNow -MinPrice 1 -MaxPrice 2 -AllSearchResults -GoogleAPIKey $googleAPIKey
 
     Performs a text search with the provided query. Only restaurant places are returned. Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates. Places data is returned in English. Results with a cheap to moderate price are returned. Only restaurants that are currently open are returned. The maximum of 60 places results is returned.
 .EXAMPLE
@@ -64,6 +64,7 @@
         MinPrice         = 1
         MaxPrice         = 2
         AllSearchResults = $true
+        GoogleAPIKey     = $googleAPIKey
     }
     Search-GMapText @searchGMapTextSplat
 
@@ -94,6 +95,8 @@
     Restricts results to only those places within the specified range. Valid values range between 0 (most affordable) to 4 (most expensive), inclusive.
 .PARAMETER AllSearchResults
     By default 20 results are returned from a standard search. Using this switch increases the search results from 20 to the maximum of 60. This does increase the number of API calls.
+.PARAMETER GoogleAPIKey
+    Google API Key
 .OUTPUTS
     GMap.PlaceText
 .NOTES
@@ -114,6 +117,9 @@
         type
 
     Example: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants%20in%20Sydney&key=YOUR_API_KEY'
+
+    How to get a Google API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
     Nearby Search and Text Search return all of the available data fields for the selected place (a subset of the supported fields), and you will be billed accordingly There is no way to constrain Nearby Search or Text Search to only return specific fields. To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.
 
@@ -208,7 +214,12 @@ function Search-GMapText {
 
         [Parameter(Mandatory = $false,
             HelpMessage = 'By default 20 results are returned from a standard search. Using this switch increases the search results from 20 to the maximum of 60')]
-        [switch]$AllSearchResults
+        [switch]$AllSearchResults,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Google API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$GoogleAPIKey
     )
 
     $uri = '{0}{1}' -f $googleMapsBaseURI, 'place/textsearch/json?'
@@ -278,7 +289,7 @@ function Search-GMapText {
     Write-Verbose -Message ('Querying Google API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:GoogleAPIKey
+    $fAPIKey = '&key={0}' -f $GoogleAPIKey
     $uri += $fAPIKey
     Write-Debug -Message ('Final URI: {0}' -f $uri)
 

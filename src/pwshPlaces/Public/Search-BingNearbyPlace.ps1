@@ -7,27 +7,27 @@
     By default the location bias is IP based.
     Location bias can be controlled via parameters.
 .EXAMPLE
-    Search-BingNearbyPlace -Type Attractions
+    Search-BingNearbyPlace -Type Attractions -BingMapsAPIKey $bingAPIKey
 
     Performs a nearby search biased by IP and returns Attraction places types.
 .EXAMPLE
-    Search-BingNearbyPlace -Type Restaurants -MaxResults 20
+    Search-BingNearbyPlace -Type Restaurants -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 
     Performs a nearby search biased by IP and returns Restaurant places types with a maximum of 20 results returned.
 .EXAMPLE
-    Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+    Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343' -BingMapsAPIKey $bingAPIKey
 
     Performs a nearby search near the provided Lat/Long and returns CafeRestaurant places types.
 .EXAMPLE
-    Search-BingNearbyPlace -Type BreweriesAndBrewPubs -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+    Search-BingNearbyPlace -Type BreweriesAndBrewPubs -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000' -BingMapsAPIKey $bingAPIKey
 
     Performs a nearby search biased by circle lat/long/radius and returns Bars and Pubs places types.
 .EXAMPLE
-    Search-BingNearbyPlace -Type Parks -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+    Search-BingNearbyPlace -Type Parks -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -BingMapsAPIKey $bingAPIKey
 
     Performs a nearby search biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle. Park places types are returned.
 .EXAMPLE
-    Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
+    Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 
     Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in English with a maximum of 20 results returned.
 .EXAMPLE
@@ -37,6 +37,7 @@
         PointLongitude = '-98.068343'
         Language       = 'en'
         MaxResults     = 20
+        BingMapsAPIKey = $bingAPIKey
     }
     Search-BingNearbyPlace @searchBingNearbyPlaceSplat
 
@@ -65,6 +66,8 @@
     The region code, specified as a ccTLD ("top-level domain") two-character value.
 .PARAMETER Language
     The language in which to return results.
+.PARAMETER BingMapsAPIKey
+    Bing Maps API Key
 .OUTPUTS
     Bing.Place
 .NOTES
@@ -72,6 +75,9 @@
 
     Example:
         https://dev.virtualearth.net/REST/v1/LocalSearch/?type={type_string_id_list}&userLocation={point}&key={BingMapsAPIKey}
+
+    How to get a Bing Maps API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
 .COMPONENT
     pwshPlaces
 .LINK
@@ -167,7 +173,12 @@ function Search-BingNearbyPlace {
         [Parameter(Mandatory = $false,
             HelpMessage = 'Specifies the maximum number of locations to return in the response')]
         [ValidateRange(1, 20)]
-        [int]$MaxResults
+        [int]$MaxResults,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Bing Maps API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$BingMapsAPIKey
     )
 
     Write-Debug -Message ($PSCmdlet.ParameterSetName)
@@ -218,7 +229,7 @@ function Search-BingNearbyPlace {
     Write-Verbose -Message ('Querying Bing API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:BingAPIKey
+    $fAPIKey = '&key={0}' -f $BingMapsAPIKey
     $uri += $fAPIKey
 
     $invokeRestMethodSplat = @{

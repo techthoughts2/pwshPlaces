@@ -10,6 +10,11 @@ $PathToManifest = [System.IO.Path]::Combine('..', '..', 'Artifacts', "$ModuleNam
 Import-Module $PathToManifest -Force
 #-------------------------------------------------------------------------
 Describe 'Infrastructure Tests' -Tag Infrastructure {
+    # for local dev testing only
+    BeforeEach {
+        $env:GoogleAPIKey = 'AIzaSyCyXypZobAjrOnRKoPKa6aZqcRWPw7od-U'
+        $env:BingAPIKey = 'AlX3WrsMGXpT3HauFYqm7AqAU3s1xWWb_Fp55Xpf99m0gHWxHouzZssxngC9NUI9'
+    }
     Context 'Google Maps Function Tests' {
 
         Context 'Find-GMapPlace' {
@@ -21,6 +26,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     Contact        = $true
                     Atmosphere     = $true
                     Language       = 'en'
+                    GoogleAPIKey   = $env:GoogleAPIKey
                 }
                 $eval = Find-GMapPlace @findGMapPlaceSplat
                 $eval.place_id  | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
@@ -34,10 +40,11 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
         Context 'Get-GMapPlaceDetail' {
             It 'should return the expected results' {
                 $getGMapPlaceDetailsSplat = @{
-                    PlaceID    = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
-                    Contact    = $true
-                    Atmosphere = $true
-                    Language   = 'en'
+                    PlaceID      = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
+                    Contact      = $true
+                    Atmosphere   = $true
+                    Language     = 'en'
+                    GoogleAPIKey = $env:GoogleAPIKey
                 }
                 $eval = Get-GMapPlaceDetail @getGMapPlaceDetailsSplat
                 $eval.place_id              | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
@@ -58,17 +65,30 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
 
         Context 'Invoke-GMapGeoCode' {
             It 'should return the expected results for lat long lookup' {
-                $eval = Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, USA'
+                $invokeGMapGeoCodeSplat = @{
+                    Address      = '148 S Castell Ave, New Braunfels, TX 78130, USA'
+                    GoogleAPIKey = $env:GoogleAPIKey
+                }
+                $eval = Invoke-GMapGeoCode @invokeGMapGeoCodeSplat
                 ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 1
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
             It 'should return the expected results for reverse geocoding' {
-                $eval = Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235'
+                $invokeGMapGeoCodeSplat = @{
+                    Latitude     = '29.7012853'
+                    Longitude    = '-98.1250235'
+                    GoogleAPIKey = $env:GoogleAPIKey
+                }
+                $eval = Invoke-GMapGeoCode @invokeGMapGeoCodeSplat
                 ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 1
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
             It 'should return expected results for place lookup' {
-                $eval = Invoke-GMapGeoCode -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
+                $invokeGMapGeoCodeSplat = @{
+                    PlaceID      = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
+                    GoogleAPIKey = $env:GoogleAPIKey
+                }
+                $eval = Invoke-GMapGeoCode @invokeGMapGeoCodeSplat
                 $eval.place_id  | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
                 $eval.City      | Should -BeExactly 'New Braunfels'
                 $eval.Latitude  | Should -Not -BeNullOrEmpty
@@ -90,6 +110,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     MaxPrice         = 4
                     MinPrice         = 2
                     AllSearchResults = $true
+                    GoogleAPIKey     = $env:GoogleAPIKey
                 }
                 $eval = Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
                 ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 2
@@ -109,6 +130,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     MinPrice         = 1
                     MaxPrice         = 2
                     AllSearchResults = $true
+                    GoogleAPIKey     = $env:GoogleAPIKey
                 }
                 $eval = Search-GMapText @searchGMapTextSplat
                 ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 20
@@ -120,12 +142,24 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
 
         Context 'Invoke-BingGeoCode' {
             It 'should return the expected results for lat long lookup' {
-                $eval = Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130
+                $invokeBingGeoCodeSplat = @{
+                    AddressLine    = '148 S Castell Ave'
+                    City           = 'New Braunfels'
+                    State          = 'TX'
+                    PostalCode     = 78130
+                    BingMapsAPIKey = $env:BingAPIKey
+                }
+                $eval = Invoke-BingGeoCode @invokeBingGeoCodeSplat
                 ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
             It 'should return the expected results for reverse geocoding' {
-                $eval = Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245'
+                $invokeBingGeoCodeSplat = @{
+                    Latitude       = '29.7030'
+                    Longitude      = '-98.1245'
+                    BingMapsAPIKey = $env:BingAPIKey
+                }
+                $eval = Invoke-BingGeoCode @invokeBingGeoCodeSplat
                 ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
                 Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
             } #it
@@ -139,6 +173,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     PointLongitude = '-98.068343'
                     Language       = 'en'
                     MaxResults     = 20
+                    BingMapsAPIKey = $env:BingAPIKey
                 }
                 $eval = Find-BingPlace @findBingPlaceSplat
                 ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
@@ -154,6 +189,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     PointLongitude = '-98.068343'
                     Language       = 'en'
                     MaxResults     = 20
+                    BingMapsAPIKey = $env:BingAPIKey
                 }
                 $eval = Search-BingNearbyPlace @searchBingNearbyPlaceSplat
                 ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
@@ -166,6 +202,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                 $findBingTimeZoneSplat = @{
                     PointLatitude  = '29.70'
                     PointLongitude = '-98.11'
+                    BingMapsAPIKey = $env:BingAPIKey
                 }
                 $eval = Find-BingTimeZone @findBingTimeZoneSplat
                 $eval.TimeZoneName  | Should -BeExactly 'Central Standard Time'
