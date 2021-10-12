@@ -45,7 +45,7 @@ The Google Maps and Bing Maps API require very specific formatting and criteria 
 
 ### Prerequisites
 
-To use pwshPlaces you will require a Google Maps or Bing Maps API key. To use all of the functions you will require both. The API key(s) will need to be loaded into environment variables in your current session.
+To use pwshPlaces you will require a Google Maps or Bing Maps API key. To use all of the functions you will require both.
 
 > 🙄 Not another module that requires an API Key!
 
