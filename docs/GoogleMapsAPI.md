@@ -120,9 +120,18 @@ Import-Module pwshPlaces
 
 $scrapePath = $env:Temp
 
-$locale = Invoke-GMapGeoCode -Address 'New Braunfels'
+$locale = Invoke-GMapGeoCode -Address 'New Braunfels' -GoogleAPIKey $env:GoogleAPIKey
 
-$areaRestaurants = Search-GMapNearbyPlace -Latitude $locale.Latitude -Longitude $locale.Longitude -Radius 10000 -RankByProminence -Type restaurant -AllSearchResults
+$searchGMapNearbyPlaceSplat = @{
+    Latitude         = $locale.Latitude
+    Longitude        = $locale.Longitude
+    Radius           = 10000
+    RankByProminence = $true
+    Type             = 'restaurant'
+    AllSearchResults = $true
+    GoogleAPIKey     = $env:GoogleAPIKey
+}
+$areaRestaurants = Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
 
 ConvertTo-Clixml -InputObject $areaRestaurants -Depth 100 | Out-File "$scrapePath\localRestaurants.xml"
 #--------------------------------------------------------------

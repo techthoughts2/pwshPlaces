@@ -69,9 +69,16 @@ Import-Module pwshPlaces
 
 $scrapePath = $env:Temp
 
-$locale = Invoke-BingGeoCode -Query 'New Braunfels, TX'
+$locale = Invoke-BingGeoCode -Query 'New Braunfels, TX' -BingMapsAPIKey $env:BingAPIKey
 
-$areaRestaurants = Search-BingNearbyPlace -Type Restaurants -PointLatitude $locale.Latitude -PointLongitude $locale.Longitude -MaxResults 20
+$searchBingNearbyPlaceSplat = @{
+    Type           = 'Restaurants'
+    PointLatitude  = $locale.Latitude
+    PointLongitude = $locale.Longitude
+    MaxResults     = 20
+    BingMapsAPIKey = $env:BingAPIKey
+}
+$areaRestaurants = Search-BingNearbyPlace @searchBingNearbyPlaceSplat
 
 ConvertTo-Clixml -InputObject $areaRestaurants -Depth 100 | Out-File "$scrapePath\localRestaurants.xml"
 #--------------------------------------------------------------

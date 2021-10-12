@@ -11,10 +11,10 @@ Import-Module $PathToManifest -Force
 #-------------------------------------------------------------------------
 Describe 'Infrastructure Tests' -Tag Infrastructure {
     # for local dev testing only
-    BeforeEach {
-        $env:GoogleAPIKey = 'AIzaSyCyXypZobAjrOnRKoPKa6aZqcRWPw7od-U'
-        $env:BingAPIKey = 'AlX3WrsMGXpT3HauFYqm7AqAU3s1xWWb_Fp55Xpf99m0gHWxHouzZssxngC9NUI9'
-    }
+    # BeforeEach {
+    #     $env:GoogleAPIKey = ''
+    #     $env:BingAPIKey = ''
+    # }
     Context 'Google Maps Function Tests' {
 
         Context 'Find-GMapPlace' {

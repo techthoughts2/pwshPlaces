@@ -20,22 +20,22 @@ pwshPlaces is a PowerShell module that can help you discover places and search f
 
 pwshPlaces enables you to leverage the Google Maps and/or Bing Maps API(s) to perform a variety of maps related tasks using PowerShell:
 
-* Search for places, entities, addresses, and other points of interest
-* Discover locations near your or near a specified place
-* Easily perform Geocoding and reverse Geocoding actions
-* Get detailed place information including opening hours, website information, and contact information
+- Search for places, entities, addresses, and other points of interest
+- Discover locations near your or near a specified place
+- Easily perform Geocoding and reverse Geocoding actions
+- Get detailed place information including opening hours, website information, and contact information
 
 [pwshPlaces](docs/pwshPlaces.md) provides the following functions:
 
-* [Find-BingPlace](docs/Find-BingPlace.md)
-* [Find-BingTimeZone](docs/Find-BingTimeZone.md)
-* [Find-GMapPlace](docs/Find-GMapPlace.md)
-* [Get-GMapPlaceDetail](docs/Get-GMapPlaceDetail.md)
-* [Invoke-BingGeoCode](docs/Invoke-BingGeoCode.md)
-* [Invoke-GMapGeoCode](docs/Invoke-GMapGeoCode.md)
-* [Search-BingNearbyPlace](docs/Search-BingNearbyPlace.md)
-* [Search-GMapNearbyPlace](docs/Search-GMapNearbyPlace.md)
-* [Search-GMapText](docs/Search-GMapText.md)
+- [Find-BingPlace](docs/Find-BingPlace.md)
+- [Find-BingTimeZone](docs/Find-BingTimeZone.md)
+- [Find-GMapPlace](docs/Find-GMapPlace.md)
+- [Get-GMapPlaceDetail](docs/Get-GMapPlaceDetail.md)
+- [Invoke-BingGeoCode](docs/Invoke-BingGeoCode.md)
+- [Invoke-GMapGeoCode](docs/Invoke-GMapGeoCode.md)
+- [Search-BingNearbyPlace](docs/Search-BingNearbyPlace.md)
+- [Search-GMapNearbyPlace](docs/Search-GMapNearbyPlace.md)
+- [Search-GMapText](docs/Search-GMapText.md)
 
 ## Why
 
@@ -51,8 +51,8 @@ To use pwshPlaces you will require a Google Maps or Bing Maps API key. To use al
 
 Both of these Map API keys are *easy to create* and have *no cost* pricing tiers which should meet your needs. I have provided detailed guides on how to get your API keys:
 
-* [How to get a Google Maps API Key](docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
-* [How to get a Bing Maps API Key](docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
+- [How to get a Google Maps API Key](docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
+- [How to get a Bing Maps API Key](docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
 
 ### Install pwshPlaces
 
@@ -122,6 +122,11 @@ Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $b
 [Jake Morrison](https://twitter.com/JakeMorrison) - [https://www.techthoughts.info/](https://www.techthoughts.info/)
 
 ## Notes
+
+Read more about:
+
+- [Google Maps API](docs/GoogleMapsAPI.md)
+- [Bing Maps API](docs/BingMapsAPI.md)
 
 This PowerShell project was created with [Catesta](https://github.com/techthoughts2/Catesta).
 
