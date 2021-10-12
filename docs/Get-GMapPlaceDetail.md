@@ -14,7 +14,7 @@ Request more details about a particular establishment or point of interest
 
 ```
 Get-GMapPlaceDetail -PlaceID <String> [-Contact] [-Atmosphere] [-Language <languages>] [-RegionBias <ccTLD>]
- [<CommonParameters>]
+ -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,21 +24,21 @@ Place Details request returns more comprehensive information about the indicated
 
 ### EXAMPLE 1
 ```
-Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU'
+Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -GoogleAPIKey $googleAPIKey
 ```
 
 Returns detailed place information about provided place ID.
 
 ### EXAMPLE 2
 ```
-Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -Contact
+Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -Contact -GoogleAPIKey $googleAPIKey
 ```
 
 Returns detailed place information about provided place ID including detailed contact information.
 
 ### EXAMPLE 3
 ```
-Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -Language en
+Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -Language en -GoogleAPIKey $googleAPIKey
 ```
 
 Returns detailed place information about provided place ID including detailed contact, review, rating, and pricing information.
@@ -47,10 +47,11 @@ Results are returned in English.
 ### EXAMPLE 4
 ```
 $getGMapPlaceDetailsSplat = @{
-    PlaceID    = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
-    Contact    = $true
-    Atmosphere = $true
-    Language   = 'en'
+    PlaceID      = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
+    Contact      = $true
+    Atmosphere   = $true
+    Language     = 'en'
+    GoogleAPIKey = $googleAPIKey
 }
 Get-GMapPlaceDetail @getGMapPlaceDetailsSplat
 ```
@@ -137,6 +138,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -GoogleAPIKey
+Google API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -170,6 +186,9 @@ Optional parameters
 
 Example:
     https://maps.googleapis.com/maps/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number&place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&key=YOUR_API_KEY
+
+How to get a Google API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
 This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 

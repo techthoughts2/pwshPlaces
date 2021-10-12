@@ -7,27 +7,27 @@
     By default, the location bias is IP based.
     Location bias and language can be controlled via parameters.
 .EXAMPLE
-    Find-BingPlace -Query "Krause's cafe"
+    Find-BingPlace -Query "Krause's cafe" -BingMapsAPIKey $bingAPIKey
 
     Returns place information for the query location biased by IP.
 .EXAMPLE
-    Find-BingPlace -Query "Krause's cafe" -Language es
+    Find-BingPlace -Query "Krause's cafe" -Language es -BingMapsAPIKey $bingAPIKey
 
     Returns place information for the query location biased by IP and returns a few portions of the results in Spanish.
 .EXAMPLE
-    Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+    Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -BingMapsAPIKey $bingAPIKey
 
     Returns place information for the query location biased by provided lat/long point.
 .EXAMPLE
-    Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+    Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000' -BingMapsAPIKey $bingAPIKey
 
     Returns place information for the query location biased by circle lat/long/radius.
 .EXAMPLE
-    Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+    Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -BingMapsAPIKey $bingAPIKey
 
     Returns place information for the query location biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
 .EXAMPLE
-    Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
+    Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 
     Returns place information for the query location biased by provided lat/long point with a maximum of 20 results in English.
 .EXAMPLE
@@ -37,6 +37,7 @@
         PointLongitude = '-98.068343'
         Language       = 'en'
         MaxResults     = 20
+        BingMapsAPIKey = $bingAPIKey
     }
     Find-BingPlace @findBingPlaceSplat
 
@@ -65,6 +66,8 @@
     The region code, specified as a ccTLD ("top-level domain") two-character value.
 .PARAMETER Language
     The language in which to return results.
+.PARAMETER BingMapsAPIKey
+    Bing Maps API Key
 .OUTPUTS
     Bing.Place
 .NOTES
@@ -72,6 +75,9 @@
 
     Example:
         https://dev.virtualearth.net/REST/v1/LocalSearch/?query={query}&userLocation={point}&key={BingMapsAPIKey}
+
+    How to get a Bing Maps API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
 .COMPONENT
     pwshPlaces
 .LINK
@@ -167,7 +173,12 @@ function Find-BingPlace {
         [Parameter(Mandatory = $false,
             HelpMessage = 'Specifies the maximum number of locations to return in the response')]
         [ValidateRange(1, 20)]
-        [int]$MaxResults
+        [int]$MaxResults,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Bing Maps API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$BingMapsAPIKey
     )
 
     Write-Debug -Message ($PSCmdlet.ParameterSetName)
@@ -218,7 +229,7 @@ function Find-BingPlace {
     Write-Verbose -Message ('Querying Bing API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:BingAPIKey
+    $fAPIKey = '&key={0}' -f $BingMapsAPIKey
     $uri += $fAPIKey
 
     $invokeRestMethodSplat = @{

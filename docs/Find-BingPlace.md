@@ -15,27 +15,27 @@ Returns a list of business entities centered around a location or a geographic r
 ### textquery (Default)
 ```
 Find-BingPlace -Query <String> [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>]
- [<CommonParameters>]
+ -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ### Rectangle
 ```
 Find-BingPlace [-Query <String>] -SouthLatitude <String> -WestLongitude <String> -NorthLatitude <String>
  -EastLongitude <String> [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>]
- [<CommonParameters>]
+ -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ### Circle
 ```
 Find-BingPlace [-Query <String>] [-CircleLatitude <String>] [-CircleLongitude <String>]
  [-CircleRadius <String>] [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>]
- [<CommonParameters>]
+ -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ### Point
 ```
 Find-BingPlace [-Query <String>] [-PointLatitude <String>] [-PointLongitude <String>] [-RegionBias <ccTLD>]
- [-Language <languages>] [-MaxResults <Int32>] [<CommonParameters>]
+ [-Language <languages>] [-MaxResults <Int32>] -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,42 +48,42 @@ Location bias and language can be controlled via parameters.
 
 ### EXAMPLE 1
 ```
-Find-BingPlace -Query "Krause's cafe"
+Find-BingPlace -Query "Krause's cafe" -BingMapsAPIKey $bingAPIKey
 ```
 
 Returns place information for the query location biased by IP.
 
 ### EXAMPLE 2
 ```
-Find-BingPlace -Query "Krause's cafe" -Language es
+Find-BingPlace -Query "Krause's cafe" -Language es -BingMapsAPIKey $bingAPIKey
 ```
 
 Returns place information for the query location biased by IP and returns a few portions of the results in Spanish.
 
 ### EXAMPLE 3
 ```
-Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -BingMapsAPIKey $bingAPIKey
 ```
 
 Returns place information for the query location biased by provided lat/long point.
 
 ### EXAMPLE 4
 ```
-Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000' -BingMapsAPIKey $bingAPIKey
 ```
 
 Returns place information for the query location biased by circle lat/long/radius.
 
 ### EXAMPLE 5
 ```
-Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -BingMapsAPIKey $bingAPIKey
 ```
 
 Returns place information for the query location biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
 
 ### EXAMPLE 6
 ```
-Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
+Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 ```
 
 Returns place information for the query location biased by provided lat/long point with a maximum of 20 results in English.
@@ -96,6 +96,7 @@ $findBingPlaceSplat = @{
     PointLongitude = '-98.068343'
     Language       = 'en'
     MaxResults     = 20
+    BingMapsAPIKey = $bingAPIKey
 }
 Find-BingPlace @findBingPlaceSplat
 ```
@@ -313,6 +314,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -BingMapsAPIKey
+Bing Maps API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -327,6 +343,9 @@ Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
 Example:
     https://dev.virtualearth.net/REST/v1/LocalSearch/?query={query}&userLocation={point}&key={BingMapsAPIKey}
+
+How to get a Bing Maps API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
 
 ## RELATED LINKS
 

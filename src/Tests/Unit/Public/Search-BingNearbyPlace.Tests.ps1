@@ -23,6 +23,7 @@ InModuleScope 'pwshPlaces' {
             Mock -CommandName Invoke-RestMethod -MockWith {
                 $findBingPlace
             } #endMock
+            $bingAPIKey = 'xxxxxxxxxx'
         }
         Context 'Error' {
 
@@ -30,7 +31,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Search-BingNearbyPlace -Type Attractions } | Should -Throw
+                { Search-BingNearbyPlace -Type Attractions -BingMapsAPIKey $bingAPIKey } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -41,7 +42,7 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Search-BingNearbyPlace -Type Restaurants -MaxResults 20
+                Search-BingNearbyPlace -Type Restaurants -MaxResults 20 -BingMapsAPIKey $bingAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -60,13 +61,19 @@ InModuleScope 'pwshPlaces' {
                         statusDescription = 'OK'
                     }
                 } #endMock
-                Search-BingNearbyPlace -Type Attractions
+                Search-BingNearbyPlace -Type Attractions -BingMapsAPIKey $bingAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
             It 'should return expected results if no issues are encountered' {
-                $eval = Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+                $searchBingNearbyPlaceSplat = @{
+                    Type           = 'CafeRestaurants'
+                    PointLatitude  = '29.7049806'
+                    PointLongitude = '-98.068343'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                $eval = Search-BingNearbyPlace @searchBingNearbyPlaceSplat
                 ($eval | Measure-Object).Count | Should -BeExactly 1
                 $eval.Latitude | Should -BeExactly '29.7015113830566'
                 $eval.Longitude | Should -BeExactly '-98.1247940063477'
@@ -81,7 +88,17 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike '*culture=en*'
                     $Uri | Should -BeLike '*maxResults=*'
                 } -Verifiable
-                Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20 -RegionBias us
+                $searchBingNearbyPlaceSplat = @{
+                    Type           = 'Museums'
+                    PointLatitude  = '29.7049806'
+                    PointLongitude = '-98.068343'
+                    Language       = 'en'
+                    MaxResults     = 20
+                    RegionBias     = 'us'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+
+                Search-BingNearbyPlace @searchBingNearbyPlaceSplat
                 Assert-VerifiableMock
             } #it
 
@@ -89,7 +106,14 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod {
                     $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/LocalSearch?output=json*userCircularMapView=*'
                 } -Verifiable
-                Search-BingNearbyPlace -Type BreweriesAndBrewPubs -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+                $searchBingNearbyPlaceSplat = @{
+                    Type            = 'BreweriesAndBrewPubs'
+                    CircleLatitude  = '29.7049806'
+                    CircleLongitude = '-98.068343'
+                    CircleRadius    = '5000'
+                    BingMapsAPIKey  = $bingAPIKey
+                }
+                Search-BingNearbyPlace @searchBingNearbyPlaceSplat
                 Assert-VerifiableMock
             } #it
 
@@ -97,7 +121,15 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod {
                     $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/LocalSearch?output=json*userMapView=*'
                 } -Verifiable
-                Search-BingNearbyPlace -Type Parks -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+                $searchBingNearbyPlaceSplat = @{
+                    Type           = 'Parks'
+                    SouthLatitude  = '39.8592387'
+                    WestLongitude  = '-75.295486'
+                    NorthLatitude  = '40.0381942'
+                    EastLongitude  = '-75.0064087'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                Search-BingNearbyPlace @searchBingNearbyPlaceSplat
                 Assert-VerifiableMock
             } #it
 

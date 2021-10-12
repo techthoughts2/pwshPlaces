@@ -23,6 +23,7 @@ InModuleScope 'pwshPlaces' {
             Mock -CommandName Invoke-RestMethod -MockWith {
                 $geoGMapAddress
             } #endMock
+            $googleAPIKey = 'xxxxxxxxxx'
         }
         Context 'Error' {
 
@@ -30,7 +31,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Invoke-GMapGeoCode -Address '24-593 Federation Drive, San Francisco, CA' } | Should -Throw
+                { Invoke-GMapGeoCode -Address '24-593 Federation Drive, San Francisco, CA' -GoogleAPIKey $googleAPIKey } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -41,7 +42,7 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Invoke-GMapGeoCode -Address '24-593 Federation Drive, San Francisco, CA'
+                Invoke-GMapGeoCode -Address '24-593 Federation Drive, San Francisco, CA' -GoogleAPIKey $googleAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -53,7 +54,14 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     $geoGMapLatLong
                 } #endMock
-                $eval = Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -Language 'en' -RegionBias 'us'
+                $invokeGMapGeoCodeSplat = @{
+                    Latitude     = '29.7012853'
+                    Longitude    = '-98.1250235'
+                    Language     = 'en'
+                    RegionBias   = 'us'
+                    GoogleAPIKey = $googleAPIKey
+                }
+                $eval = Invoke-GMapGeoCode @invokeGMapGeoCodeSplat
                 ($eval | Measure-Object).Count | Should -BeExactly 2
                 $eval[0].Latitude | Should -BeExactly '29.7012853'
                 $eval[0].Longitude | Should -BeExactly '-98.1250235'
@@ -63,7 +71,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod {
                     $Uri | Should -BeLike 'https://maps.googleapis.com/maps/api/geocode/json?address=*'
                 } -Verifiable
-                Invoke-GMapGeoCode -Address '24-593 Federation Drive, San Francisco, CA'
+                Invoke-GMapGeoCode -Address '24-593 Federation Drive, San Francisco, CA' -GoogleAPIKey $googleAPIKey
                 Assert-VerifiableMock
             } #it
 
@@ -71,7 +79,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod {
                     $Uri | Should -BeLike 'https://maps.googleapis.com/maps/api/geocode/json?latlng=*'
                 } -Verifiable
-                Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235'
+                Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -GoogleAPIKey $googleAPIKey
                 Assert-VerifiableMock
             } #it
 
@@ -79,7 +87,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod {
                     $Uri | Should -BeLike 'https://maps.googleapis.com/maps/api/geocode/json?place_id=*'
                 } -Verifiable
-                Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w'
+                Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w' -GoogleAPIKey $googleAPIKey
                 Assert-VerifiableMock
             } #it
 

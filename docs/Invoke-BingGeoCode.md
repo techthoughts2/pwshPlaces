@@ -15,18 +15,19 @@ Engages Bing Maps API to return address and geographic coordinates based on prov
 ### Address
 ```
 Invoke-BingGeoCode -AddressLine <String> -City <String> -State <String> -PostalCode <String> [-Country <ccTLD>]
- [-Language <languages>] [-MaxResults <Int32>] [<CommonParameters>]
+ [-Language <languages>] [-MaxResults <Int32>] -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ### Location
 ```
 Invoke-BingGeoCode -Latitude <String> -Longitude <String> [-Language <languages>] [-MaxResults <Int32>]
- [<CommonParameters>]
+ -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ### textquery
 ```
-Invoke-BingGeoCode -Query <String> [-Language <languages>] [-MaxResults <Int32>] [<CommonParameters>]
+Invoke-BingGeoCode -Query <String> [-Language <languages>] [-MaxResults <Int32>] -BingMapsAPIKey <String>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,28 +39,28 @@ You can also provide coordinates to return multiple nearby address results.
 
 ### EXAMPLE 1
 ```
-Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130
+Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs Geocoding (latitude/longitude lookup) on provided address.
 
 ### EXAMPLE 2
 ```
-Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245'
+Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245' -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
 
 ### EXAMPLE 3
 ```
-Invoke-BingGeoCode -Query 'The Alamo'
+Invoke-BingGeoCode -Query 'The Alamo' -BingMapsAPIKey $bingAPIKey
 ```
 
 Searches for provided query and if a match is found will return Geocoding (latitude/longitude lookup) of the results.
 
 ### EXAMPLE 4
 ```
-Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20
+Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs Geocoding (latitude/longitude lookup) on provided address.
@@ -70,13 +71,14 @@ Up to 20 results are returned.
 ### EXAMPLE 5
 ```
 $invokeBingGeoCodeSplat = @{
-    AddressLine = '148 S Castell Ave'
-    City        = 'New Braunfels'
-    State       = 'TX'
-    PostalCode  = 78130
-    Country     = 'us'
-    Language    = 'en'
-    MaxResults  = 20
+    AddressLine    = '148 S Castell Ave'
+    City           = 'New Braunfels'
+    State          = 'TX'
+    PostalCode     = 78130
+    Country        = 'us'
+    Language       = 'en'
+    MaxResults     = 20
+    BingMapsAPIKey = $bingAPIKey
 }
 Invoke-BingGeoCode @invokeBingGeoCodeSplat
 ```
@@ -243,6 +245,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -BingMapsAPIKey
+Bing Maps API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -257,6 +274,9 @@ Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
 Example:
     http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}
+
+How to get a Bing Maps API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
 
 While the Bing Location API does support a text query option, I have found it to be unreliable.
 For GeoCode info stick to Addresses and Lat/Long for reverse Geocoding.

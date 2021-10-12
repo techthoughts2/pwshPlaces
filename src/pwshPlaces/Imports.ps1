@@ -5,12 +5,6 @@
 #region script variables
 # $script:resourcePath = "$PSScriptRoot\Resources"
 
-#------------------------------------------------------------
-# ! API KEYS
-#$env:GoogleAPIKey = ''
-#$env:BingAPIKey = ''
-#------------------------------------------------------------
-
 $script:googleMapsBaseURI = 'https://maps.googleapis.com/maps/api/'
 $script:bingMapsBaseURI = 'https://dev.virtualearth.net/REST/'
 

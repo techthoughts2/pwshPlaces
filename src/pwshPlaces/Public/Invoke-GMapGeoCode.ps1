@@ -7,19 +7,19 @@
     You can also provide coordinates to return multiple nearby address results.
     If you know the exact google placeID this can also be provided to return Geocoding information about that location.
 .EXAMPLE
-    Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States'
+    Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States' -GoogleAPIKey $googleAPIKey
 
     Performs Geocoding (latitude/longitude lookup) on provided address.
 .EXAMPLE
-    Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235'
+    Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -GoogleAPIKey $googleAPIKey
 
     Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
 .EXAMPLE
-    Invoke-GMapGeoCode -Latitude '37.621313' -Longitude '-122.378955' -Language es
+    Invoke-GMapGeoCode -Latitude '37.621313' -Longitude '-122.378955' -Language es -GoogleAPIKey $googleAPIKey
 
     Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results in Spanish.
 .EXAMPLE
-    Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w'
+    Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w' -GoogleAPIKey $googleAPIKey
 
     Returns Geocoding information about the provided place.
 .PARAMETER Address
@@ -34,6 +34,8 @@
     The language in which to return results.
 .PARAMETER RegionBias
     The region code, specified as a ccTLD ("top-level domain") two-character value. This parameter will only influence, not fully restrict, results from the geocoder.
+.PARAMETER GoogleAPIKey
+    Google API Key
 .OUTPUTS
     GMap.GeoCode
 .NOTES
@@ -63,6 +65,9 @@
             location_type
         Example:
             https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+
+    How to get a Google API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
     This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 .COMPONENT
@@ -117,7 +122,12 @@ function Invoke-GMapGeoCode {
 
         [Parameter(Mandatory = $false,
             HelpMessage = 'The region code, specified as a ccTLD')]
-        [ccTLD]$RegionBias
+        [ccTLD]$RegionBias,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Google API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$GoogleAPIKey
     )
 
     $uri = '{0}{1}' -f $googleMapsBaseURI, 'geocode/json?'
@@ -156,7 +166,7 @@ function Invoke-GMapGeoCode {
     Write-Verbose -Message ('Querying Google API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:GoogleAPIKey
+    $fAPIKey = '&key={0}' -f $GoogleAPIKey
     $uri += $fAPIKey
     Write-Debug -Message ('Final URI: {0}' -f $uri)
 

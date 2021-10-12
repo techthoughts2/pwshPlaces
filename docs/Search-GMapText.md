@@ -15,28 +15,28 @@ A text search that returns information about a set of places based on provided s
 ### textquery (Default)
 ```
 Search-GMapText -Query <String> [-Type <placeTypes>] [-Language <languages>] [-RegionBias <ccTLD>] [-OpenNow]
- [-MaxPrice <String>] [-MinPrice <String>] [-AllSearchResults] [<CommonParameters>]
+ [-MaxPrice <String>] [-MinPrice <String>] [-AllSearchResults] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ### Distance
 ```
 Search-GMapText [-Query <String>] [-Latitude <String>] [-Longitude <String>] [-RankByDistance]
  [-Type <placeTypes>] [-Language <languages>] [-RegionBias <ccTLD>] [-OpenNow] [-MaxPrice <String>]
- [-MinPrice <String>] [-AllSearchResults] [<CommonParameters>]
+ [-MinPrice <String>] [-AllSearchResults] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ### Area
 ```
 Search-GMapText [-Query <String>] [-Latitude <String>] [-Longitude <String>] -Radius <String>
  [-RankByProminence] [-Type <placeTypes>] [-Language <languages>] [-RegionBias <ccTLD>] [-OpenNow]
- [-MaxPrice <String>] [-MinPrice <String>] [-AllSearchResults] [<CommonParameters>]
+ [-MaxPrice <String>] [-MinPrice <String>] [-AllSearchResults] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ### Location
 ```
 Search-GMapText [-Query <String>] -Latitude <String> -Longitude <String> [-Type <placeTypes>]
  [-Language <languages>] [-RegionBias <ccTLD>] [-OpenNow] [-MaxPrice <String>] [-MinPrice <String>]
- [-AllSearchResults] [<CommonParameters>]
+ [-AllSearchResults] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,7 +51,7 @@ You can increase this to a maximum of 60 places results by providing the AllSear
 
 ### EXAMPLE 1
 ```
-Search-GMapText -Query "Krause's Cafe"
+Search-GMapText -Query "Krause's Cafe" -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query.
@@ -59,7 +59,7 @@ Since no address or location information is provided places results are biased b
 
 ### EXAMPLE 2
 ```
-Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults
+Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query and returns places that are classified as type: bakery.
@@ -67,7 +67,7 @@ Since no address or location information is provided places results are biased b
 
 ### EXAMPLE 3
 ```
-Search-GMapText -Query "pizza restaurants in New York"
+Search-GMapText -Query "pizza restaurants in New York" -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query.
@@ -75,7 +75,7 @@ Since a location is provided in the query, places results will be biased by that
 
 ### EXAMPLE 4
 ```
-Search-GMapText -Query "Airport" -RegionBias es
+Search-GMapText -Query "Airport" -RegionBias es -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query.
@@ -83,7 +83,7 @@ Places results are biased to the region of Spain.
 
 ### EXAMPLE 5
 ```
-Search-GMapText -Query "italian restaurants in New York" -MinPrice 4
+Search-GMapText -Query "italian restaurants in New York" -MinPrice 4 -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query and returns expensive restaurant options.
@@ -91,7 +91,7 @@ Since a location is provided in the query, places results will be biased by that
 
 ### EXAMPLE 6
 ```
-Search-GMapText -Query "main plaza New Braunfels" -Type restaurant
+Search-GMapText -Query "main plaza New Braunfels" -Type restaurant -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query and returns only restaurants.
@@ -99,7 +99,7 @@ Since a location is provided in the query, places results will be biased by that
 
 ### EXAMPLE 7
 ```
-Search-GMapText -Query 'Cafe' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en
+Search-GMapText -Query 'Cafe' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query.
@@ -108,7 +108,7 @@ Places results are returned in English.
 
 ### EXAMPLE 8
 ```
-Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en -Type restaurant
+Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en -Type restaurant -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query.
@@ -118,7 +118,7 @@ Places results are returned in English.
 
 ### EXAMPLE 9
 ```
-Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 500 -RankByProminence
+Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 500 -RankByProminence -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query.
@@ -127,7 +127,7 @@ Places results are ranked by their prominence.
 
 ### EXAMPLE 10
 ```
-Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant
+Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query.
@@ -136,7 +136,7 @@ Results are returned based on the provided coordiantes and are ranked by their d
 
 ### EXAMPLE 11
 ```
-Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -Language en -OpenNow -MinPrice 1 -MaxPrice 2 -AllSearchResults
+Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -Language en -OpenNow -MinPrice 1 -MaxPrice 2 -AllSearchResults -GoogleAPIKey $googleAPIKey
 ```
 
 Performs a text search with the provided query.
@@ -160,6 +160,7 @@ $searchGMapTextSplat = @{
     MinPrice         = 1
     MaxPrice         = 2
     AllSearchResults = $true
+    GoogleAPIKey     = $googleAPIKey
 }
 Search-GMapText @searchGMapTextSplat
 ```
@@ -414,6 +415,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -GoogleAPIKey
+Google API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -441,6 +457,9 @@ Optional parameters
     type
 
 Example: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants%20in%20Sydney&key=YOUR_API_KEY'
+
+How to get a Google API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
 
 Nearby Search and Text Search return all of the available data fields for the selected place (a subset of the supported fields), and you will be billed accordingly There is no way to constrain Nearby Search or Text Search to only return specific fields.
 To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.

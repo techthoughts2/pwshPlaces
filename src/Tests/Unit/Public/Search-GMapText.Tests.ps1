@@ -25,6 +25,7 @@ InModuleScope 'pwshPlaces' {
             Mock -CommandName Invoke-RestMethod -MockWith {
                 $nearbyGMap
             } #endMock
+            $googleAPIKey = 'xxxxxxxxxx'
         }
         Context 'Error' {
 
@@ -32,7 +33,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Search-GMapText -Query "Krause's Cafe" } | Should -Throw
+                { Search-GMapText -Query "Krause's Cafe" -GoogleAPIKey $googleAPIKey } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -43,7 +44,7 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Search-GMapText -Query "Airport" -RegionBias es
+                Search-GMapText -Query "Airport" -RegionBias es -GoogleAPIKey $googleAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -77,14 +78,22 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #mock_invoke
                 Mock -CommandName Invoke-RestMethod -MockWith $mockInvoke
-                { Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults } | Should -Throw
+                { Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults -GoogleAPIKey $googleAPIKey } | Should -Throw
             } #it
 
         } #context_Error
         Context 'Success' {
 
             It 'should return expected results if no issues are encountered' {
-                $eval = Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant
+                $searchGMapTextSplat = @{
+                    Query          = 'Coco'
+                    Latitude       = '26.1202'
+                    Longitude      = '127.7025'
+                    RankByDistance = $true
+                    Type           = 'restaurant'
+                    GoogleAPIKey   = $googleAPIKey
+                }
+                $eval = Search-GMapText @searchGMapTextSplat
                 ($eval | Measure-Object).Count | Should -BeExactly 2
                 $eval[0].Latitude | Should -BeExactly '29.7013856'
                 $eval[0].Longitude | Should -BeExactly '-98.1249258'
@@ -102,7 +111,21 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike '*maxprice=*'
                     $Uri | Should -BeLike '*minprice=*'
                 } -Verifiable
-                Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 5 -RankByProminence -Type restaurant -Language en -OpenNow -MinPrice 1 -MaxPrice 2 -AllSearchResults
+                $searchGMapTextSplat = @{
+                    Query            = 'Coco'
+                    Latitude         = '26.1202'
+                    Longitude        = '127.7025'
+                    Radius           = 5
+                    RankByProminence = $true
+                    Type             = 'restaurant'
+                    Language         = 'en'
+                    OpenNow          = $true
+                    MinPrice         = 1
+                    MaxPrice         = 2
+                    AllSearchResults = $true
+                    GoogleAPIKey     = $googleAPIKey
+                }
+                Search-GMapText @searchGMapTextSplat
                 Assert-VerifiableMock
             } #it
 
@@ -140,7 +163,21 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #mock_invoke
                 Mock -CommandName Invoke-RestMethod -MockWith $mockInvoke
-                Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 5 -RankByProminence -Type restaurant -Language en -OpenNow -MinPrice 1 -MaxPrice 2 -AllSearchResults
+                $searchGMapTextSplat = @{
+                    Query            = 'Coco'
+                    Latitude         = '26.1202'
+                    Longitude        = '127.7025'
+                    Radius           = 5
+                    RankByProminence = $true
+                    Type             = 'restaurant'
+                    Language         = 'en'
+                    OpenNow          = $true
+                    MinPrice         = 1
+                    MaxPrice         = 2
+                    AllSearchResults = $true
+                    GoogleAPIKey     = $googleAPIKey
+                }
+                Search-GMapText @searchGMapTextSplat
                 Assert-MockCalled -CommandName Invoke-RestMethod -Times 3
                 Assert-VerifiableMock
             } #it

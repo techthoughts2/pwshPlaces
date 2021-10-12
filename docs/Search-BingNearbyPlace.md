@@ -15,27 +15,28 @@ Nearby Search lets you search for different place types within a specified area.
 ### PlaceType (Default)
 ```
 Search-BingNearbyPlace -Type <typeIdentifier> [-RegionBias <ccTLD>] [-Language <languages>]
- [-MaxResults <Int32>] [<CommonParameters>]
+ [-MaxResults <Int32>] -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ### Rectangle
 ```
 Search-BingNearbyPlace [-Type <typeIdentifier>] -SouthLatitude <String> -WestLongitude <String>
  -NorthLatitude <String> -EastLongitude <String> [-RegionBias <ccTLD>] [-Language <languages>]
- [-MaxResults <Int32>] [<CommonParameters>]
+ [-MaxResults <Int32>] -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ### Circle
 ```
 Search-BingNearbyPlace [-Type <typeIdentifier>] [-CircleLatitude <String>] [-CircleLongitude <String>]
  [-CircleRadius <String>] [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>]
- [<CommonParameters>]
+ -BingMapsAPIKey <String> [<CommonParameters>]
 ```
 
 ### Point
 ```
 Search-BingNearbyPlace [-Type <typeIdentifier>] [-PointLatitude <String>] [-PointLongitude <String>]
- [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>] [<CommonParameters>]
+ [-RegionBias <ccTLD>] [-Language <languages>] [-MaxResults <Int32>] -BingMapsAPIKey <String>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,35 +49,35 @@ Location bias can be controlled via parameters.
 
 ### EXAMPLE 1
 ```
-Search-BingNearbyPlace -Type Attractions
+Search-BingNearbyPlace -Type Attractions -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs a nearby search biased by IP and returns Attraction places types.
 
 ### EXAMPLE 2
 ```
-Search-BingNearbyPlace -Type Restaurants -MaxResults 20
+Search-BingNearbyPlace -Type Restaurants -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs a nearby search biased by IP and returns Restaurant places types with a maximum of 20 results returned.
 
 ### EXAMPLE 3
 ```
-Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343'
+Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343' -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs a nearby search near the provided Lat/Long and returns CafeRestaurant places types.
 
 ### EXAMPLE 4
 ```
-Search-BingNearbyPlace -Type BreweriesAndBrewPubs -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000'
+Search-BingNearbyPlace -Type BreweriesAndBrewPubs -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000' -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs a nearby search biased by circle lat/long/radius and returns Bars and Pubs places types.
 
 ### EXAMPLE 5
 ```
-Search-BingNearbyPlace -Type Parks -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087'
+Search-BingNearbyPlace -Type Parks -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs a nearby search biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
@@ -84,7 +85,7 @@ Park places types are returned.
 
 ### EXAMPLE 6
 ```
-Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20
+Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 ```
 
 Performs a nearby search near the provided Lat/Long and returns Museum places types.
@@ -98,6 +99,7 @@ $searchBingNearbyPlaceSplat = @{
     PointLongitude = '-98.068343'
     Language       = 'en'
     MaxResults     = 20
+    BingMapsAPIKey = $bingAPIKey
 }
 Search-BingNearbyPlace @searchBingNearbyPlaceSplat
 ```
@@ -318,6 +320,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -BingMapsAPIKey
+Bing Maps API Key
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -332,6 +349,9 @@ Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
 Example:
     https://dev.virtualearth.net/REST/v1/LocalSearch/?type={type_string_id_list}&userLocation={point}&key={BingMapsAPIKey}
+
+How to get a Bing Maps API Key:
+    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
 
 ## RELATED LINKS
 

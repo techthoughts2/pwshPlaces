@@ -23,6 +23,7 @@ InModuleScope 'pwshPlaces' {
             Mock -CommandName Invoke-RestMethod -MockWith {
                 $geoBingAddress
             } #endMock
+            $bingAPIKey = 'xxxxxxxxxx'
         }
         Context 'Error' {
 
@@ -30,7 +31,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 } | Should -Throw
+                { Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -BingMapsAPIKey $bingAPIKey } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -41,7 +42,7 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Invoke-BingGeoCode -Query 'The Alamo'
+                Invoke-BingGeoCode -Query 'The Alamo' -BingMapsAPIKey $bingAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -60,13 +61,29 @@ InModuleScope 'pwshPlaces' {
                         statusDescription = 'OK'
                     }
                 } #endMock
-                Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us
+                $invokeBingGeoCodeSplat = @{
+                    AddressLine    = '148 S Castell Ave'
+                    City           = 'New Braunfels'
+                    State          = 'TX'
+                    PostalCode     = 78130
+                    Country        = 'us'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                Invoke-BingGeoCode @invokeBingGeoCodeSplat
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
             It 'should return expected results if no issues are encountered' {
-                $eval = Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us
+                $invokeBingGeoCodeSplat = @{
+                    AddressLine    = '148 S Castell Ave'
+                    City           = 'New Braunfels'
+                    State          = 'TX'
+                    PostalCode     = 78130
+                    Country        = 'us'
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                $eval = Invoke-BingGeoCode @invokeBingGeoCodeSplat
                 $eval.Latitude | Should -BeExactly '29.701293'
                 $eval.Longitude | Should -BeExactly '-98.12502'
             } #it
@@ -82,7 +99,17 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike '*maxResults=*'
                     $Uri | Should -BeLike '*culture=*'
                 } -Verifiable
-                Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20
+                $invokeBingGeoCodeSplat = @{
+                    AddressLine    = '148 S Castell Ave'
+                    City           = 'New Braunfels'
+                    State          = 'TX'
+                    PostalCode     = 78130
+                    Country        = 'us'
+                    Language       = 'en'
+                    MaxResults     = 20
+                    BingMapsAPIKey = $bingAPIKey
+                }
+                Invoke-BingGeoCode @invokeBingGeoCodeSplat
                 Assert-VerifiableMock
             } #it
 
@@ -90,7 +117,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod {
                     $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/Locations/29.7030,-98.1245?output=json*'
                 } -Verifiable
-                Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245'
+                Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245' -BingMapsAPIKey $bingAPIKey
                 Assert-VerifiableMock
             } #it
 

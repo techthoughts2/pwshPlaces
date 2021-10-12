@@ -4,11 +4,11 @@
 .DESCRIPTION
     Given a pair of coordinates or a place name query the Time Zone API will return local time zone and daylight savings (DST) information for that location.
 .EXAMPLE
-    Find-BingTimeZone -Query 'New Braunfels, TX'
+    Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey
 
     Returns Time Zone information for matches found for the provided query.
 .EXAMPLE
-    Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11
+    Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $bingAPIKey
 
     Returns Time Zone information for the provided coordinates.
 .PARAMETER Query
@@ -21,6 +21,8 @@
     The region code, specified as a ccTLD ("top-level domain") two-character value.
 .PARAMETER Language
     The language in which to return results.
+.PARAMETER BingMapsAPIKey
+    Bing Maps API Key
 .OUTPUTS
     Bing.TimeZone
 .NOTES
@@ -28,6 +30,9 @@
 
     Example:
         https://dev.virtualearth.net/REST/v1/TimeZone/{point}?datetime={datetime_utc}&key={BingMapsAPIKey}
+
+    How to get a Bing Maps API Key:
+        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
 .COMPONENT
     pwshPlaces
 .LINK
@@ -68,7 +73,12 @@ function Find-BingTimeZone {
 
         [Parameter(Mandatory = $false,
             HelpMessage = 'The language in which to return results')]
-        [languages]$Language
+        [languages]$Language,
+
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Bing Maps API Key')]
+        [ValidateNotNullOrEmpty()]
+        [string]$BingMapsAPIKey
     )
 
     Write-Debug -Message ($PSCmdlet.ParameterSetName)
@@ -107,7 +117,7 @@ function Find-BingTimeZone {
     Write-Verbose -Message ('Querying Bing API: {0}' -f $uri)
 
     Write-Debug -Message 'Adding API key'
-    $fAPIKey = '&key={0}' -f $env:BingAPIKey
+    $fAPIKey = '&key={0}' -f $BingMapsAPIKey
     $uri += $fAPIKey
 
     $invokeRestMethodSplat = @{

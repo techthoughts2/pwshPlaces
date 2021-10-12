@@ -23,6 +23,7 @@ InModuleScope 'pwshPlaces' {
             Mock -CommandName Invoke-RestMethod -MockWith {
                 $placeDetailsGMap
             } #endMock
+            $googleAPIKey = 'xxxxxxxxxx'
         }
         Context 'Error' {
 
@@ -30,7 +31,7 @@ InModuleScope 'pwshPlaces' {
                 Mock -CommandName Invoke-RestMethod -MockWith {
                     throw 'Fake Error'
                 } #endMock
-                { Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' } | Should -Throw
+                { Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -GoogleAPIKey $googleAPIKey } | Should -Throw
             } #it
 
             It 'should warn the user if the API does not return an OK status' {
@@ -41,7 +42,7 @@ InModuleScope 'pwshPlaces' {
                         status  = 'ZERO_RESULTS'
                     }
                 } #endMock
-                Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -Contact
+                Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -Contact -GoogleAPIKey $googleAPIKey
                 Assert-MockCalled -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
@@ -50,7 +51,7 @@ InModuleScope 'pwshPlaces' {
         Context 'Success' {
 
             It 'should return expected results if no issues are encountered' {
-                $eval = Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
+                $eval = Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -GoogleAPIKey $googleAPIKey
                 ($eval | Measure-Object).Count | Should -BeExactly 1
                 $eval.place_id              | Should -BeExactly 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
                 $eval.name                  | Should -BeExactly 'Krause''s Cafe'
@@ -76,7 +77,15 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike '*price_level*'
                     $Uri | Should -BeLike '*region=*'
                 } -Verifiable
-                Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -Language en -RegionBias us
+                $getGMapPlaceDetailSplat = @{
+                    PlaceID      = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
+                    Contact      = $true
+                    Atmosphere   = $true
+                    Language     = 'en'
+                    RegionBias   = 'us'
+                    GoogleAPIKey = $googleAPIKey
+                }
+                Get-GMapPlaceDetail @getGMapPlaceDetailSplat
                 Assert-VerifiableMock
             } #it
 
