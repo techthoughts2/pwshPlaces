@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module Changes
 - Build Updates
     - Moved `CHANGELOG.md` from `.github` to `docs`
+    - Bumped dependencies to latest versions
 - Misc
     - Updated `settings.json` for tab requirements to support Readthedocs
     - Added `SECURITY.md`
