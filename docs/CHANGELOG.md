@@ -9,8 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Module Changes
 - Build Updates
+    - Updated all Github action files to:
+        - support ignore certain files for Readthedocs implementation
+        - updated actions from `v2` to `v3`
     - Moved `CHANGELOG.md` from `.github` to `docs`
-    - Bumped dependencies to latest versions
+    - `actions_bootstrap.ps1` - bumped module versions to latest
 - Misc
     - Updated `settings.json` for tab requirements to support Readthedocs
     - Added `SECURITY.md`
