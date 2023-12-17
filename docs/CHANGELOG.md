@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - All Infra/Infrastructure references changed to Integration
     - Removed all test case uses of `Assert-MockCalled`
     - Added support for readthedocs
+    - Corrected bug in `pwshPlaces.Settings.ps1` referencing `requiredPSVersion` fpr `ValidateRequirements` check.
 - Misc
     - Updated `settings.json` for tab requirements to support Readthedocs
     - Added `SECURITY.md`
