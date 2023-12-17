@@ -24,7 +24,7 @@ Find Place request takes a text input and returns a place. The input can be any 
 Request more details about a particular establishment or point of interest
 
 ### [Invoke-BingGeoCode](Invoke-BingGeoCode.md)
-Engages Bing Maps API to return address and geographic coordinates based on provided query parameters.
+Converts addresses to geographic coordinates and vice versa using Bing Maps API.
 
 ### [Invoke-GMapGeoCode](Invoke-GMapGeoCode.md)
 Engages Geocoding API to return address and geographic coordinates based on provided query parameters.
