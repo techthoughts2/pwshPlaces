@@ -76,12 +76,12 @@ theme:
 nav:
   - Home: index.md
   - Functions:
-    - Bing
+    - Bing:
       - Find-BingPlace: Find-BingPlace.md
       - Find-BingTimeZone: Find-BingTimeZone.md
       - Invoke-BingGeoCode: Invoke-BingGeoCode.md
       - Search-BingNearbyPlaces: Search-BingNearbyPlaces.md
-    - Google
+    - Google:
       - Find-GMapPlace: Find-GMapPlace.md
       - Get-GMapPlaceDetails: Get-GMapPlaceDetails.md
       - Get-GMapPlaceDetails: Get-GMapPlaceDetails.md
