@@ -102,7 +102,7 @@ function Format-BingTimeZone {
         # set a default display of the above properties, all other properties are still there just not displayed
         $updateTypeDataSplat = @{
             TypeName                  = 'Bing.TimeZone'
-            DefaultDisplayPropertySet = 'TimeZoneName', 'TimeZoneShort', 'UTCOffSet', 'TimeZoneID', 'LocalTime', 'TimeZoneCurrentName', 'TimeZoneCurrentShort', 'UTCOffSetDST'
+            DefaultDisplayPropertySet = 'TimeZoneName', 'TimeZoneShort', 'UTCOffSet', 'TimeZoneID', 'LocalTime', 'TimeZoneCurrentName', 'TimeZoneCurrentShort', 'UTCOffSetDST', 'dstRule'
             DefaultKeyPropertySet     = 'TimeZoneName'
             Force                     = $true
         }

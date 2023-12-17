@@ -36,6 +36,8 @@ InModuleScope 'pwshPlaces' {
                 $eval.TimeZoneCurrentName       | Should -BeExactly 'Central Daylight Time'
                 $eval.TimeZoneCurrentShort      | Should -BeExactly 'CDT'
                 $eval.UTCOffSetDST              | Should -BeExactly '-5:00'
+                $eval.dstRule.dstStartMonth     | Should -BeExactly 'Mar'
+                $eval.dstRule.dstEndMonth       | Should -BeExactly 'Nov'
             } #it
 
             It 'should return the expected results for point' {
@@ -48,6 +50,8 @@ InModuleScope 'pwshPlaces' {
                 $eval.TimeZoneCurrentName       | Should -BeExactly 'Central Daylight Time'
                 $eval.TimeZoneCurrentShort      | Should -BeExactly 'CDT'
                 $eval.UTCOffSetDST              | Should -BeExactly '-5:00'
+                $eval.dstRule.dstStartMonth     | Should -BeExactly 'Mar'
+                $eval.dstRule.dstEndMonth       | Should -BeExactly 'Nov'
             } #it
 
         } #context_Success

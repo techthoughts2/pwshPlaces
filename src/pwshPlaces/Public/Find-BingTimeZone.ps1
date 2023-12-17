@@ -26,6 +26,8 @@
     The language in which to return results.
 .PARAMETER BingMapsAPIKey
     Bing Maps API Key
+.PARAMETER IncludeDSTRules
+    Include Daylight Saving Time (DST) rules in the search results. Returns additional information about the DST observance and rules applicable to the places found in the search.
 .OUTPUTS
     Bing.TimeZone
 .NOTES
@@ -82,7 +84,11 @@ function Find-BingTimeZone {
         [Parameter(Mandatory = $true,
             HelpMessage = 'Bing Maps API Key')]
         [ValidateNotNullOrEmpty()]
-        [string]$BingMapsAPIKey
+        [string]$BingMapsAPIKey,
+
+        [Parameter(Mandatory = $false,
+            HelpMessage = 'Include DST rules')]
+        [switch]$IncludeDSTRules
     )
 
     Write-Debug -Message ($PSCmdlet.ParameterSetName)
@@ -116,6 +122,11 @@ function Find-BingTimeZone {
         Write-Debug -Message ('Language: {0}' -f $Language)
         $fLanguage = '&culture={0}' -f $Language
         $uri += $fLanguage
+    }
+    if ($IncludeDSTRules) {
+        Write-Debug -Message 'IncludeDSTRules specified'
+        $fIncludeDSTRules = '&includeDstRules={0}' -f $IncludeDSTRules
+        $uri += $fIncludeDSTRules
     }
 
     Write-Verbose -Message ('Querying Bing API: {0}' -f $uri)

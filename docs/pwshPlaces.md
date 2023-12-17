@@ -2,7 +2,7 @@
 Module Name: pwshPlaces
 Module Guid: 9a9914bd-d115-4f42-bb5d-19c5e5561a3f
 Download Help Link: NA
-Help Version: 0.7.1
+Help Version: 0.7.3
 Locale: en-US
 ---
 
@@ -30,7 +30,7 @@ Converts addresses to geographic coordinates and vice versa using Bing Maps API.
 Engages Geocoding API to return address and geographic coordinates based on provided query parameters.
 
 ### [Search-BingNearbyPlace](Search-BingNearbyPlace.md)
-Nearby Search lets you search for different place types within a specified area.
+Nearby Search lets you search for places of interest within a specified area using Bing Maps API.
 
 ### [Search-GMapNearbyPlace](Search-GMapNearbyPlace.md)
 Nearby Search lets you search for places within a specified area. You can refine your search request by supplying keywords, type of place you are searching for and other parameters.

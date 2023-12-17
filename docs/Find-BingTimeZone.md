@@ -15,13 +15,13 @@ Retrieves time zone information for a specific location on Earth.
 ### textquery
 ```
 Find-BingTimeZone -Query <String> [-RegionBias <ccTLD>] [-Language <languages>] -BingMapsAPIKey <String>
- [<CommonParameters>]
+ [-IncludeDSTRules] [<CommonParameters>]
 ```
 
 ### Point
 ```
 Find-BingTimeZone -PointLatitude <String> -PointLongitude <String> [-RegionBias <ccTLD>]
- [-Language <languages>] -BingMapsAPIKey <String> [<CommonParameters>]
+ [-Language <languages>] -BingMapsAPIKey <String> [-IncludeDSTRules] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -139,6 +139,22 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeDSTRules
+Include Daylight Saving Time (DST) rules in the search results.
+Returns additional information about the DST observance and rules applicable to the places found in the search.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

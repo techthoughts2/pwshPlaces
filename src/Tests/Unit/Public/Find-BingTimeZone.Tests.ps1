@@ -72,26 +72,10 @@ InModuleScope 'pwshPlaces' {
             } #it
 
             It 'should return expected results if no issues are encountered with query' {
-                $eval = Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey
-                ($eval | Measure-Object).Count  | Should -BeExactly 1
-                $eval.TimeZoneName              | Should -BeExactly 'Central Standard Time'
-                $eval.TimeZoneShort             | Should -BeExactly 'CST'
-                $eval.UTCOffSet                 | Should -BeExactly '-6:00'
-                $eval.TimeZoneID                | Should -BeExactly 'America/Chicago'
-                $eval.LocalTime                 | Should -BeExactly '10/10/21 10:58:29'
-                $eval.TimeZoneCurrentName       | Should -BeExactly 'Central Daylight Time'
-                $eval.TimeZoneCurrentShort      | Should -BeExactly 'CDT'
-                $eval.UTCOffSetDST              | Should -BeExactly '-5:00'
-            } #it
-
-            It 'should return expected results if no issues are encountered with point' {
-                Mock -CommandName Invoke-RestMethod -MockWith {
-                    $findBingTimeZonePoint
-                } #endMock
                 $findBingTimeZoneSplat = @{
-                    PointLatitude  = 29.70
-                    PointLongitude = '-98.11'
-                    BingMapsAPIKey = $bingAPIKey
+                    Query           = 'New Braunfels, TX'
+                    BingMapsAPIKey  = $bingAPIKey
+                    IncludeDSTRules = $true
                 }
                 $eval = Find-BingTimeZone @findBingTimeZoneSplat
                 ($eval | Measure-Object).Count  | Should -BeExactly 1
@@ -103,6 +87,32 @@ InModuleScope 'pwshPlaces' {
                 $eval.TimeZoneCurrentName       | Should -BeExactly 'Central Daylight Time'
                 $eval.TimeZoneCurrentShort      | Should -BeExactly 'CDT'
                 $eval.UTCOffSetDST              | Should -BeExactly '-5:00'
+                $eval.DSTRule.dstStartMonth     | Should -BeExactly 'Mar'
+                $eval.DSTRule.dstEndMonth       | Should -BeExactly 'Nov'
+            } #it
+
+            It 'should return expected results if no issues are encountered with point' {
+                Mock -CommandName Invoke-RestMethod -MockWith {
+                    $findBingTimeZonePoint
+                } #endMock
+                $findBingTimeZoneSplat = @{
+                    PointLatitude   = 29.70
+                    PointLongitude  = '-98.11'
+                    BingMapsAPIKey  = $bingAPIKey
+                    IncludeDSTRules = $true
+                }
+                $eval = Find-BingTimeZone @findBingTimeZoneSplat
+                ($eval | Measure-Object).Count  | Should -BeExactly 1
+                $eval.TimeZoneName              | Should -BeExactly 'Central Standard Time'
+                $eval.TimeZoneShort             | Should -BeExactly 'CST'
+                $eval.UTCOffSet                 | Should -BeExactly '-6:00'
+                $eval.TimeZoneID                | Should -BeExactly 'America/Chicago'
+                $eval.LocalTime                 | Should -BeExactly '10/10/21 10:58:29'
+                $eval.TimeZoneCurrentName       | Should -BeExactly 'Central Daylight Time'
+                $eval.TimeZoneCurrentShort      | Should -BeExactly 'CDT'
+                $eval.UTCOffSetDST              | Should -BeExactly '-5:00'
+                $eval.DSTRule.dstStartMonth     | Should -BeExactly 'Mar'
+                $eval.DSTRule.dstEndMonth       | Should -BeExactly 'Nov'
             } #it
 
             #  jake- put all the things here
@@ -111,13 +121,15 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike 'https://dev.virtualearth.net/REST/v1/TimeZone*?output=json*'
                     $Uri | Should -BeLike '*userRegion=*'
                     $Uri | Should -BeLike '*culture=en*'
+                    $Uri | Should -BeLike '*includeDstRules=True*'
                 } -Verifiable
                 $findBingTimeZoneSplat = @{
-                    PointLatitude  = 29.70
-                    PointLongitude = '-98.11'
-                    Language       = 'en'
-                    RegionBias     = 'us'
-                    BingMapsAPIKey = $bingAPIKey
+                    PointLatitude   = 29.70
+                    PointLongitude  = '-98.11'
+                    Language        = 'en'
+                    RegionBias      = 'us'
+                    BingMapsAPIKey  = $bingAPIKey
+                    IncludeDSTRules = $true
                 }
                 Find-BingTimeZone @findBingTimeZoneSplat
                 Assert-VerifiableMock
