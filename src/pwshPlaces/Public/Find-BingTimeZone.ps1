@@ -11,6 +11,10 @@
 
     Retrieves time zone information for the location matching the query 'New Braunfels, TX'.
 .EXAMPLE
+    Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey -IncludeDSTRules
+
+    Retrieves time zone information for the location matching the query 'New Braunfels, TX', including DST rules.
+.EXAMPLE
     Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $bingAPIKey
 
     Returns time zone information for the specified latitude and longitude coordinates.
