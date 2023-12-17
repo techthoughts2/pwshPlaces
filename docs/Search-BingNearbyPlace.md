@@ -1,7 +1,7 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Search-BingNearbyPlace
 schema: 2.0.0
 ---
 
@@ -139,7 +139,8 @@ Accept wildcard characters: False
 ```
 
 ### -PointLatitude
-Prefer results in a specified area by specifying a single coordinate for the north-south position of a point on the Earth's surface.
+Specifies the latitude for location-based searches.
+Single coordinate for the north-south position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -154,7 +155,8 @@ Accept wildcard characters: False
 ```
 
 ### -PointLongitude
-Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earth's surface.
+Specifies the longitude for location-based searches.
+Single coordinate for the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -347,15 +349,16 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-Example:
+Direct API Example:
     https://dev.virtualearth.net/REST/v1/LocalSearch/?type={type_string_id_list}&userLocation={point}&key={BingMapsAPIKey}
 
-How to get a Bing Maps API Key:
-    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+Ensure you have a valid Bing Maps API Key.
+    How to get a Bing Maps API Key:
+        https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md)
+[https://pwshplaces.readthedocs.io/en/latest/Search-BingNearbyPlace](https://pwshplaces.readthedocs.io/en/latest/Search-BingNearbyPlace)
 
 [https://docs.microsoft.com/bingmaps/rest-services/locations/local-search](https://docs.microsoft.com/bingmaps/rest-services/locations/local-search)
 

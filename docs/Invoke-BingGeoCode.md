@@ -1,7 +1,7 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Invoke-BingGeoCode.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Invoke-BingGeoCode
 schema: 2.0.0
 ---
 
@@ -199,7 +199,7 @@ Accept wildcard characters: False
 ```
 
 ### -Query
-A string that contains information about a location, such as an address or landmark name.
+Specifies the search term string, such as an address, business name, or landmark name.
 
 ```yaml
 Type: String
@@ -272,11 +272,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-Example:
+Direct API Example:
     http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}
 
-How to get a Bing Maps API Key:
-    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+Ensure you have a valid Bing Maps API Key.
+    How to get a Bing Maps API Key:
+        https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 
 While the Bing Location API does support a text query option, I have found it to be unreliable.
 For GeoCode info stick to Addresses and Lat/Long for reverse Geocoding.
@@ -284,7 +285,7 @@ For Text Queries use other Bing Maps functions.
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Invoke-BingGeoCode.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Invoke-BingGeoCode.md)
+[https://pwshplaces.readthedocs.io/en/latest/Invoke-BingGeoCode](https://pwshplaces.readthedocs.io/en/latest/Invoke-BingGeoCode)
 
 [https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-address](https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-address)
 

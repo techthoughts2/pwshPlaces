@@ -1,7 +1,7 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-GMapPlace.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Find-GMapPlace
 schema: 2.0.0
 ---
 
@@ -158,7 +158,8 @@ Accept wildcard characters: False
 ```
 
 ### -PointLatitude
-Prefer results in a specified area by specifying a single coordinate for the north-south position of a point on the Earth's surface.
+Specifies the latitude for location-based searches.
+Single coordinate for the north-south position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -173,7 +174,8 @@ Accept wildcard characters: False
 ```
 
 ### -PointLongitude
-Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earth's surface.
+Specifies the longitude for location-based searches.
+Single coordinate for the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -417,7 +419,7 @@ This function includes Google Maps features and content; use of Google Maps feat
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-GMapPlace.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-GMapPlace.md)
+[https://pwshplaces.readthedocs.io/en/latest/Find-GMapPlace](https://pwshplaces.readthedocs.io/en/latest/Find-GMapPlace)
 
 [https://developers.google.com/maps/documentation/places/web-service/search-find-place](https://developers.google.com/maps/documentation/places/web-service/search-find-place)
 

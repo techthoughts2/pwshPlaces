@@ -57,9 +57,9 @@
 .PARAMETER Query
     Text input that identifies the search target, such as a name, address, or phone number. Phone numbers must be in international format (prefixed by a plus sign ("+"), followed by the country code, then the phone number itself)
 .PARAMETER PointLatitude
-    Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
+    Specifies the latitude for location-based searches. Single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
+    Specifies the longitude for location-based searches. Single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER CircleLatitude
     Prefer results in a specified area by specifying a radius plus lat/long - north–south position of a point on the Earth's surface.
 .PARAMETER CircleLongitude
@@ -131,7 +131,7 @@
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-GMapPlace.md
+    https://pwshplaces.readthedocs.io/en/latest/Find-GMapPlace
 .LINK
     https://developers.google.com/maps/documentation/places/web-service/search-find-place
 .LINK

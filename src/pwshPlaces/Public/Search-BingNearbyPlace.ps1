@@ -43,11 +43,11 @@
 
     Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in English with a maximum of 20 results returned.
 .PARAMETER Query
-    A string that contains information about a location, such as an address or landmark name.
+    Specifies the search term string, such as an address, business name, or landmark name.
 .PARAMETER PointLatitude
-    Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
+    Specifies the latitude for location-based searches. Single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
+    Specifies the longitude for location-based searches. Single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER CircleLatitude
     Prefer results in a specified area by specifying a radius plus lat/long - north–south position of a point on the Earth's surface.
 .PARAMETER CircleLongitude
@@ -73,15 +73,16 @@
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-    Example:
+    Direct API Example:
         https://dev.virtualearth.net/REST/v1/LocalSearch/?type={type_string_id_list}&userLocation={point}&key={BingMapsAPIKey}
 
-    How to get a Bing Maps API Key:
-        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+    Ensure you have a valid Bing Maps API Key.
+        How to get a Bing Maps API Key:
+            https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md
+    https://pwshplaces.readthedocs.io/en/latest/Search-BingNearbyPlace
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/local-search
 .LINK

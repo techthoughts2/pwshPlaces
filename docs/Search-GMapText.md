@@ -1,7 +1,7 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapText.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Search-GMapText
 schema: 2.0.0
 ---
 
@@ -470,7 +470,7 @@ This function includes Google Maps features and content; use of Google Maps feat
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapText.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapText.md)
+[https://pwshplaces.readthedocs.io/en/latest/Search-GMapText](https://pwshplaces.readthedocs.io/en/latest/Search-GMapText)
 
 [https://developers.google.com/maps/documentation/places/web-service/search-text](https://developers.google.com/maps/documentation/places/web-service/search-text)
 

@@ -129,7 +129,7 @@
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapText.md
+    https://pwshplaces.readthedocs.io/en/latest/Search-GMapText
 .LINK
     https://developers.google.com/maps/documentation/places/web-service/search-text
 .LINK

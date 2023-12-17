@@ -1,7 +1,7 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapNearbyPlace.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Search-GMapNearbyPlace
 schema: 2.0.0
 ---
 
@@ -369,7 +369,7 @@ This function includes Google Maps features and content; use of Google Maps feat
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapNearbyPlace.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapNearbyPlace.md)
+[https://pwshplaces.readthedocs.io/en/latest/Search-GMapNearbyPlace](https://pwshplaces.readthedocs.io/en/latest/Search-GMapNearbyPlace)
 
 [https://developers.google.com/maps/documentation/places/web-service/search-nearby](https://developers.google.com/maps/documentation/places/web-service/search-nearby)
 

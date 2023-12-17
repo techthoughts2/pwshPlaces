@@ -1,7 +1,7 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingTimeZone.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone
 schema: 2.0.0
 ---
 
@@ -46,7 +46,7 @@ Returns Time Zone information for the provided coordinates.
 ## PARAMETERS
 
 ### -Query
-A string that contains information about a location, such as an address or landmark name.
+Specifies the search term string, such as an address, business name, or landmark name.
 
 ```yaml
 Type: String
@@ -61,7 +61,8 @@ Accept wildcard characters: False
 ```
 
 ### -PointLatitude
-Prefer results in a specified area by specifying a single coordinate for the north-south position of a point on the Earth's surface.
+Specifies the latitude for location-based searches.
+Single coordinate for the north-south position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -76,7 +77,8 @@ Accept wildcard characters: False
 ```
 
 ### -PointLongitude
-Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earth's surface.
+Specifies the longitude for location-based searches.
+Single coordinate for the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -149,15 +151,16 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-Example:
+Direct API Example:
     https://dev.virtualearth.net/REST/v1/TimeZone/{point}?datetime={datetime_utc}&key={BingMapsAPIKey}
 
-How to get a Bing Maps API Key:
-    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+Ensure you have a valid Bing Maps API Key.
+    How to get a Bing Maps API Key:
+        https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingTimeZone.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingTimeZone.md)
+[https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone](https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone)
 
 [https://docs.microsoft.com/bingmaps/rest-services/timezone/find-time-zone](https://docs.microsoft.com/bingmaps/rest-services/timezone/find-time-zone)
 

@@ -73,7 +73,7 @@
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Invoke-GMapGeoCode.md
+    https://pwshplaces.readthedocs.io/en/latest/Invoke-GMapGeoCode
 .LINK
     https://developers.google.com/maps/documentation/geocoding/overview
 .LINK

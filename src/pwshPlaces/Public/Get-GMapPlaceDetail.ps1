@@ -72,7 +72,7 @@
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Get-GMapPlaceDetail.md
+    https://pwshplaces.readthedocs.io/en/latest/Get-GMapPlaceDetail
 .LINK
     https://developers.google.com/maps/documentation/places/web-service/details
 .LINK
