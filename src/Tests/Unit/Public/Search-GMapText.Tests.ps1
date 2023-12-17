@@ -45,7 +45,7 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #endMock
                 Search-GMapText -Query "Airport" -RegionBias es -GoogleAPIKey $googleAPIKey
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
@@ -178,7 +178,7 @@ InModuleScope 'pwshPlaces' {
                     GoogleAPIKey     = $googleAPIKey
                 }
                 Search-GMapText @searchGMapTextSplat
-                Assert-MockCalled -CommandName Invoke-RestMethod -Times 3
+                Should -Invoke -CommandName Invoke-RestMethod -Times 3
                 Assert-VerifiableMock
             } #it
 

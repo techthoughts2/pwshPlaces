@@ -43,7 +43,7 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #endMock
                 Invoke-BingGeoCode -Query 'The Alamo' -BingMapsAPIKey $bingAPIKey
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
@@ -70,7 +70,7 @@ InModuleScope 'pwshPlaces' {
                     BingMapsAPIKey = $bingAPIKey
                 }
                 Invoke-BingGeoCode @invokeBingGeoCodeSplat
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 

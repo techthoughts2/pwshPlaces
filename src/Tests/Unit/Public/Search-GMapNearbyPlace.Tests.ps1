@@ -54,7 +54,7 @@ InModuleScope 'pwshPlaces' {
                     GoogleAPIKey = $googleAPIKey
                 }
                 Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
@@ -180,7 +180,7 @@ InModuleScope 'pwshPlaces' {
                     GoogleAPIKey     = $googleAPIKey
                 }
                 Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
-                Assert-MockCalled -CommandName Invoke-RestMethod -Times 3
+                Should -Invoke -CommandName Invoke-RestMethod -Times 3
                 Assert-VerifiableMock
             } #it
 
