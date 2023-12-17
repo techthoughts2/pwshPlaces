@@ -39,44 +39,44 @@ Google Maps API Keys are created and managed through Google Cloud Platform (GCP)
 #### 1. Create a new GCP project
 
 Log into your [GCP console](https://console.cloud.google.com/home/) and create a new project:
-![Google Cloud (GCP) new project](../media/gcp_new_project.PNG 'New GCP Project')
+![Google Cloud (GCP) new project](assets/gcp_new_project.PNG 'New GCP Project')
 
 #### 2. Enable the Places API and the Geocoding API
 
 - Top left Navigation Menu
-  - Other Google Solutions
-    - Google Maps Platform
-      - Maps APIs and Services
-        - Places API - --Enable--
+    - Other Google Solutions
+        - Google Maps Platform
+            - Maps APIs and Services
+                - Places API - --Enable--
 - Google Maps Platform
-  - APIs
-    - Additional APIs
-      - Geocoding API - --Enable--
+    - APIs
+        - Additional APIs
+            - Geocoding API - --Enable--
 
-![Google Cloud (GCP) Top Left Navigation Menu](../media/google_cloud_top_left_navigation_menu.PNG 'GCP Navigation Menu')
-![Google Cloud (GCP) Google Maps Platform](../media/gcp_google_maps_platform.PNG 'GCP Google Maps Platform')
-![Google Cloud (GCP) Google Maps Platform Maps APIs and Services](../media/google_maps_platform_maps_api_and_services.PNG 'Google Maps Platform Maps APIs and Services')
-![Google Maps Places API](../media/gcp_enable_places_api.PNG 'Google Maps Places API')
-![Google Maps Geocoding API](../media/gcp_enable_geocoding_api.PNG 'Google Maps Geocoding API')
+![Google Cloud (GCP) Top Left Navigation Menu](assets/google_cloud_top_left_navigation_menu.PNG 'GCP Navigation Menu')
+![Google Cloud (GCP) Google Maps Platform](assets/gcp_google_maps_platform.PNG 'GCP Google Maps Platform')
+![Google Cloud (GCP) Google Maps Platform Maps APIs and Services](assets/google_maps_platform_maps_api_and_services.PNG 'Google Maps Platform Maps APIs and Services')
+![Google Maps Places API](assets/gcp_enable_places_api.PNG 'Google Maps Places API')
+![Google Maps Geocoding API](assets/gcp_enable_geocoding_api.PNG 'Google Maps Geocoding API')
 
 #### 3. Create API Key
 
 - Google Maps Platform
-  - Credentials
-    - Create Credentials
-      - API key
+    - Credentials
+        - Create Credentials
+            - API key
 
-![GCP Google Maps Platform Credentials](../media/gcp_google_maps_create_credential_api.PNG 'Google Maps Platform Credentials')
+![GCP Google Maps Platform Credentials](assets/gcp_google_maps_create_credential_api.PNG 'Google Maps Platform Credentials')
 
 #### 4. Restrict to places API
 
 Restrict API access to just the two enabled
 
 - Google Maps Platform
-  - Credentials
-    - Restrict API to secure account
+    - Credentials
+        - Restrict API to secure account
 
-![GCP API Restrict Access](../media/gcp_api_services_restrict_api_key.PNG 'API Restrict Access')
+![GCP API Restrict Access](assets/gcp_api_services_restrict_api_key.PNG 'API Restrict Access')
 
 #### 5. Enable Billing on the Google Cloud project
 
@@ -100,7 +100,7 @@ Additional reading:
 - [Google Maps Platform pricing](https://cloud.google.com/maps-platform/pricing)
 - [Places product API pricing](https://developers.google.com/maps/billing/gmp-billing#places-product)
 - [Places API Usage and Billing](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing)
-  - [Places SKU breakdown cost data](https://developers.google.com/maps/billing/gmp-billing#basic-data)
+    - [Places SKU breakdown cost data](https://developers.google.com/maps/billing/gmp-billing#basic-data)
 
 ## API Caching
 

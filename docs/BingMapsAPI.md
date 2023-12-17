@@ -36,15 +36,15 @@ Here is what you need to accomplish at a high level:
 #### 1. Create a new Bing maps dev account
 
 Log into the [Bing Maps Dev Center Portal](https://www.bingmapsportal.com) - if you do not yet have an account go ahead and create one:
-![Bing Maps Dev Center New Account](../media/bing_map_create_bing_maps_dev_account.PNG 'New Bing Maps Account')
+![Bing Maps Dev Center New Account](assets/bing_map_create_bing_maps_dev_account.PNG 'New Bing Maps Account')
 
 #### 2. Create a Bing Maps Basic API Key
 
 - Under My account tab click *My Keys*
-  - Create a new API key
+    - Create a new API key
 
-![Bing Maps API Key Choices](../media/create_bing_maps_api_key.PNG 'Bing Map API Key Choice')
-![Bing Maps Dev Center New API Key](../media/bing_map_create_api_key.PNG 'New Bing Maps API Key')
+![Bing Maps API Key Choices](assets/create_bing_maps_api_key.PNG 'Bing Map API Key Choice')
+![Bing Maps Dev Center New API Key](assets/bing_map_create_api_key.PNG 'New Bing Maps API Key')
 
 ### Monitoring Bing Maps API usage
 
