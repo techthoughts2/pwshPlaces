@@ -11,11 +11,15 @@ on:
       - '**.md'
       - 'docs/**'
       - 'LICENSE'
+    branches-ignore:
+      - doctesting
   pull_request:
     paths-ignore:
       - '**.md'
       - 'docs/**'
       - 'LICENSE'
+    branches-ignore:
+      - doctesting
 jobs:
   test:
     name: Run Tests
