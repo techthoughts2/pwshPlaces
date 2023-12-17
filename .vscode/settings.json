@@ -15,6 +15,11 @@
     "cSpell.enableFiletypes": [
         "!yaml",
         "powershell"
+    ],
+    "cSpell.words": [
+        "jakemorrison",
+        "Krause's",
+        "textquery"
     ]
 }
 

@@ -2,7 +2,7 @@
 Module Name: pwshPlaces
 Module Guid: 9a9914bd-d115-4f42-bb5d-19c5e5561a3f
 Download Help Link: NA
-Help Version: 0.7.0
+Help Version: 0.7.1
 Locale: en-US
 ---
 
@@ -12,7 +12,7 @@ Search for places, establishments, points of interest, and other detailed inform
 
 ## pwshPlaces Cmdlets
 ### [Find-BingPlace](Find-BingPlace.md)
-Returns a list of business entities centered around a location or a geographic region
+Searches for business entities or points of interest based on a query and geographic parameters.
 
 ### [Find-BingTimeZone](Find-BingTimeZone.md)
 Retrieve time zone information for any point on Earth

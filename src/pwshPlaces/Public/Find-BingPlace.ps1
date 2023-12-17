@@ -1,35 +1,37 @@
 ﻿<#
 .SYNOPSIS
-    Returns a list of business entities centered around a location or a geographic region
+    Searches for business entities or points of interest based on a query and geographic parameters.
 .DESCRIPTION
-    Performs a find place request with provided parameters.
-    A text search is performed that returns a list of business entities.
-    By default, the location bias is IP based.
-    Location bias and language can be controlled via parameters.
+    The Find-BingPlace function interfaces with the Bing Maps API to perform text-based searches
+    for business entities or points of interest. By default, search results are biased based on
+    the user's IP location, but this can be customized using various geographic parameters.
+    This function is ideal for locating specific places or exploring areas of interest.
+    Location bias and language can also be controlled via parameters.
 .EXAMPLE
     Find-BingPlace -Query "Krause's cafe" -BingMapsAPIKey $bingAPIKey
 
-    Returns place information for the query location biased by IP.
+    Performs a search for "Krause's cafe" and biases the results based on the IP location of the user.
 .EXAMPLE
     Find-BingPlace -Query "Krause's cafe" -Language es -BingMapsAPIKey $bingAPIKey
 
-    Returns place information for the query location biased by IP and returns a few portions of the results in Spanish.
+    Searches for "Krause's cafe" and returns portions of the results in Spanish, biased by the user's IP location.
 .EXAMPLE
     Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -BingMapsAPIKey $bingAPIKey
 
-    Returns place information for the query location biased by provided lat/long point.
+    Searches for cafes near the specified latitude and longitude coordinates.
 .EXAMPLE
     Find-BingPlace -Query 'cafe' -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000' -BingMapsAPIKey $bingAPIKey
 
-    Returns place information for the query location biased by circle lat/long/radius.
+    Searches for cafes within a 5000-meter radius of the given lat/long point.
 .EXAMPLE
     Find-BingPlace -Query 'cafe' -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -BingMapsAPIKey $bingAPIKey
 
-    Returns place information for the query location biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle.
+    Searches for cafes within a specified rectangular area defined by two sets of lat/long coordinates.
+    These are represented by the south/west and north/east points of a rectangle.
 .EXAMPLE
     Find-BingPlace -Query 'cafe' -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 
-    Returns place information for the query location biased by provided lat/long point with a maximum of 20 results in English.
+    Finds up to 20 cafes near the specified point, with results in English.
 .EXAMPLE
     $findBingPlaceSplat = @{
         Query          = 'cafe'
@@ -41,13 +43,13 @@
     }
     Find-BingPlace @findBingPlaceSplat
 
-    Returns place information for the query location biased by provided lat/long point with a maximum of 20 results in English.
+    Finds up to 20 cafes near the specified point, with results in English.
 .PARAMETER Query
-    A string that contains information about a location, such as an address or landmark name.
+    Specifies the search term string, such as an address, business name, or landmark name.
 .PARAMETER PointLatitude
-    Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
+    Specifies the latitude for location-based searches. Single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
+    Specifies the longitude for location-based searches. Single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER CircleLatitude
     Prefer results in a specified area by specifying a radius plus lat/long - north–south position of a point on the Earth's surface.
 .PARAMETER CircleLongitude
@@ -73,15 +75,16 @@
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-    Example:
+    Direct API Example:
         https://dev.virtualearth.net/REST/v1/LocalSearch/?query={query}&userLocation={point}&key={BingMapsAPIKey}
 
-    How to get a Bing Maps API Key:
-        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+    Ensure you have a valid Bing Maps API Key.
+        How to get a Bing Maps API Key:
+            https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingPlace.md
+    https://pwshplaces.readthedocs.io/en/latest/Find-BingPlace/
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/local-search
 .LINK
@@ -208,7 +211,7 @@ function Find-BingPlace {
             $fLocationBias = '&userMapView={0}' -f [uri]::EscapeDataString($combinedRectangle)
             $uri += $fLocationBias
         } #rectangle
-    } #switch_parametersetname
+    } #switch_ParameterSetName
 
     if ($RegionBias) {
         Write-Debug -Message ('RegionBias: {0}' -f $RegionBias)
@@ -244,7 +247,7 @@ function Find-BingPlace {
     }
 
     if ($results.statusDescription -ne 'OK') {
-        Write-Warning -Message 'Did not get a succcessful return from Bing Location API endpoint'
+        Write-Warning -Message 'Did not get a successful return from Bing Location API endpoint'
         $finalResults = $results
     }
     elseif (-not ($results.resourceSets.estimatedTotal -ge 1)) {

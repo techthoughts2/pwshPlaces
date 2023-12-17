@@ -567,6 +567,7 @@ enum cultureCodes {
     zu              #isiZulu
 } #enum_cultureCodes
 
+# https://learn.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/type-identifiers/
 enum typeIdentifier {
     AmusementParks                  # Amusement parks.
     AntiqueStores                   # For retail stores that sell antiques.

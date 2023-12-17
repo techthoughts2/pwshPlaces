@@ -5,9 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [0.7.1]
 
 - Module Changes
+    - Updated help for all functions
+    - Minor spelling corrections on output messages
 - Build Updates
     - Updated all Github action files to:
         - support ignore certain files for Readthedocs implementation
