@@ -112,11 +112,12 @@
     Circular: A string specifying radius in meters, plus lat/lng in decimal degrees. Use the following format: circle:radius@lat,lng.
     Rectangular: A string specifying two lat/lng pairs in decimal degrees
 
-    Example:
+    Direct API Example:
         https://maps.googleapis.com/maps/api/place/findplacefromtext/json?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key=YOUR_API_KEY
 
-    How to get a Google API Key:
-        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
+    Ensure you have a valid Google API Key.
+        How to get a Google API Key:
+            https://pwshplaces.readthedocs.io/en/latest/GoogleMapsAPI/#how-to-get-a-google-maps-api-key
 
     Caution: Place Search requests and Place Details requests do not return the same fields.
     Place Search requests return a subset of the fields that are returned by Place Details requests.

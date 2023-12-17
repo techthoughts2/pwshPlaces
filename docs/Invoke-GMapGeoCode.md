@@ -203,7 +203,7 @@ LAT LONG LOOKUP
         language
         region
         components
-    Example:
+    Direct API Example:
         https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
 Reverse geocoding (address lookup)
     Required parameters
@@ -213,11 +213,12 @@ Reverse geocoding (address lookup)
         language
         result_type
         location_type
-    Example:
+    Direct API Example:
         https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
 
-How to get a Google API Key:
-    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
+Ensure you have a valid Google API Key.
+    How to get a Google API Key:
+        https://pwshplaces.readthedocs.io/en/latest/GoogleMapsAPI/#how-to-get-a-google-maps-api-key
 
 This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 
