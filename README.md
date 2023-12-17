@@ -1,6 +1,6 @@
 # pwshPlaces
 
-[![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.1+-purple.svg)](https://github.com/PowerShell/PowerShell) [![PowerShell Gallery][psgallery-img]][psgallery-site] ![Cross Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey) [![License][license-badge]](LICENSE)
+[![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.1+-purple.svg)](https://github.com/PowerShell/PowerShell) [![PowerShell Gallery][psgallery-img]][psgallery-site] ![Cross Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey) [![License][license-badge]](LICENSE) [![Documentation Status](https://readthedocs.org/projects/pwshPlaces/badge/?version=latest)](https://pwshPlaces.readthedocs.io/en/latest/?badge=latest)
 
 [psgallery-img]:   https://img.shields.io/powershellgallery/dt/pwshPlaces?label=Powershell%20Gallery&logo=powershell
 [psgallery-site]:  https://www.powershellgallery.com/packages/pwshPlaces
