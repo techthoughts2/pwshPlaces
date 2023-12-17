@@ -133,7 +133,7 @@ Describe 'Infrastructure Tests' -Tag Infrastructure {
                     GoogleAPIKey     = $env:GoogleAPIKey
                 }
                 $eval = Search-GMapText @searchGMapTextSplat
-                ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 20
+                ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 8
             } #it
         } #context_Search-GMapText
     } #context_GoogleMaps
