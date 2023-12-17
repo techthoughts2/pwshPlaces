@@ -15,7 +15,7 @@ Search for places, establishments, points of interest, and other detailed inform
 Searches for business entities or points of interest based on a query and geographic parameters.
 
 ### [Find-BingTimeZone](Find-BingTimeZone.md)
-Retrieve time zone information for any point on Earth
+Retrieves time zone information for a specific location on Earth.
 
 ### [Find-GMapPlace](Find-GMapPlace.md)
 Find Place request takes a text input and returns a place. The input can be any kind of Places text data, such as a name, address, or phone number.

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Find-BingTimeZone
 
 ## SYNOPSIS
-Retrieve time zone information for any point on Earth
+Retrieves time zone information for a specific location on Earth.
 
 ## SYNTAX
 
@@ -25,7 +25,11 @@ Find-BingTimeZone -PointLatitude <String> -PointLongitude <String> [-RegionBias 
 ```
 
 ## DESCRIPTION
-Given a pair of coordinates or a place name query the Time Zone API will return local time zone and daylight savings (DST) information for that location.
+The Find-BingTimeZone function queries the Bing Maps Time Zone API to obtain local
+time zone and daylight saving time (DST) information based on either geographic coordinates
+or a place name.
+This function is useful for determining the time zone of any location,
+including whether DST is observed and the current local time.
 
 ## EXAMPLES
 
@@ -34,14 +38,14 @@ Given a pair of coordinates or a place name query the Time Zone API will return 
 Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey
 ```
 
-Returns Time Zone information for matches found for the provided query.
+Retrieves time zone information for the location matching the query 'New Braunfels, TX'.
 
 ### EXAMPLE 2
 ```
 Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $bingAPIKey
 ```
 
-Returns Time Zone information for the provided coordinates.
+Returns time zone information for the specified latitude and longitude coordinates.
 
 ## PARAMETERS
 
