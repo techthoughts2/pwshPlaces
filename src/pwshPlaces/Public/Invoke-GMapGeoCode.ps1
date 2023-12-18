@@ -62,9 +62,9 @@
 .LINK
     https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters
 .LINK
-    https://developers.google.com/maps/documentation/geocoding/overview#geocoding-lookup
+    https://developers.google.com/maps/documentation/geocoding/requests-geocoding
 .LINK
-    https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding
+    https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding
 .LINK
     https://developers.google.com/maps/faq#languagesupport
 .LINK
@@ -132,6 +132,7 @@ function Invoke-GMapGeoCode {
                     key
                 Optional parameters
                     language
+                    region
                     result_type
                     location_type
     #>
