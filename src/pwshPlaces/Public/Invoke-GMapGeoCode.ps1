@@ -1,27 +1,26 @@
 ﻿<#
 .SYNOPSIS
-    Engages Geocoding API to return address and geographic coordinates based on provided query parameters.
+    Converts addresses to geographic coordinates and vice versa using Google's Geocoding API.
 .DESCRIPTION
-    Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
-    This function can take in an address and return coordinate information.
-    You can also provide coordinates to return multiple nearby address results.
-    If you know the exact google placeID this can also be provided to return Geocoding information about that location.
+    The Invoke-GMapGeoCode function utilizes Google's Geocoding API to convert street addresses into geographic coordinates
+    (latitude and longitude) and perform reverse geocoding, which converts coordinates back into readable addresses.
+    This function can also use a Google Place ID to retrieve geocoding information about a specific location.
 .EXAMPLE
     Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States' -GoogleAPIKey $googleAPIKey
 
-    Performs Geocoding (latitude/longitude lookup) on provided address.
+    Performs geocoding to find the latitude and longitude of the given address
 .EXAMPLE
     Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -GoogleAPIKey $googleAPIKey
 
-    Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
+    Performs reverse geocoding on the provided coordinates, returning potential address matches.
 .EXAMPLE
     Invoke-GMapGeoCode -Latitude '37.621313' -Longitude '-122.378955' -Language es -GoogleAPIKey $googleAPIKey
 
-    Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results in Spanish.
+    Performs reverse geocoding on the provided coordinates, returning address results in Spanish.
 .EXAMPLE
     Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w' -GoogleAPIKey $googleAPIKey
 
-    Returns Geocoding information about the provided place.
+    Retrieves geocoding information for the specified place ID.
 .PARAMETER Address
     The street address or plus code that you want to geocode. Specify addresses in accordance with the format used by the national postal service of the country concerned. Additional address elements such as business names and unit, suite or floor numbers should be avoided.
 .PARAMETER Latitude
@@ -155,7 +154,7 @@ function Invoke-GMapGeoCode {
             $fPlaceID = 'place_id={0}' -f $PlaceID
             $uri += $fPlaceID
         } #placeID
-    } #switch_parametersetname
+    } #switch_ParameterSetName
 
     if ($Language) {
         Write-Debug -Message ('Language: {0}' -f $Language)
@@ -187,7 +186,7 @@ function Invoke-GMapGeoCode {
     }
 
     if ($results.status -ne 'OK') {
-        Write-Warning -Message 'Did not get a succcessful return from Google Geocode API endpoint'
+        Write-Warning -Message 'Did not get a successful return from Google Geocode API endpoint'
         $finalResults = $results
     }
     else {

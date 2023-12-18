@@ -27,7 +27,7 @@ Retrieves comprehensive details about a specified place or point of interest.
 Converts addresses to geographic coordinates and vice versa using Bing Maps API.
 
 ### [Invoke-GMapGeoCode](Invoke-GMapGeoCode.md)
-Engages Geocoding API to return address and geographic coordinates based on provided query parameters.
+Converts addresses to geographic coordinates and vice versa using Google's Geocoding API.
 
 ### [Search-BingNearbyPlace](Search-BingNearbyPlace.md)
 Nearby Search lets you search for places of interest within a specified area using Bing Maps API.

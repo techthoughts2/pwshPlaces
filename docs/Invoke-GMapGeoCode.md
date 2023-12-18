@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-GMapGeoCode
 
 ## SYNOPSIS
-Engages Geocoding API to return address and geographic coordinates based on provided query parameters.
+Converts addresses to geographic coordinates and vice versa using Google's Geocoding API.
 
 ## SYNTAX
 
@@ -31,10 +31,9 @@ Invoke-GMapGeoCode -PlaceID <String> [-Language <languages>] [-RegionBias <ccTLD
 ```
 
 ## DESCRIPTION
-Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
-This function can take in an address and return coordinate information.
-You can also provide coordinates to return multiple nearby address results.
-If you know the exact google placeID this can also be provided to return Geocoding information about that location.
+The Invoke-GMapGeoCode function utilizes Google's Geocoding API to convert street addresses into geographic coordinates
+(latitude and longitude) and perform reverse geocoding, which converts coordinates back into readable addresses.
+This function can also use a Google Place ID to retrieve geocoding information about a specific location.
 
 ## EXAMPLES
 
@@ -43,28 +42,28 @@ If you know the exact google placeID this can also be provided to return Geocodi
 Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States' -GoogleAPIKey $googleAPIKey
 ```
 
-Performs Geocoding (latitude/longitude lookup) on provided address.
+Performs geocoding to find the latitude and longitude of the given address
 
 ### EXAMPLE 2
 ```
 Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -GoogleAPIKey $googleAPIKey
 ```
 
-Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
+Performs reverse geocoding on the provided coordinates, returning potential address matches.
 
 ### EXAMPLE 3
 ```
 Invoke-GMapGeoCode -Latitude '37.621313' -Longitude '-122.378955' -Language es -GoogleAPIKey $googleAPIKey
 ```
 
-Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results in Spanish.
+Performs reverse geocoding on the provided coordinates, returning address results in Spanish.
 
 ### EXAMPLE 4
 ```
 Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w' -GoogleAPIKey $googleAPIKey
 ```
 
-Returns Geocoding information about the provided place.
+Retrieves geocoding information for the specified place ID.
 
 ## PARAMETERS
 
