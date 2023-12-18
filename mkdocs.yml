@@ -91,5 +91,8 @@ nav:
   - Getting An API Key:
     - Bing Maps API Key: BingMapsAPI
     - Google Maps API Key: GoogleMapsAPI.md
+  - Practical Use examples:
+    - Bing Maps Examples: pwshPlaces-Bing-Maps-examples.md
+    - Google Maps Examples: pwshPlaces-Google-Maps-examples.md
   - FAQ: pwshPlaces-FAQ.md
   - Change Log: CHANGELOG.md
