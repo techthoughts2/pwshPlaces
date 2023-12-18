@@ -310,7 +310,7 @@ function Search-GMapNearbyPlace {
             There is a short delay between when a next_page_token is issued, and when it will become valid.
             Requesting the next page before it is available will return an INVALID_REQUEST response.
             This sleep is necessary. the api backend needs time to catch up.
-            #TODO: add logic to check for INVALID_REQUEST and retry
+            TODO: add logic to check for INVALID_REQUEST and retry
             #>
             Start-Sleep -Seconds 4
             #_________________________________________________________________________
