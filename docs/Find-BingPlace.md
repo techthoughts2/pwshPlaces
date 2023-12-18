@@ -357,6 +357,8 @@ Ensure you have a valid Bing Maps API Key.
 
 [https://pwshplaces.readthedocs.io/en/latest/Find-BingPlace/](https://pwshplaces.readthedocs.io/en/latest/Find-BingPlace/)
 
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/)
+
 [https://docs.microsoft.com/bingmaps/rest-services/locations/local-search](https://docs.microsoft.com/bingmaps/rest-services/locations/local-search)
 
 [https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/user-context-parameters](https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/user-context-parameters)

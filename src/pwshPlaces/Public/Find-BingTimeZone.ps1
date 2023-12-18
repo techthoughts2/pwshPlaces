@@ -48,6 +48,8 @@
 .LINK
     https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone
 .LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/
+.LINK
     https://docs.microsoft.com/bingmaps/rest-services/timezone/find-time-zone
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes

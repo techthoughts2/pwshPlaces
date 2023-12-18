@@ -78,6 +78,8 @@
 .LINK
     https://pwshplaces.readthedocs.io/en/latest/Invoke-BingGeoCode
 .LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/
+.LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-address
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-point

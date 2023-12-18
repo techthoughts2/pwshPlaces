@@ -189,6 +189,8 @@ Ensure you have a valid Bing Maps API Key.
 
 [https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone](https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone)
 
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/)
+
 [https://docs.microsoft.com/bingmaps/rest-services/timezone/find-time-zone](https://docs.microsoft.com/bingmaps/rest-services/timezone/find-time-zone)
 
 [https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes](https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes)

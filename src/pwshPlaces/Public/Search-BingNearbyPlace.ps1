@@ -85,6 +85,8 @@
 .LINK
     https://pwshplaces.readthedocs.io/en/latest/Search-BingNearbyPlace
 .LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/
+.LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/local-search
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/common-parameters-and-types/user-context-parameters

@@ -282,6 +282,8 @@ For Text Queries use other Bing Maps functions.
 
 [https://pwshplaces.readthedocs.io/en/latest/Invoke-BingGeoCode](https://pwshplaces.readthedocs.io/en/latest/Invoke-BingGeoCode)
 
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/)
+
 [https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-address](https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-address)
 
 [https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-point](https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-point)
