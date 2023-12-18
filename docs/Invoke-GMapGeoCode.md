@@ -206,6 +206,8 @@ This function includes Google Maps features and content; use of Google Maps feat
 
 [https://pwshplaces.readthedocs.io/en/latest/Invoke-GMapGeoCode](https://pwshplaces.readthedocs.io/en/latest/Invoke-GMapGeoCode)
 
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/)
+
 [https://developers.google.com/maps/documentation/geocoding/overview](https://developers.google.com/maps/documentation/geocoding/overview)
 
 [https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters](https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters)

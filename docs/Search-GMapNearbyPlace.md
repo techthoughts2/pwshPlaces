@@ -350,6 +350,8 @@ This function includes Google Maps features and content; use of Google Maps feat
 
 [https://pwshplaces.readthedocs.io/en/latest/Search-GMapNearbyPlace](https://pwshplaces.readthedocs.io/en/latest/Search-GMapNearbyPlace)
 
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/)
+
 [https://developers.google.com/maps/documentation/places/web-service/search-nearby](https://developers.google.com/maps/documentation/places/web-service/search-nearby)
 
 [https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters](https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters)

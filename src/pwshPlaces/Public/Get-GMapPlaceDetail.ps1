@@ -62,6 +62,8 @@
 .LINK
     https://pwshplaces.readthedocs.io/en/latest/Get-GMapPlaceDetail
 .LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/
+.LINK
     https://developers.google.com/maps/documentation/places/web-service/details
 .LINK
     https://developers.google.com/maps/faq#languagesupport

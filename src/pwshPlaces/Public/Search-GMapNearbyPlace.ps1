@@ -102,6 +102,8 @@
 .LINK
     https://pwshplaces.readthedocs.io/en/latest/Search-GMapNearbyPlace
 .LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/
+.LINK
     https://developers.google.com/maps/documentation/places/web-service/search-nearby
 .LINK
     https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters

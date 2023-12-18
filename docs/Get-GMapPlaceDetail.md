@@ -183,6 +183,8 @@ This function includes Google Maps features and content; use of Google Maps feat
 
 [https://pwshplaces.readthedocs.io/en/latest/Get-GMapPlaceDetail](https://pwshplaces.readthedocs.io/en/latest/Get-GMapPlaceDetail)
 
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/)
+
 [https://developers.google.com/maps/documentation/places/web-service/details](https://developers.google.com/maps/documentation/places/web-service/details)
 
 [https://developers.google.com/maps/faq#languagesupport](https://developers.google.com/maps/faq#languagesupport)

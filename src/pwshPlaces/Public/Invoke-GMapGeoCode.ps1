@@ -56,6 +56,8 @@
 .LINK
     https://pwshplaces.readthedocs.io/en/latest/Invoke-GMapGeoCode
 .LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/
+.LINK
     https://developers.google.com/maps/documentation/geocoding/overview
 .LINK
     https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters

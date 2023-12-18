@@ -381,14 +381,16 @@ Ensure you have a valid Google API Key.
 For basic place information, Find-GMapPlace is sufficient.
 However, if you need more detailed data
 about a place, use Get-GMapPlaceDetail with the Place ID obtained from \`Find-GMapPlace\`.
-For a detailed guide on using these functions effectively, please refer to our documentation:
-\[here\](link-to-detailed-guide).
+For a detailed guide on using these functions effectively, please refer to the examples documentation:
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/
 
 This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 
 ## RELATED LINKS
 
 [https://pwshplaces.readthedocs.io/en/latest/Find-GMapPlace](https://pwshplaces.readthedocs.io/en/latest/Find-GMapPlace)
+
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/)
 
 [https://developers.google.com/maps/documentation/places/web-service/search-find-place](https://developers.google.com/maps/documentation/places/web-service/search-find-place)
 
