@@ -195,17 +195,22 @@ function Search-GMapNearbyPlace {
             Required parameters
                 location
                     This must be specified as latitude,longitude.
+                radius
+                    Defines the distance (in meters) within which to return place results. You may bias results to a specified circle by passing a location and a radius parameter.
+                    Doing so instructs the Places service to prefer showing results within that circle; results outside of the defined area may still be displayed.
+                    The radius will automatically be clamped to a maximum value depending on the type of search and other parameters.
+                    Query Autocomplete: 50,000 meters
+                    Text Search: 50,000 meters
             Optional parameters
                 keyword
                 language
                 maxprice
                 minprice
-                name
                 opennow
+                pagetoken
                 radius
                 rankby
                 type
-                sessiontoken
     #>
 
     $uri = '{0}{1}' -f $googleMapsBaseURI, 'place/nearbysearch/json?'
@@ -305,6 +310,7 @@ function Search-GMapNearbyPlace {
             There is a short delay between when a next_page_token is issued, and when it will become valid.
             Requesting the next page before it is available will return an INVALID_REQUEST response.
             This sleep is necessary. the api backend needs time to catch up.
+            #TODO: add logic to check for INVALID_REQUEST and retry
             #>
             Start-Sleep -Seconds 4
             #_________________________________________________________________________
