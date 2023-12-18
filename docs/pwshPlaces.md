@@ -36,6 +36,6 @@ Nearby Search lets you search for places of interest within a specified area usi
 Searches for places within a specified area using Google Maps Nearby Search.
 
 ### [Search-GMapText](Search-GMapText.md)
-A text search that returns information about a set of places based on provided string.
+Conducts a text-based search that returns information about a set of places using Google Maps.
 
 
