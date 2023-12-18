@@ -115,8 +115,6 @@
 .LINK
     https://developers.google.com/maps/documentation/places/web-service/search-find-place
 .LINK
-    https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters
-.LINK
     https://developers.google.com/maps/faq#languagesupport
 .LINK
     https://cloud.google.com/maps-platform/terms/

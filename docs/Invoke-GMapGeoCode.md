@@ -210,8 +210,6 @@ This function includes Google Maps features and content; use of Google Maps feat
 
 [https://developers.google.com/maps/documentation/geocoding/overview](https://developers.google.com/maps/documentation/geocoding/overview)
 
-[https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters](https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters)
-
 [https://developers.google.com/maps/documentation/geocoding/requests-geocoding](https://developers.google.com/maps/documentation/geocoding/requests-geocoding)
 
 [https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding](https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding)

@@ -354,8 +354,6 @@ This function includes Google Maps features and content; use of Google Maps feat
 
 [https://developers.google.com/maps/documentation/places/web-service/search-nearby](https://developers.google.com/maps/documentation/places/web-service/search-nearby)
 
-[https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters](https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters)
-
 [https://developers.google.com/maps/faq#languagesupport](https://developers.google.com/maps/faq#languagesupport)
 
 [https://cloud.google.com/maps-platform/terms/](https://cloud.google.com/maps-platform/terms/)

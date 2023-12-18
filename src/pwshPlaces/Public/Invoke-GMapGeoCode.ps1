@@ -60,8 +60,6 @@
 .LINK
     https://developers.google.com/maps/documentation/geocoding/overview
 .LINK
-    https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters
-.LINK
     https://developers.google.com/maps/documentation/geocoding/requests-geocoding
 .LINK
     https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding
