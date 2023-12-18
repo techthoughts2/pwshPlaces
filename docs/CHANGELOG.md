@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Module Changes
     - `Find-BingTimeZone`
-        - Added new parameter for pulling more details DST details: `$IncludeDSTRules`
+        - Added new parameter for pulling more details DST details: `IncludeDSTRules`
     - Updated help for all functions
     - Minor spelling corrections on output messages
 - Build Updates
