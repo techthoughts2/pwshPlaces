@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-GMapPlaceDetail
 
 ## SYNOPSIS
-Request more details about a particular establishment or point of interest
+Retrieves comprehensive details about a specified place or point of interest.
 
 ## SYNTAX
 
@@ -18,7 +18,11 @@ Get-GMapPlaceDetail -PlaceID <String> [-Contact] [-Atmosphere] [-Language <langu
 ```
 
 ## DESCRIPTION
-Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, website, user rating and reviews.
+The Get-GMapPlaceDetail function interacts with the Google Maps API to fetch extensive information about a place,
+identified by its PlaceID.
+It provides details like the full address, phone number, website, user ratings, and reviews.
+Additional information such as contact details and atmosphere data (reviews, ratings, pricing) can be requested but
+are subject to higher billing rates.
 
 ## EXAMPLES
 
@@ -27,22 +31,21 @@ Place Details request returns more comprehensive information about the indicated
 Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -GoogleAPIKey $googleAPIKey
 ```
 
-Returns detailed place information about provided place ID.
+Retrieves detailed information for the specified place ID.
 
 ### EXAMPLE 2
 ```
 Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -Contact -GoogleAPIKey $googleAPIKey
 ```
 
-Returns detailed place information about provided place ID including detailed contact information.
+Retrieves detailed place information including contact details for the specified place ID.
 
 ### EXAMPLE 3
 ```
 Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -Language en -GoogleAPIKey $googleAPIKey
 ```
 
-Returns detailed place information about provided place ID including detailed contact, review, rating, and pricing information.
-Results are returned in English.
+Returns extensive place details including contact info, reviews, ratings, and pricing, in English, for the given place ID.
 
 ### EXAMPLE 4
 ```
@@ -56,13 +59,12 @@ $getGMapPlaceDetailsSplat = @{
 Get-GMapPlaceDetail @getGMapPlaceDetailsSplat
 ```
 
-Returns detailed place information about provided place ID including detailed contact, review, rating, and pricing information.
-Results are returned in English.
+Returns extensive place details including contact info, reviews, ratings, and pricing, in English, for the given place ID.
 
 ## PARAMETERS
 
 ### -PlaceID
-A textual identifier that uniquely identifies a place
+The unique identifier of a place in Google Maps.
 
 ```yaml
 Type: String
@@ -77,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -Contact
-Returns contact related information about the result - contact fields are billed at a higher rate.
+Includes contact information such as phone numbers and addresses (higher billing rate applies).
 
 ```yaml
 Type: SwitchParameter
@@ -92,7 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -Atmosphere
-Returns atmosphere related information including reviews and pricing about the result - atmosphere fields are billed at a higher rate.
+Includes atmosphere data like reviews, ratings, and pricing (higher billing rate applies).
 
 ```yaml
 Type: SwitchParameter
@@ -107,7 +109,7 @@ Accept wildcard characters: False
 ```
 
 ### -Language
-The language in which to return results.
+Specifies the language for returned results.
 
 ```yaml
 Type: languages

@@ -21,7 +21,7 @@ Retrieves time zone information for a specific location on Earth.
 Searches for a place using text input, returning key details about the location.
 
 ### [Get-GMapPlaceDetail](Get-GMapPlaceDetail.md)
-Request more details about a particular establishment or point of interest
+Retrieves comprehensive details about a specified place or point of interest.
 
 ### [Invoke-BingGeoCode](Invoke-BingGeoCode.md)
 Converts addresses to geographic coordinates and vice versa using Bing Maps API.
