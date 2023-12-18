@@ -35,6 +35,8 @@
     Includes contact information such as phone numbers and addresses (higher billing rate applies).
 .PARAMETER Atmosphere
     Includes atmosphere data like reviews, ratings, and pricing (higher billing rate applies).
+.PARAMETER ReviewSort
+    The sorting method to use when returning reviews. Can be set to most_relevant (default) or newest.
 .PARAMETER Language
     Specifies the language for returned results.
 .PARAMETER RegionBias
@@ -80,6 +82,7 @@ function Get-GMapPlaceDetail {
         [Parameter(Mandatory = $true,
             ParameterSetName = 'textquery',
             HelpMessage = 'The unique identifier of a place in Google Maps')]
+        [Parameter(ParameterSetName = 'atmosphereDetail', Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [string]$PlaceID,
 
@@ -88,8 +91,15 @@ function Get-GMapPlaceDetail {
         [switch]$Contact,
 
         [Parameter(Mandatory = $false,
+            ParameterSetName = 'atmosphereDetail',
             HelpMessage = 'return additional atmosphere information')]
         [switch]$Atmosphere,
+
+        [Parameter(Mandatory = $false,
+            ParameterSetName = 'atmosphereDetail',
+            HelpMessage = 'The sorting method to use when returning reviews')]
+        [ValidateSet('MostRelevant', 'Newest')]
+        [string]$ReviewSort = 'MostRelevant',
 
         [Parameter(Mandatory = $false,
             HelpMessage = 'The language in which to return results')]
@@ -119,6 +129,8 @@ function Get-GMapPlaceDetail {
                         formatted_phone_number, international_phone_number, opening_hours, website
                     Atmosphere
                         price_level, rating, review, user_ratings_total.
+                            reviews_sort
+                                The sorting method to use when returning reviews. Can be set to most_relevant (default) or newest.
             language
             region
     #>
@@ -155,6 +167,17 @@ function Get-GMapPlaceDetail {
         $fRegion = '&region={0}' -f $RegionBias
         $uri += $fRegion
     }
+
+    switch ($ReviewSort) {
+        'MostRelevant' {
+            $sortSelection = 'most_relevant'
+        }
+        'Newest' {
+            $sortSelection = 'newest'
+        }
+    }
+    Write-Debug -Message ('ReviewSort: {0}' -f $sortSelection)
+    $uri += '&reviews_sort={0}' -f $sortSelection
 
     Write-Verbose -Message ('Querying Google API: {0}' -f $uri)
 

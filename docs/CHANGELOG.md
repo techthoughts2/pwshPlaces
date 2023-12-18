@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module Changes
     - `Find-BingTimeZone`
         - Added new parameter for pulling more details DST details: `IncludeDSTRules`
+    - `Get-GMapPlaceDetail`
+        - Added new parameter for sorting reviews: `ReviewSort`
     - Updated help for all functions
     - Minor spelling corrections on output messages
 - Build Updates

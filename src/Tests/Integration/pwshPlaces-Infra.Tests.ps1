@@ -46,7 +46,9 @@ Describe 'Integration Tests' -Tag Infrastructure {
                     PlaceID      = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
                     Contact      = $true
                     Atmosphere   = $true
+                    ReviewSort   = 'Newest'
                     Language     = 'en'
+                    RegionBias   = 'us'
                     GoogleAPIKey = $env:GoogleAPIKey
                 }
                 $eval = Get-GMapPlaceDetail @getGMapPlaceDetailsSplat

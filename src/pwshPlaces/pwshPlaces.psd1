@@ -12,7 +12,7 @@
     RootModule        = 'pwshPlaces.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.7.3'
+    ModuleVersion     = '0.7.5'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()

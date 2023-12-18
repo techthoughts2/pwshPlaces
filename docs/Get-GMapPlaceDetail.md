@@ -12,9 +12,16 @@ Retrieves comprehensive details about a specified place or point of interest.
 
 ## SYNTAX
 
+### textquery (Default)
 ```
-Get-GMapPlaceDetail -PlaceID <String> [-Contact] [-Atmosphere] [-Language <languages>] [-RegionBias <ccTLD>]
+Get-GMapPlaceDetail -PlaceID <String> [-Contact] [-Language <languages>] [-RegionBias <ccTLD>]
  -GoogleAPIKey <String> [<CommonParameters>]
+```
+
+### atmosphereDetail
+```
+Get-GMapPlaceDetail [-PlaceID <String>] [-Contact] [-Atmosphere] [-ReviewSort <String>] [-Language <languages>]
+ [-RegionBias <ccTLD>] -GoogleAPIKey <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,10 +75,22 @@ The unique identifier of a place in Google Maps.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: textquery
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+```yaml
+Type: String
+Parameter Sets: atmosphereDetail
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -98,12 +117,28 @@ Includes atmosphere data like reviews, ratings, and pricing (higher billing rate
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: atmosphereDetail
 Aliases:
 
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReviewSort
+The sorting method to use when returning reviews.
+Can be set to most_relevant (default) or newest.
+
+```yaml
+Type: String
+Parameter Sets: atmosphereDetail
+Aliases:
+
+Required: False
+Position: Named
+Default value: MostRelevant
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
