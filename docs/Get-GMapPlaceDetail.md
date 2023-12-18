@@ -165,24 +165,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-Latitude and Longitude information can be easily retrieved using Invoke-GMapGeoCode
-
-If you provide faulty lat/long info the API call will default back to IP based locationbias.
-
-Required parameters
-    place_id
-        A textual identifier that uniquely identifies a place
-Optional parameters
-    fields
-        Billing Categories
-            Basic - no charge
-                address_component, adr_address, business_status, formatted_address, geometry, icon, icon_mask_base_uri, icon_background_color, name, permanently_closed (deprecated), photo, place_id, plus_code, type, url, utc_offset, vicinity
-            Contact
-                formatted_phone_number, international_phone_number, opening_hours, website
-            Atmosphere
-                price_level, rating, review, user_ratings_total.
-    language
-    region
+- Use Invoke-GMapGeoCode if you need to retrieve latitude and longitude information.
+- If you provide faulty lat/long info the API call will default back to IP based locationbias.
 
 Direct API Example:
     https://maps.googleapis.com/maps/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number&place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&key=YOUR_API_KEY

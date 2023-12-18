@@ -44,27 +44,8 @@
     This function does not support pipeline input because of this issue:
         https://github.com/PowerShell/PowerShell/issues/10188
 
-    LAT LONG LOOKUP
-        Required parameters
-            address
-            key
-        Optional parameters
-            bounds
-            language
-            region
-            components
-        Direct API Example:
-            https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-    Reverse geocoding (address lookup)
-        Required parameters
-            latlng
-            key
-        Optional parameters
-            language
-            result_type
-            location_type
-        Direct API Example:
-            https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+    Direct API Example:
+        https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
 
     Ensure you have a valid Google API Key.
         How to get a Google API Key:
@@ -130,6 +111,29 @@ function Invoke-GMapGeoCode {
         [ValidateNotNullOrEmpty()]
         [string]$GoogleAPIKey
     )
+
+    <#
+        API Notes:
+            LAT LONG LOOKUP
+                Required parameters
+                    address
+                    key
+                Optional parameters
+                    bounds
+                    language
+                    region
+                    components
+                Direct API Example:
+                    https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
+            Reverse geocoding (address lookup)
+                Required parameters
+                    latlng
+                    key
+                Optional parameters
+                    language
+                    result_type
+                    location_type
+    #>
 
     $uri = '{0}{1}' -f $googleMapsBaseURI, 'geocode/json?'
     Write-Debug -Message ('Base function URI: {0}' -f $uri)

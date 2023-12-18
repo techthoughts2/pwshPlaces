@@ -83,22 +83,7 @@
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-    Latitude and Longitude information can be easily retrieved using Invoke-GMapGeoCode
-
-    Required parameters
-        location
-            This must be specified as latitude,longitude.
-    Optional parameters
-        keyword
-        language
-        maxprice
-        minprice
-        name
-        opennow
-        radius
-        rankby
-        type
-        sessiontoken
+    - Use Invoke-GMapGeoCode if you need to retrieve latitude and longitude information.
 
     Direct API Example:
         https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=YOUR_API_KEY
@@ -202,6 +187,24 @@ function Search-GMapNearbyPlace {
         [ValidateNotNullOrEmpty()]
         [string]$GoogleAPIKey
     )
+
+    <#
+        API Notes:
+            Required parameters
+                location
+                    This must be specified as latitude,longitude.
+            Optional parameters
+                keyword
+                language
+                maxprice
+                minprice
+                name
+                opennow
+                radius
+                rankby
+                type
+                sessiontoken
+    #>
 
     $uri = '{0}{1}' -f $googleMapsBaseURI, 'place/nearbysearch/json?'
     Write-Debug -Message ('Base function URI: {0}' -f $uri)

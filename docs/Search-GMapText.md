@@ -442,19 +442,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-Latitude and Longitude information can be easily retrieved using Invoke-GMapGeoCode
-
-Required parameters
-    query
-Optional parameters
-    language
-    location
-    maxprice
-    minprice
-    opennow
-    radius
-    region
-    type
+- Use Invoke-GMapGeoCode if you need to retrieve latitude and longitude information.
+- Nearby Search and Text Search return all of the available data fields for the selected place
+    (a subset of the supported fields), and you will be billed accordingly.
+    There is no way to constrain Nearby Search or Text Search to only return specific fields.
+    To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.
+-  Use of the AllSearchResults parameter does increase the number of API calls.
 
 Direct API Example:
     https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants%20in%20Sydney&key=YOUR_API_KEY
@@ -462,11 +455,6 @@ Direct API Example:
 Ensure you have a valid Google API Key.
     How to get a Google API Key:
         https://pwshplaces.readthedocs.io/en/latest/GoogleMapsAPI/#how-to-get-a-google-maps-api-key
-
-Nearby Search and Text Search return all of the available data fields for the selected place (a subset of the supported fields), and you will be billed accordingly There is no way to constrain Nearby Search or Text Search to only return specific fields.
-To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.
-
-Use of the AllSearchResults parameter does increase the number of API calls.
 
 This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 
