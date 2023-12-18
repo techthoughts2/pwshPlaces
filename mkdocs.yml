@@ -92,7 +92,7 @@ nav:
     - Bing Maps API Key: BingMapsAPI
     - Google Maps API Key: GoogleMapsAPI.md
   - Practical Use examples:
-    - Bing Maps Examples: pwshPlaces-Bing-Maps-examples.md
-    - Google Maps Examples: pwshPlaces-Google-Maps-examples.md
+    - Bing Maps Examples: pwshPlaces-Bing-Maps-Examples.md
+    - Google Maps Examples: pwshPlaces-Google-Maps-Examples.md
   - FAQ: pwshPlaces-FAQ.md
   - Change Log: CHANGELOG.md
