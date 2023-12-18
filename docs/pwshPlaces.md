@@ -33,7 +33,7 @@ Converts addresses to geographic coordinates and vice versa using Google's Geoco
 Nearby Search lets you search for places of interest within a specified area using Bing Maps API.
 
 ### [Search-GMapNearbyPlace](Search-GMapNearbyPlace.md)
-Nearby Search lets you search for places within a specified area. You can refine your search request by supplying keywords, type of place you are searching for and other parameters.
+Searches for places within a specified area using Google Maps Nearby Search.
 
 ### [Search-GMapText](Search-GMapText.md)
 A text search that returns information about a set of places based on provided string.

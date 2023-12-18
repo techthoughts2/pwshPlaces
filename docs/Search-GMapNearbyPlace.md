@@ -8,8 +8,7 @@ schema: 2.0.0
 # Search-GMapNearbyPlace
 
 ## SYNOPSIS
-Nearby Search lets you search for places within a specified area.
-You can refine your search request by supplying keywords, type of place you are searching for and other parameters.
+Searches for places within a specified area using Google Maps Nearby Search.
 
 ## SYNTAX
 
@@ -35,10 +34,12 @@ Search-GMapNearbyPlace -Latitude <String> -Longitude <String> -Radius <String> [
 ```
 
 ## DESCRIPTION
-Performs a nearby search request with provided parameters.
-Nearby search is useful for finding places near a specific geographic location.
-By default, 20 results are returned from a standard search.
-You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
+The Search-GMapNearbyPlace function utilizes Google's Places API to perform nearby searches for places
+around a specified geographic location.
+By default, it returns 20 results, which can be increased to a
+maximum of 60 using the AllSearchResults switch.
+The function allows refining the search based on keywords,
+place types, and other criteria.
 
 ## EXAMPLES
 
@@ -47,55 +48,49 @@ You can increase this to a maximum of 60 places results by providing the AllSear
 Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a nearby search and returns all places types near provided coordinates within a range of 5000 meters.
+Searches for places within a 5000-meter radius of the specified coordinates.
 
 ### EXAMPLE 2
 ```
 Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 10000 -RankByProminence -Keyword 'butcher' -Type store -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a nearby search and returns all store place types that match the keyword of butcher within the specified geographic range.
+Searches for stores related to the keyword 'butcher' within a 10000-meter radius, sorted by prominence.
 
 ### EXAMPLE 3
 ```
 Search-GMapNearbyPlace -Latitude '38.9072' -Longitude '-77.0369' -Radius 10000 -RankByProminence -Type embassy -AllSearchResults -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a nearby search and returns all embassy place types near provided coordinates within a range of 10000 meters.
-The maximum of 60 places results is returned.
+Searches for embassies within a 10000-meter radius, returning up to 60 results.
 
 ### EXAMPLE 4
 ```
 Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3 -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a nearby search and returns only restaurants places near provided coordinates within a range of 1000 meters.
-Restaurant will be in the cheap to moderately expensive price range.
+Searches for restaurants within 1000 meters in the affordable to moderately expensive price range.
 
 ### EXAMPLE 5
 ```
 Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -RankByDistance -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a nearby search and returns all places types near provided coordinates ranked by distance from the coordinates.
+Searches for places near the specified coordinates, ranked by distance.
 
 ### EXAMPLE 6
 ```
 Search-GMapNearbyPlace -Latitude '26.1202' -Longitude '127.7025' -Radius 10000 -RankByProminence -Type amusement_park -Language en -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a nearby search and returns only amusement parks places near provided coordinates within a range of 10000 meters.
-Results are ranked by prominence and returned in English.
+Searches for amusement parks within a 10000-meter radius, results in English, sorted by prominence.
 
 ### EXAMPLE 7
 ```
 Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -RankByProminence -Keyword 'pasta' -Type restaurant -Language en -OpenNow -MaxPrice 4 -MinPrice 2 -AllSearchResults -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a nearby search and returns only restaurants places near provided coordinates that match the keyword of pasta within a range of 5000 meters.
-Restaurant will be in the moderately expensive to expensive price range.
-Only places that are currently opened are returned.
-Results will be returned in English.
+Searches for pasta restaurants within 5000 meters, open now, priced mid to high, returning all results in English.
 
 ### EXAMPLE 8
 ```
@@ -116,10 +111,7 @@ $searchGMapNearbyPlaceSplat = @{
 Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
 ```
 
-Performs a nearby search and returns only restaurants places near provided coordinates that match the keyword of pasta within a range of 5000 meters.
-Restaurant will be in the moderately expensive to expensive price range.
-Only places that are currently opened are returned.
-Results will be returned in English.
+Searches for pasta restaurants within 5000 meters, open now, priced mid to high, returning all results in English.
 
 ## PARAMETERS
 

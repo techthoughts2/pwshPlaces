@@ -29,10 +29,18 @@
         "Krause's",
         "latlng",
         "locationbias",
+        "maxprice",
+        "minprice",
+        "nearbysearch",
+        "opennow",
+        "pagetoken",
         "phme",
         "phonenumber",
         "pwsh",
+        "rankby",
         "Rqst",
+        "sessiontoken",
+        "succcessful",
         "textquery",
         "Yxhme"
     ]
