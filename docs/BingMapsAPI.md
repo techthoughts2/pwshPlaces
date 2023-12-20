@@ -2,15 +2,6 @@
 
 ***[pwshPlaces](https://github.com/techthoughts2/pwshPlaces)** includes Bing Maps features and content; use of Bing Maps features and content is subject to the [terms of service](https://www.microsoft.com/maps/product/terms.html) and [Microsoft privacy policy](https://privacy.microsoft.com/en-us/privacystatement).*
 
-- [Bing Maps API](#bing-maps-api)
-  - [Bing Maps API Key](#bing-maps-api-key)
-    - [How to get a Bing Maps API Key](#how-to-get-a-bing-maps-api-key)
-      - [1. Create a new Bing maps dev account](#1-create-a-new-bing-maps-dev-account)
-      - [2. Create a Bing Maps Basic API Key](#2-create-a-bing-maps-basic-api-key)
-    - [Monitoring Bing Maps API usage](#monitoring-bing-maps-api-usage)
-    - [Understanding Bing Maps API pricing](#understanding-bing-maps-api-pricing)
-  - [API Caching](#api-caching)
-
 ## Bing Maps API Key
 
 **[pwshPlaces](https://github.com/techthoughts2/pwshPlaces)** requires a Bing Maps API key to run Bing Maps functions.
@@ -54,36 +45,3 @@ Visit the [Bing Maps Dev Center Portal Summary Report](https://www.bingmapsporta
 
 - [Bing Maps Licensing](https://www.microsoft.com/maps/licensing/licensing.aspx)
 - [Bing Maps Licensing Options](https://www.microsoft.com/en-us/maps/licensing/licensing-options)
-
-## API Caching
-
-There doesn't seem to be anything in the [terms of service](https://www.microsoft.com/maps/product/terms.html) the explicitly forbids local caching of Bing Maps data.
-
-This means that doing something like this should be fine:
-
-```powershell
-#--------------------------------------------------------------
-# scrape and locally cache local restaurants
-Import-Module Convert
-Import-Module pwshPlaces
-
-$scrapePath = $env:Temp
-
-$locale = Invoke-BingGeoCode -Query 'New Braunfels, TX' -BingMapsAPIKey $env:BingAPIKey
-
-$searchBingNearbyPlaceSplat = @{
-    Type           = 'Restaurants'
-    PointLatitude  = $locale.Latitude
-    PointLongitude = $locale.Longitude
-    MaxResults     = 20
-    BingMapsAPIKey = $env:BingAPIKey
-}
-$areaRestaurants = Search-BingNearbyPlace @searchBingNearbyPlaceSplat
-
-ConvertTo-Clixml -InputObject $areaRestaurants -Depth 100 | Out-File "$scrapePath\localRestaurants.xml"
-#--------------------------------------------------------------
-# where should we eat today?
-$myLocalRestaurants = Get-Content -Path "$scrapePath\localRestaurants.xml" -Raw | ConvertFrom-Clixml
-
-Get-Random $myLocalRestaurants
-```

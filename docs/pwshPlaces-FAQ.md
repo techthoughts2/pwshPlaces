@@ -1,35 +1,29 @@
 # pwshPlaces - FAQ
 
-- [pwshPlaces - FAQ](#pwshplaces---faq)
-  - [FAQs](#faqs)
-    - [Do I need an API key us to use pwshPlaces](#do-i-need-an-api-key-us-to-use-pwshplaces)
-    - [Do I need a Google Maps API key and a Bing Maps API key](#do-i-need-a-google-maps-api-key-and-a-bing-maps-api-key)
-    - [How do I get a Maps API key](#how-do-i-get-a-maps-api-key)
-    - [Does the Google Maps API key cost money](#does-the-google-maps-api-key-cost-money)
-    - [Does the Bing Maps API key cost money](#does-the-bing-maps-api-key-cost-money)
-
 ## FAQs
 
-### Do I need an API key us to use pwshPlaces
+### API Keys
 
-Yes. pwshPlaces requires API keys in order to make calls to the various Map services.
+#### Do I need an API key us to use pwshPlaces
 
-### Do I need a Google Maps API key and a Bing Maps API key
+Yes. pwshPlaces requires an API key in order to make calls to the various map services.
 
-No. If you prefer one Map provider over another you can just get that API key. For example, if you prefer Google Maps you can just get a Google Maps API key and load that into the ```$GoogleAPIKey``` variable. This enables only the ```GMap``` functions in pwshPlaces. You will be unable to use the ```Bing``` functions. To unlock all functions inside pwshPlaces you will require both API keys.
+#### Do I need both a Google Maps API key and a Bing Maps API key
 
-### How do I get a Maps API key
+No. If you prefer one Map provider over another you can just get that API key. For example, if you prefer Google Maps you can just get a Google Maps API key and load that into the `$GoogleAPIKey` variable. This enables only the `GMap` functions in pwshPlaces. You will be unable to use the `Bing` functions. To unlock all functions inside pwshPlaces you will require both API keys.
 
-- [How to get a Google Maps API Key](GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
-- [How to get a Bing Maps API Key](BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
+#### How do I get a Maps API key
 
-### Does the Google Maps API key cost money
+- [How to get a Google Maps API Key](GoogleMapsAPI.md)
+- [How to get a Bing Maps API Key](BingMapsAPI.md)
+
+#### Does the Google Maps API key cost money
 
 The Google Maps API has $200 free monthly usage for all users. This should be more than sufficient for most people.
 
 You can dive into more details by [Understanding Google Maps API pricing](GoogleMapsAPI.md#understanding-google-maps-api-pricing)
 
-### Does the Bing Maps API key cost money
+#### Does the Bing Maps API key cost money
 
 The Basic API key gives you up to 125,000 billable transactions per calendar year and less than 50,000 cumulative billable transactions with any 24-hour period. This should be more than sufficient for most people.
 

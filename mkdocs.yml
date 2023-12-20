@@ -75,6 +75,11 @@ theme:
     #     name: Switch to light mode
 nav:
   - Home: index.md
+  - Usage:
+    - Bing Maps Basics: pwshPlaces-Bing-Maps-Basics.md
+    - Bing Maps Advanced: pwshPlaces-Bing-Maps-Advanced.md
+    - Google Maps Basics: pwshPlaces-Google-Maps-Basics.md
+    - Google Maps Advanced: pwshPlaces-Google-Maps-Advanced.md
   - Functions:
     - Bing:
       - Find-BingPlace: Find-BingPlace.md
@@ -91,8 +96,5 @@ nav:
   - Getting An API Key:
     - Bing Maps API Key: BingMapsAPI
     - Google Maps API Key: GoogleMapsAPI.md
-  - Practical Use Examples:
-    - Bing Maps Examples: pwshPlaces-Bing-Maps-Examples.md
-    - Google Maps Examples: pwshPlaces-Google-Maps-Examples.md
   - FAQ: pwshPlaces-FAQ.md
   - Change Log: CHANGELOG.md
