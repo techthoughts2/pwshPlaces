@@ -14,34 +14,29 @@ Enhancements | [![Build Status Windows PowerShell Enhancements](https://github.c
 
 ## Synopsis
 
-pwshPlaces is a PowerShell module that can help you discover places and search for points of interest around the globe.
+pwshPlaces is a PowerShell module that integrates with leading mapping services like Google Maps and Bing Maps. Offering a suite of commands for interacting with maps, it enables you to perform searches, read reviews, and retrieve detailed information about locations worldwide. From discovering nearby restaurants to geocoding addresses, pwshPlaces equips you with a wealth of geographical data, accessible through simple and intuitive PowerShell commands.
 
 ## Description
 
-pwshPlaces enables you to leverage the Google Maps and/or Bing Maps API(s) to perform a variety of maps related tasks using PowerShell:
+pwshPlaces enables you to leverage the Google Maps and/or Bing Maps APIs to perform a variety of map-related tasks using PowerShell. This module simplifies accessing and analyzing geographical data with user-friendly commands, empowering users to search for locations, read reviews, and perform geocoding effortlessly. Ideal for discovery, travel planning, or enhancing automation scripts, pwshPlaces transforms complex mapping data into actionable insights using PowerShell.
 
-- Search for places, entities, addresses, and other points of interest
-- Discover locations near your or near a specified place
-- Easily perform Geocoding and reverse Geocoding actions
-- Get detailed place information including opening hours, website information, and contact information
+### Features
 
-[pwshPlaces](docs/pwshPlaces.md) provides the following functions:
+- Support for both Bing Maps and Google Maps
+- *Find Places with Ease*: Use commands to locate any place, from restaurants to landmarks, using simple queries.
+- *Open-Text Search Capabilities*: Harness the power of flexible, text-based searches. Whether it’s "coffee shops in Amsterdam" or "art galleries in New York", get targeted results swiftly.
+- *Discover Nearby Points of Interest*: Explore what's around you, be it parks, eateries, or museums, based on your current or specified location.
+- *Efficient Geocoding and Reverse Geocoding*: Convert addresses to coordinates and vice versa, integrating geographical context into your data.
+- *In-depth Place Details*: Dive deeper into specific locations to access comprehensive information like contact details, ratings, reviews, and more.
+- *Time Zone Information*: Stay informed about the time zones of different places, making scheduling and planning across time zones simpler.
+- *Rapid Comparison and Decision Making*: Compare ratings, prices, and other key information quickly and make informed decisions without wading through dense web pages.
+- *Customizable Search Parameters*: Tailor your searches with various parameters like radius, price level, and types to get precisely what you're looking for.
 
-- [Find-BingPlace](docs/Find-BingPlace.md)
-- [Find-BingTimeZone](docs/Find-BingTimeZone.md)
-- [Find-GMapPlace](docs/Find-GMapPlace.md)
-- [Get-GMapPlaceDetail](docs/Get-GMapPlaceDetail.md)
-- [Invoke-BingGeoCode](docs/Invoke-BingGeoCode.md)
-- [Invoke-GMapGeoCode](docs/Invoke-GMapGeoCode.md)
-- [Search-BingNearbyPlace](docs/Search-BingNearbyPlace.md)
-- [Search-GMapNearbyPlace](docs/Search-GMapNearbyPlace.md)
-- [Search-GMapText](docs/Search-GMapText.md)
+## Getting Started
 
-## Why
+### Documentation
 
-The Google Maps and Bing Maps API require very specific formatting and criteria for API map interaction. The goal of this project is to abstract that complexity away in favor of simple and direct PowerShell commands.
-
-## Installation
+Documentation for pwshPlaces is available at: [https://pwshPlaces.readthedocs.io](https://pwshPlaces.readthedocs.io)
 
 ### Prerequisites
 
@@ -54,11 +49,10 @@ Both of these Map API keys are *easy to create* and have *no cost* pricing tiers
 - [How to get a Google Maps API Key](docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
 - [How to get a Bing Maps API Key](docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
 
-### Install pwshPlaces
+### Installation
 
 ```powershell
-# Install pwshPlaces from the PowerShell Gallery
-Install-Module -Name pwshPlaces -Repository PSGallery -Scope CurrentUser
+Install-Module -Name 'pwshPlaces' -Repository PSGallery -Scope CurrentUser
 ```
 
 ## Quick start
@@ -113,23 +107,14 @@ Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $b
 #-------------------------------------------------------------------------------------
 ```
 
-## FAQ
-
-**[pwshPlaces - FAQ](docs/pwshPlaces-FAQ.md)**
-
-## Author
-
-[Jake Morrison](https://twitter.com/JakeMorrison) - [https://www.techthoughts.info/](https://www.techthoughts.info/)
-
 ## Notes
-
-Read more about:
-
-- [Google Maps API](docs/GoogleMapsAPI.md)
-- [Bing Maps API](docs/BingMapsAPI.md)
 
 This PowerShell project was created with [Catesta](https://github.com/techthoughts2/Catesta).
 
-## Changelog
+## Contributing
 
-Reference the [Changelog](.github/CHANGELOG.md)
+If you'd like to contribute to pwshPlaces, please see the [contribution guidelines](.github/CONTRIBUTING.md).
+
+## License
+
+This project is [licensed under the MIT License](LICENSE).
