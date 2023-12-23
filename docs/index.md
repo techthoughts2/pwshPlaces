@@ -26,8 +26,8 @@ To use pwshPlaces you will require a Google Maps or Bing Maps API key. To use al
 
 Both of these Map API keys are *easy to create* and have *no cost* pricing tiers which should meet your needs. I have provided detailed guides on how to get your API keys:
 
-- [How to get a Google Maps API Key](docs/GoogleMapsAPI.md)
-- [How to get a Bing Maps API Key](docs/BingMapsAPI.md)
+- [How to get a Google Maps API Key](GoogleMapsAPI.md)
+- [How to get a Bing Maps API Key](BingMapsAPI.md)
 
 ### Installation
 
