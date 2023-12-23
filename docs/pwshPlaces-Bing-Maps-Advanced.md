@@ -1,6 +1,6 @@
 # pwshPlaces - Bing Maps Advanced
 
-*Consider exploring the [pwshPlaces Bing Maps](pwshPlaces-Bing-Maps-Basics) Basics page first to gain a comprehensive understanding of the tool and its features before proceeding to the advanced page.*
+*Consider exploring the [pwshPlaces Bing Maps Basics](pwshPlaces-Bing-Maps-Basics.md) page first to gain a comprehensive understanding of the tool and its features before proceeding to the advanced page.*
 
 ## API Caching
 

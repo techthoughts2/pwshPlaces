@@ -21,7 +21,7 @@ Example: `Find-BingPlace`
 Description: This command searches for "Krause's cafe", returning information about the place including its location, based on the user's IP location bias.
 
 ```powershell
-Find-BingPlace -Query "Moriyama Sushi" -BingMapsAPIKey $bingAPIKey
+Find-BingPlace -Query 'Moriyama Sushi' -BingMapsAPIKey $bingAPIKey
 
 name             : Moriyama Sushi
 FormattedAddress : 1823 Eastlake Ave E Ste 153, Seattle, Wa, 98102

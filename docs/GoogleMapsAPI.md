@@ -2,18 +2,6 @@
 
 ***[pwshPlaces](https://github.com/techthoughts2/pwshPlaces)** includes Google Maps features and content; use of Google Maps features and content is subject to the [terms of service](https://cloud.google.com/maps-platform/terms/) and [Google privacy policy](https://www.google.com/policies/privacy/).*
 
-- [Google Maps API](#google-maps-api)
-  - [Google Maps API Key](#google-maps-api-key)
-    - [How to get a Google Maps API Key](#how-to-get-a-google-maps-api-key)
-      - [1. Create a new GCP project](#1-create-a-new-gcp-project)
-      - [2. Enable the Places API and the Geocoding API](#2-enable-the-places-api-and-the-geocoding-api)
-      - [3. Create API Key](#3-create-api-key)
-      - [4. Restrict to places API](#4-restrict-to-places-api)
-      - [5. Enable Billing on the Google Cloud project](#5-enable-billing-on-the-google-cloud-project)
-    - [Monitoring Google Maps API usage](#monitoring-google-maps-api-usage)
-    - [Understanding Google Maps API pricing](#understanding-google-maps-api-pricing)
-  - [API Caching](#api-caching)
-
 ## Google Maps API Key
 
 **[pwshPlaces](https://github.com/techthoughts2/pwshPlaces)** requires a Google API key to run Google maps functions.
@@ -44,16 +32,20 @@ Log into your [GCP console](https://console.cloud.google.com/home/) and create a
 #### 2. Enable the Places API and the Geocoding API
 
 - Top left Navigation Menu
-    - Other Google Solutions
-        - Google Maps Platform
-            - Maps APIs and Services
-                - Places API - --Enable--
+    - Products & solutions
+        - All products
+            - Other Google products
+                - Google Maps Platform
+                    - Maps APIs and Services
+                        - Places API - --Enable--
 - Google Maps Platform
-    - APIs
+    - APIs & Services
         - Additional APIs
+            - Places API - --Enable--
             - Geocoding API - --Enable--
 
 ![Google Cloud (GCP) Top Left Navigation Menu](assets/google_cloud_top_left_navigation_menu.PNG 'GCP Navigation Menu')
+
 ![Google Cloud (GCP) Google Maps Platform](assets/gcp_google_maps_platform.PNG 'GCP Google Maps Platform')
 ![Google Cloud (GCP) Google Maps Platform Maps APIs and Services](assets/google_maps_platform_maps_api_and_services.PNG 'Google Maps Platform Maps APIs and Services')
 ![Google Maps Places API](assets/gcp_enable_places_api.PNG 'Google Maps Places API')
@@ -62,7 +54,7 @@ Log into your [GCP console](https://console.cloud.google.com/home/) and create a
 #### 3. Create API Key
 
 - Google Maps Platform
-    - Credentials
+    - Keys & Credentials
         - Create Credentials
             - API key
 
@@ -73,8 +65,9 @@ Log into your [GCP console](https://console.cloud.google.com/home/) and create a
 Restrict API access to just the two enabled
 
 - Google Maps Platform
-    - Credentials
-        - Restrict API to secure account
+    - Keys & Credentials
+        - Click on your created API key
+            - Restrict API to just the two APIs to better secure it
 
 ![GCP API Restrict Access](assets/gcp_api_services_restrict_api_key.PNG 'API Restrict Access')
 
@@ -101,42 +94,3 @@ Additional reading:
 - [Places product API pricing](https://developers.google.com/maps/billing/gmp-billing#places-product)
 - [Places API Usage and Billing](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing)
     - [Places SKU breakdown cost data](https://developers.google.com/maps/billing/gmp-billing#basic-data)
-
-## API Caching
-
-IAW with the [terms of service](https://cloud.google.com/maps-platform/terms/):
-
-> Pre-Fetching, Caching, or Storage of Content
-Applications using the Places API are bound by the Google Maps Platform Terms of Service. Section 3.2.3(a) and (b) of the terms states that you must not pre-fetch, index, store, or cache any Content except under the limited conditions stated in the terms.
-Note that the place ID, used to uniquely identify a place, is exempt from the caching restriction. You can therefore store place ID values indefinitely. The place ID is returned in the place_id field in Places API responses.
-
-This means that doing something like the following is not permitted:
-
-```powershell
-#--------------------------------------------------------------
-# scrape and locally cache up to 60 local restaurants
-Import-Module Convert
-Import-Module pwshPlaces
-
-$scrapePath = $env:Temp
-
-$locale = Invoke-GMapGeoCode -Address 'New Braunfels' -GoogleAPIKey $env:GoogleAPIKey
-
-$searchGMapNearbyPlaceSplat = @{
-    Latitude         = $locale.Latitude
-    Longitude        = $locale.Longitude
-    Radius           = 10000
-    RankByProminence = $true
-    Type             = 'restaurant'
-    AllSearchResults = $true
-    GoogleAPIKey     = $env:GoogleAPIKey
-}
-$areaRestaurants = Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
-
-ConvertTo-Clixml -InputObject $areaRestaurants -Depth 100 | Out-File "$scrapePath\localRestaurants.xml"
-#--------------------------------------------------------------
-# where should we eat today?
-$myLocalRestaurants = Get-Content -Path "$scrapePath\localRestaurants.xml" -Raw | ConvertFrom-Clixml
-
-Get-Random $myLocalRestaurants
-```
