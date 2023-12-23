@@ -1,42 +1,54 @@
 ﻿<#
 .SYNOPSIS
-    Retrieve time zone information for any point on Earth
+    Retrieves time zone information for a specific location on Earth.
 .DESCRIPTION
-    Given a pair of coordinates or a place name query the Time Zone API will return local time zone and daylight savings (DST) information for that location.
+    The Find-BingTimeZone function queries the Bing Maps Time Zone API to obtain local
+    time zone and daylight saving time (DST) information based on either geographic coordinates
+    or a place name. This function is useful for determining the time zone of any location,
+    including whether DST is observed and the current local time.
 .EXAMPLE
     Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey
 
-    Returns Time Zone information for matches found for the provided query.
+    Retrieves time zone information for the location matching the query 'New Braunfels, TX'.
+.EXAMPLE
+    Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey -IncludeDSTRules
+
+    Retrieves time zone information for the location matching the query 'New Braunfels, TX', including DST rules.
 .EXAMPLE
     Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $bingAPIKey
 
-    Returns Time Zone information for the provided coordinates.
+    Returns time zone information for the specified latitude and longitude coordinates.
 .PARAMETER Query
-    A string that contains information about a location, such as an address or landmark name.
+    Specifies the search term string, such as an address, business name, or landmark name.
 .PARAMETER PointLatitude
-    Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
+    Specifies the latitude for location-based searches. Single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
+    Specifies the longitude for location-based searches. Single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER RegionBias
     The region code, specified as a ccTLD ("top-level domain") two-character value.
 .PARAMETER Language
     The language in which to return results.
 .PARAMETER BingMapsAPIKey
     Bing Maps API Key
+.PARAMETER IncludeDSTRules
+    Include Daylight Saving Time (DST) rules in the search results. Returns additional information about the DST observance and rules applicable to the places found in the search.
 .OUTPUTS
     Bing.TimeZone
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-    Example:
+    Direct API Example:
         https://dev.virtualearth.net/REST/v1/TimeZone/{point}?datetime={datetime_utc}&key={BingMapsAPIKey}
 
-    How to get a Bing Maps API Key:
-        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+    Ensure you have a valid Bing Maps API Key.
+        How to get a Bing Maps API Key:
+            https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingTimeZone.md
+    https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone
+.LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/timezone/find-time-zone
 .LINK
@@ -78,7 +90,11 @@ function Find-BingTimeZone {
         [Parameter(Mandatory = $true,
             HelpMessage = 'Bing Maps API Key')]
         [ValidateNotNullOrEmpty()]
-        [string]$BingMapsAPIKey
+        [string]$BingMapsAPIKey,
+
+        [Parameter(Mandatory = $false,
+            HelpMessage = 'Include DST rules')]
+        [switch]$IncludeDSTRules
     )
 
     Write-Debug -Message ($PSCmdlet.ParameterSetName)
@@ -101,7 +117,7 @@ function Find-BingTimeZone {
             $uri = '{0}{1}' -f $bingMapsBaseURI, $latLong
             Write-Debug -Message ('Base function URI: {0}' -f $uri)
         } #point
-    } #switch_parametersetname
+    } #switch_ParameterSetName
 
     if ($RegionBias) {
         Write-Debug -Message ('RegionBias: {0}' -f $RegionBias)
@@ -112,6 +128,11 @@ function Find-BingTimeZone {
         Write-Debug -Message ('Language: {0}' -f $Language)
         $fLanguage = '&culture={0}' -f $Language
         $uri += $fLanguage
+    }
+    if ($IncludeDSTRules) {
+        Write-Debug -Message 'IncludeDSTRules specified'
+        $fIncludeDSTRules = '&includeDstRules={0}' -f $IncludeDSTRules
+        $uri += $fIncludeDSTRules
     }
 
     Write-Verbose -Message ('Querying Bing API: {0}' -f $uri)
@@ -132,7 +153,7 @@ function Find-BingTimeZone {
     }
 
     if ($results.statusDescription -ne 'OK') {
-        Write-Warning -Message 'Did not get a succcessful return from Bing Location API endpoint'
+        Write-Warning -Message 'Did not get a successful return from Bing Location API endpoint'
         $finalResults = $results
     }
     elseif (-not ($results.resourceSets.estimatedTotal -ge 1)) {

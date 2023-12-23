@@ -1,35 +1,36 @@
 ﻿<#
 .SYNOPSIS
-    Nearby Search lets you search for different place types within a specified area.
+    Nearby Search lets you search for places of interest within a specified area using Bing Maps API.
 .DESCRIPTION
-    Performs a nearby search request with provided parameters.
-    Nearby search is useful for finding place types near a specific geographic location.
-    By default the location bias is IP based.
-    Location bias can be controlled via parameters.
+    The Search-BingNearbyPlace function conducts a nearby search for various place types, such as attractions,
+    restaurants, or parks, within a specified geographic area. Users can define the search area using coordinates,
+    radius, or a rectangular area. By default, search results are biased based on the user's IP location,
+    but this can be customized using various geographic parameters.
+    Location bias and language can also be controlled via parameters.
 .EXAMPLE
     Search-BingNearbyPlace -Type Attractions -BingMapsAPIKey $bingAPIKey
 
-    Performs a nearby search biased by IP and returns Attraction places types.
+    Searches for attractions near the user's IP location.
 .EXAMPLE
     Search-BingNearbyPlace -Type Restaurants -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 
-    Performs a nearby search biased by IP and returns Restaurant places types with a maximum of 20 results returned.
+    Finds up to 20 restaurants near the user's IP location.
 .EXAMPLE
     Search-BingNearbyPlace -Type CafeRestaurants -PointLatitude '29.7049806' -PointLongitude '-98.068343' -BingMapsAPIKey $bingAPIKey
 
-    Performs a nearby search near the provided Lat/Long and returns CafeRestaurant places types.
+    Searches for cafe restaurants near the specified coordinates.
 .EXAMPLE
     Search-BingNearbyPlace -Type BreweriesAndBrewPubs -CircleLatitude '29.7049806' -CircleLongitude '-98.068343' -CircleRadius '5000' -BingMapsAPIKey $bingAPIKey
 
-    Performs a nearby search biased by circle lat/long/radius and returns Bars and Pubs places types.
+    Searches for breweries and brewpubs within a 5000-meter radius of the specified circle coordinates.
 .EXAMPLE
     Search-BingNearbyPlace -Type Parks -SouthLatitude '39.8592387' -WestLongitude '-75.295486' -NorthLatitude '40.0381942' -EastLongitude '-75.0064087' -BingMapsAPIKey $bingAPIKey
 
-    Performs a nearby search biased by rectangular two lat/lng pairs in decimal degrees, representing the south/west and north/east points of a rectangle. Park places types are returned.
+    Searches for parks within a rectangular area defined by two sets of latitude and longitude coordinates.
 .EXAMPLE
     Search-BingNearbyPlace -Type Museums -PointLatitude '29.7049806' -PointLongitude '-98.068343' -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 
-    Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in English with a maximum of 20 results returned.
+    Finds up to 20 museums near the specified coordinates, with results in English.
 .EXAMPLE
     $searchBingNearbyPlaceSplat = @{
         Type           = 'Museums'
@@ -41,13 +42,13 @@
     }
     Search-BingNearbyPlace @searchBingNearbyPlaceSplat
 
-    Performs a nearby search near the provided Lat/Long and returns Museum places types. Results are returned in English with a maximum of 20 results returned.
+    Finds up to 20 museums near the specified coordinates, with results in English.
 .PARAMETER Query
-    A string that contains information about a location, such as an address or landmark name.
+    Specifies the search term string, such as an address, business name, or landmark name.
 .PARAMETER PointLatitude
-    Prefer results in a specified area by specifying a single coordinate for the north–south position of a point on the Earth's surface.
+    Specifies the latitude for location-based searches. Single coordinate for the north–south position of a point on the Earth's surface.
 .PARAMETER PointLongitude
-    Prefer results in a specified area by specifying a single coordinate for the east–west position of a point on the Earth's surface.
+    Specifies the longitude for location-based searches. Single coordinate for the east–west position of a point on the Earth's surface.
 .PARAMETER CircleLatitude
     Prefer results in a specified area by specifying a radius plus lat/long - north–south position of a point on the Earth's surface.
 .PARAMETER CircleLongitude
@@ -73,15 +74,18 @@
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-    Example:
+    Direct API Example:
         https://dev.virtualearth.net/REST/v1/LocalSearch/?type={type_string_id_list}&userLocation={point}&key={BingMapsAPIKey}
 
-    How to get a Bing Maps API Key:
-        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+    Ensure you have a valid Bing Maps API Key.
+        How to get a Bing Maps API Key:
+            https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-BingNearbyPlace.md
+    https://pwshplaces.readthedocs.io/en/latest/Search-BingNearbyPlace
+.LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/local-search
 .LINK
@@ -208,7 +212,7 @@ function Search-BingNearbyPlace {
             $fLocationBias = '&userMapView={0}' -f [uri]::EscapeDataString($combinedRectangle)
             $uri += $fLocationBias
         } #rectangle
-    } #switch_parametersetname
+    } #switch_ParameterSetName
 
     if ($RegionBias) {
         Write-Debug -Message ('RegionBias: {0}' -f $RegionBias)
@@ -244,7 +248,7 @@ function Search-BingNearbyPlace {
     }
 
     if ($results.statusDescription -ne 'OK') {
-        Write-Warning -Message 'Did not get a succcessful return from Bing Location API endpoint'
+        Write-Warning -Message 'Did not get a successful return from Bing Location API endpoint'
         $finalResults = $results
     }
     elseif (-not ($results.resourceSets.estimatedTotal -ge 1)) {

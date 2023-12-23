@@ -9,14 +9,17 @@ on:
   push:
     paths-ignore:
       - '**.md'
-      - 'media/**'
+      - 'docs/**'
       - 'LICENSE'
+    branches-ignore:
+      - doctesting
   pull_request:
     paths-ignore:
       - '**.md'
-      - 'media/**'
+      - 'docs/**'
       - 'LICENSE'
-
+    branches-ignore:
+      - doctesting
 jobs:
   test:
     name: Run Tests
@@ -25,7 +28,7 @@ jobs:
       fail-fast: false
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Display the path
       shell: pwsh
       run: echo ${env:PATH}

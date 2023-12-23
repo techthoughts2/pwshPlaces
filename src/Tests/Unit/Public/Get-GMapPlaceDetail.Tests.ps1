@@ -43,7 +43,7 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #endMock
                 Get-GMapPlaceDetail -PlaceID 'ChIJE43gTHK9XIYRleSxiXqF6GU' -Contact -GoogleAPIKey $googleAPIKey
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
@@ -76,11 +76,13 @@ InModuleScope 'pwshPlaces' {
                     $Uri | Should -BeLike '*formatted_phone_number*'
                     $Uri | Should -BeLike '*price_level*'
                     $Uri | Should -BeLike '*region=*'
+                    $Uri | Should -BeLike '*reviews_sort=newest*'
                 } -Verifiable
                 $getGMapPlaceDetailSplat = @{
                     PlaceID      = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
                     Contact      = $true
                     Atmosphere   = $true
+                    ReviewSort   = 'Newest'
                     Language     = 'en'
                     RegionBias   = 'us'
                     GoogleAPIKey = $googleAPIKey

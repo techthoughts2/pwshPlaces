@@ -1,31 +1,35 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingTimeZone.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone
 schema: 2.0.0
 ---
 
 # Find-BingTimeZone
 
 ## SYNOPSIS
-Retrieve time zone information for any point on Earth
+Retrieves time zone information for a specific location on Earth.
 
 ## SYNTAX
 
 ### textquery
 ```
 Find-BingTimeZone -Query <String> [-RegionBias <ccTLD>] [-Language <languages>] -BingMapsAPIKey <String>
- [<CommonParameters>]
+ [-IncludeDSTRules] [<CommonParameters>]
 ```
 
 ### Point
 ```
 Find-BingTimeZone -PointLatitude <String> -PointLongitude <String> [-RegionBias <ccTLD>]
- [-Language <languages>] -BingMapsAPIKey <String> [<CommonParameters>]
+ [-Language <languages>] -BingMapsAPIKey <String> [-IncludeDSTRules] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Given a pair of coordinates or a place name query the Time Zone API will return local time zone and daylight savings (DST) information for that location.
+The Find-BingTimeZone function queries the Bing Maps Time Zone API to obtain local
+time zone and daylight saving time (DST) information based on either geographic coordinates
+or a place name.
+This function is useful for determining the time zone of any location,
+including whether DST is observed and the current local time.
 
 ## EXAMPLES
 
@@ -34,19 +38,26 @@ Given a pair of coordinates or a place name query the Time Zone API will return 
 Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey
 ```
 
-Returns Time Zone information for matches found for the provided query.
+Retrieves time zone information for the location matching the query 'New Braunfels, TX'.
 
 ### EXAMPLE 2
+```
+Find-BingTimeZone -Query 'New Braunfels, TX' -BingMapsAPIKey $bingAPIKey -IncludeDSTRules
+```
+
+Retrieves time zone information for the location matching the query 'New Braunfels, TX', including DST rules.
+
+### EXAMPLE 3
 ```
 Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $bingAPIKey
 ```
 
-Returns Time Zone information for the provided coordinates.
+Returns time zone information for the specified latitude and longitude coordinates.
 
 ## PARAMETERS
 
 ### -Query
-A string that contains information about a location, such as an address or landmark name.
+Specifies the search term string, such as an address, business name, or landmark name.
 
 ```yaml
 Type: String
@@ -61,7 +72,8 @@ Accept wildcard characters: False
 ```
 
 ### -PointLatitude
-Prefer results in a specified area by specifying a single coordinate for the north-south position of a point on the Earth's surface.
+Specifies the latitude for location-based searches.
+Single coordinate for the north-south position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -76,7 +88,8 @@ Accept wildcard characters: False
 ```
 
 ### -PointLongitude
-Prefer results in a specified area by specifying a single coordinate for the east-west position of a point on the Earth's surface.
+Specifies the longitude for location-based searches.
+Single coordinate for the east-west position of a point on the Earth's surface.
 
 ```yaml
 Type: String
@@ -137,6 +150,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -IncludeDSTRules
+Include Daylight Saving Time (DST) rules in the search results.
+Returns additional information about the DST observance and rules applicable to the places found in the search.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -149,15 +178,18 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-Example:
+Direct API Example:
     https://dev.virtualearth.net/REST/v1/TimeZone/{point}?datetime={datetime_utc}&key={BingMapsAPIKey}
 
-How to get a Bing Maps API Key:
-    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+Ensure you have a valid Bing Maps API Key.
+    How to get a Bing Maps API Key:
+        https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingTimeZone.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Find-BingTimeZone.md)
+[https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone](https://pwshplaces.readthedocs.io/en/latest/Find-BingTimeZone)
+
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/)
 
 [https://docs.microsoft.com/bingmaps/rest-services/timezone/find-time-zone](https://docs.microsoft.com/bingmaps/rest-services/timezone/find-time-zone)
 

@@ -43,7 +43,7 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #endMock
                 Search-BingNearbyPlace -Type Restaurants -MaxResults 20 -BingMapsAPIKey $bingAPIKey
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
@@ -62,7 +62,7 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #endMock
                 Search-BingNearbyPlace -Type Attractions -BingMapsAPIKey $bingAPIKey
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 

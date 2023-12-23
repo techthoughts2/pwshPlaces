@@ -43,7 +43,7 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #endMock
                 Find-GMapPlace -Query 'cafe' -GoogleAPIKey $googleAPIKey
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 

@@ -43,7 +43,7 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #endMock
                 Find-BingPlace -Query 'cafe' -BingMapsAPIKey $bingAPIKey
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 
@@ -62,7 +62,7 @@ InModuleScope 'pwshPlaces' {
                     }
                 } #endMock
                 Find-BingPlace -Query 'cafe' -BingMapsAPIKey $bingAPIKey
-                Assert-MockCalled -CommandName Write-Warning -Times 1
+                Should -Invoke -CommandName Write-Warning -Times 1
                 Assert-VerifiableMock
             } #it
 

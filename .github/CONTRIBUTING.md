@@ -48,4 +48,4 @@ This project has a [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Licensing
 
-See the [LICENSE](LICENSE.txt) file for our project's licensing.
+See the [LICENSE](../LICENSE) file for our project's licensing.

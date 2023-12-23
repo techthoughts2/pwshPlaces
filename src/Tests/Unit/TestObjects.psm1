@@ -582,6 +582,8 @@ $geoGMapPlaceID = [PSCustomObject]@{
 
 #endregion
 
+#region search
+
 $nearbyGMap = [PSCustomObject]@{
     html_attributions = ''
     next_page_token   = 'toooooken'
@@ -974,6 +976,8 @@ $placeDetailsGMap = [PSCustomObject]@{
 
 #endregion
 
+#endregion
+
 #region BingMap
 
 #region GeoCode
@@ -1050,6 +1054,8 @@ $geoBingAddress = [PSCustomObject]@{
 
 #endregion
 
+#region search
+
 $findBingPlace = [PSCustomObject]@{
     authenticationResultCode = 'ValidCredentials'
     brandLogoUri             = 'http://dev.virtualearth.net/Branding/logo_powered_by.png'
@@ -1125,6 +1131,16 @@ $findBingTimeZone = [PSCustomObject]@{
                         timeZoneDisplayName = 'Central Daylight Time'
                         timeZoneDisplayAbbr = 'CDT'
                     }
+                    dstRule           = [PSCustomObject]@{
+                        dstStartMonth    = 'Mar'
+                        dstStartDateRule = 'Sun>=8'
+                        dstStartTime     = '2:00'
+                        dstAdjust1       = '1:00'
+                        dstEndMonth      = 'Nov'
+                        dstEndDateRule   = 'Sun>=1'
+                        dstEndTime       = '2:00'
+                        dstAdjust2       = '0'
+                    }
                 }
             }
         }
@@ -1157,6 +1173,16 @@ $findBingTimeZonePoint = [PSCustomObject]@{
                     timeZoneDisplayName = 'Central Daylight Time'
                     timeZoneDisplayAbbr = 'CDT'
                 }
+                dstRule           = [PSCustomObject]@{
+                    dstStartMonth    = 'Mar'
+                    dstStartDateRule = 'Sun>=8'
+                    dstStartTime     = '2:00'
+                    dstAdjust1       = '1:00'
+                    dstEndMonth      = 'Nov'
+                    dstEndDateRule   = 'Sun>=1'
+                    dstEndTime       = '2:00'
+                    dstAdjust2       = '0'
+                }
             }
         }
     }
@@ -1164,6 +1190,8 @@ $findBingTimeZonePoint = [PSCustomObject]@{
     statusDescription        = 'OK'
     traceId                  = 'xxxxxxxxxxxxxxxxx|XXXXXXX|0.0.0.1|Ref A:XXXXXXXXXXXXX Ref B: XXXXXXXXX Ref C: 2021-10-06T03:08:54Z'
 }
+
+#endregion
 
 #endregion
 

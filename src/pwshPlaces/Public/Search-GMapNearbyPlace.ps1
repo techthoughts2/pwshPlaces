@@ -1,39 +1,39 @@
 ﻿<#
 .SYNOPSIS
-    Nearby Search lets you search for places within a specified area. You can refine your search request by supplying keywords, type of place you are searching for and other parameters.
+    Searches for places within a specified area using Google Maps Nearby Search.
 .DESCRIPTION
-    Performs a nearby search request with provided parameters.
-    Nearby search is useful for finding places near a specific geographic location.
-    By default, 20 results are returned from a standard search.
-    You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
+    The Search-GMapNearbyPlace function utilizes Google's Places API to perform nearby searches for places
+    around a specified geographic location. By default, it returns 20 results, which can be increased to a
+    maximum of 60 using the AllSearchResults switch. The function allows refining the search based on keywords,
+    place types, and other criteria.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -GoogleAPIKey $googleAPIKey
 
-    Performs a nearby search and returns all places types near provided coordinates within a range of 5000 meters.
+    Searches for places within a 5000-meter radius of the specified coordinates.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 10000 -RankByProminence -Keyword 'butcher' -Type store -GoogleAPIKey $googleAPIKey
 
-    Performs a nearby search and returns all store place types that match the keyword of butcher within the specified geographic range.
+    Searches for stores related to the keyword 'butcher' within a 10000-meter radius, sorted by prominence.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '38.9072' -Longitude '-77.0369' -Radius 10000 -RankByProminence -Type embassy -AllSearchResults -GoogleAPIKey $googleAPIKey
 
-    Performs a nearby search and returns all embassy place types near provided coordinates within a range of 10000 meters. The maximum of 60 places results is returned.
+    Searches for embassies within a 10000-meter radius, returning up to 60 results.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '29.7013856' -Longitude '-98.1249258' -Radius 1000 -Type restaurant -MinPrice 1 -MaxPrice 3 -GoogleAPIKey $googleAPIKey
 
-    Performs a nearby search and returns only restaurants places near provided coordinates within a range of 1000 meters. Restaurant will be in the cheap to moderately expensive price range.
+    Searches for restaurants within 1000 meters in the affordable to moderately expensive price range.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -RankByDistance -GoogleAPIKey $googleAPIKey
 
-    Performs a nearby search and returns all places types near provided coordinates ranked by distance from the coordinates.
+    Searches for places near the specified coordinates, ranked by distance.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '26.1202' -Longitude '127.7025' -Radius 10000 -RankByProminence -Type amusement_park -Language en -GoogleAPIKey $googleAPIKey
 
-    Performs a nearby search and returns only amusement parks places near provided coordinates within a range of 10000 meters. Results are ranked by prominence and returned in English.
+    Searches for amusement parks within a 10000-meter radius, results in English, sorted by prominence.
 .EXAMPLE
     Search-GMapNearbyPlace -Latitude '29.7049806' -Longitude '-98.068343' -Radius 5000 -RankByProminence -Keyword 'pasta' -Type restaurant -Language en -OpenNow -MaxPrice 4 -MinPrice 2 -AllSearchResults -GoogleAPIKey $googleAPIKey
 
-    Performs a nearby search and returns only restaurants places near provided coordinates that match the keyword of pasta within a range of 5000 meters. Restaurant will be in the moderately expensive to expensive price range. Only places that are currently opened are returned. Results will be returned in English.
+    Searches for pasta restaurants within 5000 meters, open now, priced mid to high, returning all results in English.
 .EXAMPLE
     $searchGMapNearbyPlaceSplat = @{
         Latitude         = '29.7049806'
@@ -51,7 +51,7 @@
     }
     Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
 
-    Performs a nearby search and returns only restaurants places near provided coordinates that match the keyword of pasta within a range of 5000 meters. Restaurant will be in the moderately expensive to expensive price range. Only places that are currently opened are returned. Results will be returned in English.
+    Searches for pasta restaurants within 5000 meters, open now, priced mid to high, returning all results in English.
 .PARAMETER Latitude
     Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
 .PARAMETER Longitude
@@ -83,27 +83,14 @@
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-    Latitude and Longitude information can be easily retrieved using Invoke-GMapGeoCode
+    - Use Invoke-GMapGeoCode if you need to retrieve latitude and longitude information.
 
-    Required parameters
-        location
-            This must be specified as latitude,longitude.
-    Optional parameters
-        keyword
-        language
-        maxprice
-        minprice
-        name
-        opennow
-        radius
-        rankby
-        type
-        sessiontoken
+    Direct API Example:
+        https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=YOUR_API_KEY
 
-    Example: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=YOUR_API_KEY'
-
-    How to get a Google API Key:
-        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
+    Ensure you have a valid Google API Key.
+        How to get a Google API Key:
+            https://pwshplaces.readthedocs.io/en/latest/GoogleMapsAPI/#how-to-get-a-google-maps-api-key
 
     Nearby Search and Text Search return all of the available data fields for the selected place (a subset of the supported fields), and you will be billed accordingly There is no way to constrain Nearby Search or Text Search to only return specific fields. To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.
 
@@ -113,11 +100,11 @@
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapNearbyPlace.md
+    https://pwshplaces.readthedocs.io/en/latest/Search-GMapNearbyPlace
+.LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/
 .LINK
     https://developers.google.com/maps/documentation/places/web-service/search-nearby
-.LINK
-    https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
 .LINK
     https://developers.google.com/maps/faq#languagesupport
 .LINK
@@ -201,6 +188,29 @@ function Search-GMapNearbyPlace {
         [string]$GoogleAPIKey
     )
 
+    <#
+        API Notes:
+            Required parameters
+                location
+                    This must be specified as latitude,longitude.
+                radius
+                    Defines the distance (in meters) within which to return place results. You may bias results to a specified circle by passing a location and a radius parameter.
+                    Doing so instructs the Places service to prefer showing results within that circle; results outside of the defined area may still be displayed.
+                    The radius will automatically be clamped to a maximum value depending on the type of search and other parameters.
+                    Query Autocomplete: 50,000 meters
+                    Text Search: 50,000 meters
+            Optional parameters
+                keyword
+                language
+                maxprice
+                minprice
+                opennow
+                pagetoken
+                radius
+                rankby
+                type
+    #>
+
     $uri = '{0}{1}' -f $googleMapsBaseURI, 'place/nearbysearch/json?'
     Write-Debug -Message ('Base function URI: {0}' -f $uri)
 
@@ -267,7 +277,7 @@ function Search-GMapNearbyPlace {
     $uri += $fAPIKey
     Write-Debug -Message ('Final URI: {0}' -f $uri)
 
-    $allresults = [System.Collections.ArrayList]::new()
+    $allResults = [System.Collections.ArrayList]::new()
 
     $invokeRestMethodSplat = @{
         Uri         = $uri
@@ -282,7 +292,7 @@ function Search-GMapNearbyPlace {
 
     if ($results.status -eq 'OK' -and $AllSearchResults) {
         $results.results | ForEach-Object {
-            [void]$allresults.Add($_)
+            [void]$allResults.Add($_)
         }
         $i = 0
         $pageToken = $results.next_page_token
@@ -298,6 +308,7 @@ function Search-GMapNearbyPlace {
             There is a short delay between when a next_page_token is issued, and when it will become valid.
             Requesting the next page before it is available will return an INVALID_REQUEST response.
             This sleep is necessary. the api backend needs time to catch up.
+            TODO: add logic to check for INVALID_REQUEST and retry
             #>
             Start-Sleep -Seconds 4
             #_________________________________________________________________________
@@ -318,12 +329,12 @@ function Search-GMapNearbyPlace {
             #_________________________________________________________________________
             $pageToken = $results.next_page_token
             $results.results | ForEach-Object {
-                [void]$allresults.Add($_)
+                [void]$allResults.Add($_)
             }
             $i++
             #_________________________________________________________________________
         }
-        $finalResults = $allresults | Format-GMapNearbyPlace
+        $finalResults = $allResults | Format-GMapNearbyPlace
     }
     elseif ($results.status -ne 'OK' ) {
         Write-Warning -Message 'Did not get a succcessful return from Google Geocode API endpoint'

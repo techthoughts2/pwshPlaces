@@ -1,14 +1,14 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapText.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Search-GMapText
 schema: 2.0.0
 ---
 
 # Search-GMapText
 
 ## SYNOPSIS
-A text search that returns information about a set of places based on provided string.
+Conducts a text-based search that returns information about a set of places using Google Maps.
 
 ## SYNTAX
 
@@ -40,12 +40,13 @@ Search-GMapText [-Query <String>] -Latitude <String> -Longitude <String> [-Type 
 ```
 
 ## DESCRIPTION
-Text based search for finding places based on a provided string and optional parameters.
-Text search is especially useful for making ambiguous queries when searching for places.
-Returned results can be heavily biased based on factors such as including a location in
-the query itself, or by providing direct location information in optional parameters.
-By default 20 results are returned from a standard search.
-You can increase this to a maximum of 60 places results by providing the AllSearchResults switch.
+The Search-GMapText function uses a text query to search for places using Google's Places API.
+It is especially useful for ambiguous or general searches.
+Returned results can be heavily biased based
+on factors such as including a location in the query itself or by providing direct location information in
+optional parameters.
+By default, up to 20 results are returned, which can be expanded to a maximum
+of 60 by using the AllSearchResults switch.
 
 ## EXAMPLES
 
@@ -54,75 +55,65 @@ You can increase this to a maximum of 60 places results by providing the AllSear
 Search-GMapText -Query "Krause's Cafe" -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query.
-Since no address or location information is provided places results are biased by your IP location.
+Searches for "Krause's Cafe" with results biased by the user's IP location.
 
 ### EXAMPLE 2
 ```
 Search-GMapText -Query "Cupcakes" -Type bakery -AllSearchResults -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query and returns places that are classified as type: bakery.
-Since no address or location information is provided places results are biased by your IP location.
+Searches for bakeries related to "Cupcakes," returning up to 60 results biased by the user's IP location.
 
 ### EXAMPLE 3
 ```
 Search-GMapText -Query "pizza restaurants in New York" -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query.
-Since a location is provided in the query, places results will be biased by that location.
+Searches for pizza restaurants in New York, with results biased by the location mentioned in the query.
 
 ### EXAMPLE 4
 ```
 Search-GMapText -Query "Airport" -RegionBias es -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query.
-Places results are biased to the region of Spain.
+Searches for airports with results regionally biased to Spain.
 
 ### EXAMPLE 5
 ```
 Search-GMapText -Query "italian restaurants in New York" -MinPrice 4 -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query and returns expensive restaurant options.
-Since a location is provided in the query, places results will be biased by that location.
+Searches for high-end Italian restaurants in New York.
 
 ### EXAMPLE 6
 ```
 Search-GMapText -Query "main plaza New Braunfels" -Type restaurant -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query and returns only restaurants.
-Since a location is provided in the query, places results will be biased by that location.
+Conducts a text search for 'main plaza New Braunfels' focusing specifically on restaurants.
+The query includes a specific location, which biases the search results towards places in and around Main Plaza in New Braunfels.
+As a result, the function returns a list of restaurants that are geographically relevant to the specified area, offering a targeted selection based on the user's input location.
 
 ### EXAMPLE 7
 ```
 Search-GMapText -Query 'Cafe' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query.
-Results are returned based on the provided coordiantes within a 5000 meter range.
-Places results are returned in English.
+Searches for cafes near specified coordinates within 5000 meters, results in English.
 
 ### EXAMPLE 8
 ```
 Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 5000 -Language en -Type restaurant -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query.
-Only restaurant places are returned.
-Results are returned based on the provided coordiantes within a 5000 meter range.
-Places results are returned in English.
+Searches for 'Coco' restaurants near specified coordinates, results ranked by distance and returned in English.
 
 ### EXAMPLE 9
 ```
 Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -Radius 500 -RankByProminence -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query.
-Results are returned based on the provided coordiantes within a 500 meter range.
+Searches for 'Coco' restaurants near specified coordinates within a 500 meter range.
 Places results are ranked by their prominence.
 
 ### EXAMPLE 10
@@ -130,22 +121,18 @@ Places results are ranked by their prominence.
 Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query.
-Only restaurant places are returned.
-Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates.
+Searches for 'Coco' restaurants near specified coordinates, results ranked by distance.
 
 ### EXAMPLE 11
 ```
 Search-GMapText -Query 'Coco' -Latitude '26.1202' -Longitude '127.7025' -RankByDistance -Type restaurant -Language en -OpenNow -MinPrice 1 -MaxPrice 2 -AllSearchResults -GoogleAPIKey $googleAPIKey
 ```
 
-Performs a text search with the provided query.
-Only restaurant places are returned.
-Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates.
-Places data is returned in English.
-Results with a cheap to moderate price are returned.
-Only restaurants that are currently open are returned.
-The maximum of 60 places results is returned.
+Performs an advanced search specifically for restaurants related to 'Coco' near the given coordinates.
+The function filters the results to include only restaurants, ranking them based on their proximity to the provided coordinates.
+Additionally, the search is refined to show only those restaurants that are currently open and fall within a cheap to moderate price range.
+All search results are presented in English.
+Maximum limit of 60 place results is utilized in this search.
 
 ### EXAMPLE 12
 ```
@@ -165,13 +152,11 @@ $searchGMapTextSplat = @{
 Search-GMapText @searchGMapTextSplat
 ```
 
-Performs a text search with the provided query.
-Only restaurant places are returned.
-Results are returned based on the provided coordiantes and are ranked by their distance from the coordinates.
-Places data is returned in English.
-Results with a cheap to moderate price are returned.
-Only restaurants that are currently open are returned.
-The maximum of 60 places results is returned.
+Performs an advanced search specifically for restaurants related to 'Coco' near the given coordinates.
+The function filters the results to include only restaurants, ranking them based on their proximity to the provided coordinates.
+Additionally, the search is refined to show only those restaurants that are currently open and fall within a cheap to moderate price range.
+All search results are presented in English.
+Maximum limit of 60 place results is utilized in this search.
 
 ## PARAMETERS
 
@@ -442,39 +427,29 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## NOTES
 Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-Latitude and Longitude information can be easily retrieved using Invoke-GMapGeoCode
+- Use Invoke-GMapGeoCode if you need to retrieve latitude and longitude information.
+- Nearby Search and Text Search return all of the available data fields for the selected place
+    (a subset of the supported fields), and you will be billed accordingly.
+    There is no way to constrain Nearby Search or Text Search to only return specific fields.
+    To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.
+-  Use of the AllSearchResults parameter does increase the number of API calls.
 
-Required parameters
-    query
-Optional parameters
-    language
-    location
-    maxprice
-    minprice
-    opennow
-    radius
-    region
-    type
+Direct API Example:
+    https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants%20in%20Sydney&key=YOUR_API_KEY
 
-Example: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants%20in%20Sydney&key=YOUR_API_KEY'
-
-How to get a Google API Key:
-    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
-
-Nearby Search and Text Search return all of the available data fields for the selected place (a subset of the supported fields), and you will be billed accordingly There is no way to constrain Nearby Search or Text Search to only return specific fields.
-To keep from requesting (and paying for) data that you don't need, use a Find Place request instead.
-
-Use of the AllSearchResults parameter does increase the number of API calls.
+Ensure you have a valid Google API Key.
+    How to get a Google API Key:
+        https://pwshplaces.readthedocs.io/en/latest/GoogleMapsAPI/#how-to-get-a-google-maps-api-key
 
 This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapText.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Search-GMapText.md)
+[https://pwshplaces.readthedocs.io/en/latest/Search-GMapText](https://pwshplaces.readthedocs.io/en/latest/Search-GMapText)
+
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/)
 
 [https://developers.google.com/maps/documentation/places/web-service/search-text](https://developers.google.com/maps/documentation/places/web-service/search-text)
-
-[https://maps.googleapis.com/maps/api/place/textsearch/output?parameters](https://maps.googleapis.com/maps/api/place/textsearch/output?parameters)
 
 [https://developers.google.com/maps/faq#languagesupport](https://developers.google.com/maps/faq#languagesupport)
 

@@ -2,41 +2,21 @@
 
 [![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.1+-purple.svg)](https://github.com/PowerShell/PowerShell) [![PowerShell Gallery][psgallery-img]][psgallery-site] ![Cross Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey) [![License][license-badge]](LICENSE) [![Documentation Status](https://readthedocs.org/projects/pwshPlaces/badge/?version=latest)](https://pwshPlaces.readthedocs.io/en/latest/?badge=latest)
 
+
 [psgallery-img]:   https://img.shields.io/powershellgallery/dt/pwshPlaces?label=Powershell%20Gallery&logo=powershell
 [psgallery-site]:  https://www.powershellgallery.com/packages/pwshPlaces
 [psgallery-v1]:    https://www.powershellgallery.com/packages/pwshPlaces/0.8.1
 [license-badge]:   https://img.shields.io/github/license/techthoughts2/pwshPlaces
 
-Branch | Windows - PowerShell | Windows - pwsh | Linux | MacOS
---- | --- | --- | --- | --- |
-main | [![Build Status Windows PowerShell main](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows.yml/badge.svg?branch=main)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows.yml) | [![Build Status Windows pwsh main](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows_Core.yml/badge.svg?branch=main)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows_Core.yml) | [![Build Status Linux main](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Linux.yml/badge.svg?branch=main)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Linux.yml) | [![Build Status MacOS main](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_MacOS.yml/badge.svg?branch=main)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_MacOS.yml)
-Enhancements | [![Build Status Windows PowerShell Enhancements](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows.yml/badge.svg?branch=Enhancements)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows.yml) | [![Build Status Windows pwsh Enhancements](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows_Core.yml/badge.svg?branch=Enhancements)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows_Core.yml) | [![Build Status Linux Enhancements](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Linux.yml/badge.svg?branch=Enhancements)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Linux.yml) | [![Build Status MacOS Enhancements](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_MacOS.yml/badge.svg?branch=Enhancements)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_MacOS.yml)
-
-## Synopsis
+## What is pwshPlaces?
 
 pwshPlaces is a PowerShell module that integrates with leading mapping services like Google Maps and Bing Maps. Offering a suite of commands for interacting with maps, it enables you to perform searches, read reviews, and retrieve detailed information about locations worldwide. From discovering nearby restaurants to geocoding addresses, pwshPlaces equips you with a wealth of geographical data, accessible through simple and intuitive PowerShell commands.
 
-## Description
+## Why pwshPlaces?
 
-pwshPlaces enables you to leverage the Google Maps and/or Bing Maps APIs to perform a variety of map-related tasks using PowerShell. This module simplifies accessing and analyzing geographical data with user-friendly commands, empowering users to search for locations, read reviews, and perform geocoding effortlessly. Ideal for discovery, travel planning, or enhancing automation scripts, pwshPlaces transforms complex mapping data into actionable insights using PowerShell.
-
-### Features
-
-- Support for both Bing Maps and Google Maps
-- *Find Places with Ease*: Use commands to locate any place, from restaurants to landmarks, using simple queries.
-- *Open-Text Search Capabilities*: Harness the power of flexible, text-based searches. Whether it’s "coffee shops in Amsterdam" or "art galleries in New York", get targeted results swiftly.
-- *Discover Nearby Points of Interest*: Explore what's around you, be it parks, eateries, or museums, based on your current or specified location.
-- *Efficient Geocoding and Reverse Geocoding*: Convert addresses to coordinates and vice versa, integrating geographical context into your data.
-- *In-depth Place Details*: Dive deeper into specific locations to access comprehensive information like contact details, ratings, reviews, and more.
-- *Time Zone Information*: Stay informed about the time zones of different places, making scheduling and planning across time zones simpler.
-- *Rapid Comparison and Decision Making*: Compare ratings, prices, and other key information quickly and make informed decisions without wading through dense web pages.
-- *Customizable Search Parameters*: Tailor your searches with various parameters like radius, price level, and types to get precisely what you're looking for.
+pwshPlaces streamlines your interaction with Google Maps and Bing Maps, transforming complex API requirements into simple PowerShell commands. Unlike the often overwhelming and visually dense web interfaces, pwshPlaces delivers essential information efficiently, enabling rapid decision-making based on concise and relevant data. Quickly compare restaurants, parks, or any places of interest with just a few lines of code, receiving straightforward, concise data like ratings and locations.
 
 ## Getting Started
-
-### Documentation
-
-Documentation for pwshPlaces is available at: [https://pwshPlaces.readthedocs.io](https://pwshPlaces.readthedocs.io)
 
 ### Prerequisites
 
@@ -46,8 +26,8 @@ To use pwshPlaces you will require a Google Maps or Bing Maps API key. To use al
 
 Both of these Map API keys are *easy to create* and have *no cost* pricing tiers which should meet your needs. I have provided detailed guides on how to get your API keys:
 
-- [How to get a Google Maps API Key](docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key)
-- [How to get a Bing Maps API Key](docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key)
+- [How to get a Google Maps API Key](GoogleMapsAPI.md)
+- [How to get a Bing Maps API Key](BingMapsAPI.md)
 
 ### Installation
 
@@ -55,9 +35,13 @@ Both of these Map API keys are *easy to create* and have *no cost* pricing tiers
 Install-Module -Name 'pwshPlaces' -Repository PSGallery -Scope CurrentUser
 ```
 
-## Quick start
+### Quick Start
 
 ```powershell
+#-------------------------------------------------------------------------------------
+# import the pwshPlaces module
+Import-Module -Name "pwshPlaces"
+#-------------------------------------------------------------------------------------
 ######################################################################################
 # Google Maps
 $googleAPIKey = 'yourGoogleAPIKey'
@@ -107,14 +91,20 @@ Find-BingTimeZone -PointLatitude 29.70 -PointLongitude -98.11 -BingMapsAPIKey $b
 #-------------------------------------------------------------------------------------
 ```
 
-## Notes
+## How pwshPlaces Works
 
-This PowerShell project was created with [Catesta](https://github.com/techthoughts2/Catesta).
+pwshPlaces acts as a PowerShell wrapper for the Google Maps and Bing Maps APIs. It translates the capabilities of these powerful mapping services into easy-to-use PowerShell commands. This means you can harness the extensive features of these APIs directly within your PowerShell environment, without needing to delve into the complexities of direct API interaction.
 
-## Contributing
+## Features
 
-If you'd like to contribute to pwshPlaces, please see the [contribution guidelines](.github/CONTRIBUTING.md).
+Features
 
-## License
-
-This project is [licensed under the MIT License](LICENSE).
+- Support for both Bing Maps and Google Maps
+- *Find Places with Ease*: Use commands to locate any place, from restaurants to landmarks, using simple queries.
+- *Open-Text Search Capabilities*: Harness the power of flexible, text-based searches. Whether it’s "coffee shops in Amsterdam" or "art galleries in New York", get targeted results swiftly.
+- *Discover Nearby Points of Interest*: Explore what's around you, be it parks, eateries, or museums, based on your current or specified location.
+- *Efficient Geocoding and Reverse Geocoding*: Convert addresses to coordinates and vice versa, integrating geographical context into your data.
+- *In-depth Place Details*: Dive deeper into specific locations to access comprehensive information like contact details, ratings, reviews, and more.
+- *Time Zone Information*: Stay informed about the time zones of different places, making scheduling and planning across time zones simpler.
+- *Rapid Comparison and Decision Making*: Compare ratings, prices, and other key information quickly and make informed decisions without wading through dense web pages.
+- *Customizable Search Parameters*: Tailor your searches with various parameters like radius, price level, and types to get precisely what you're looking for.

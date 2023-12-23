@@ -125,16 +125,16 @@
             "command": "Invoke-Build -Task Build -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
         },
         {
-            "label": "BuildNoInfra",
+            "label": "BuildNoIntegration",
             "type": "shell",
             "problemMatcher": "$msCompile",
-            "command": "Invoke-Build -Task BuildNoInfra -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+            "command": "Invoke-Build -Task BuildNoIntegration -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
         },
         {
-            "label": "InfraTest",
+            "label": "IntegrationTest",
             "type": "shell",
             "problemMatcher": "$msCompile",
-            "command": "Invoke-Build -Task InfraTest -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
+            "command": "Invoke-Build -Task IntegrationTest -File '${workspaceFolder}/src/pwshPlaces.build.ps1'"
         }
 	]
 }

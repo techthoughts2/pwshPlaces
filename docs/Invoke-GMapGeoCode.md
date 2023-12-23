@@ -1,14 +1,14 @@
 ---
 external help file: pwshPlaces-help.xml
 Module Name: pwshPlaces
-online version: https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Invoke-GMapGeoCode.md
+online version: https://pwshplaces.readthedocs.io/en/latest/Invoke-GMapGeoCode
 schema: 2.0.0
 ---
 
 # Invoke-GMapGeoCode
 
 ## SYNOPSIS
-Engages Geocoding API to return address and geographic coordinates based on provided query parameters.
+Converts addresses to geographic coordinates and vice versa using Google's Geocoding API.
 
 ## SYNTAX
 
@@ -31,10 +31,9 @@ Invoke-GMapGeoCode -PlaceID <String> [-Language <languages>] [-RegionBias <ccTLD
 ```
 
 ## DESCRIPTION
-Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
-This function can take in an address and return coordinate information.
-You can also provide coordinates to return multiple nearby address results.
-If you know the exact google placeID this can also be provided to return Geocoding information about that location.
+The Invoke-GMapGeoCode function utilizes Google's Geocoding API to convert street addresses into geographic coordinates
+(latitude and longitude) and perform reverse geocoding, which converts coordinates back into readable addresses.
+This function can also use a Google Place ID to retrieve geocoding information about a specific location.
 
 ## EXAMPLES
 
@@ -43,28 +42,28 @@ If you know the exact google placeID this can also be provided to return Geocodi
 Invoke-GMapGeoCode -Address '148 S Castell Ave, New Braunfels, TX 78130, United States' -GoogleAPIKey $googleAPIKey
 ```
 
-Performs Geocoding (latitude/longitude lookup) on provided address.
+Performs geocoding to find the latitude and longitude of the given address
 
 ### EXAMPLE 2
 ```
 Invoke-GMapGeoCode -Latitude '29.7012853' -Longitude '-98.1250235' -GoogleAPIKey $googleAPIKey
 ```
 
-Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
+Performs reverse geocoding on the provided coordinates, returning potential address matches.
 
 ### EXAMPLE 3
 ```
 Invoke-GMapGeoCode -Latitude '37.621313' -Longitude '-122.378955' -Language es -GoogleAPIKey $googleAPIKey
 ```
 
-Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results in Spanish.
+Performs reverse geocoding on the provided coordinates, returning address results in Spanish.
 
 ### EXAMPLE 4
 ```
 Invoke-GMapGeoCode -PlaceID 'ChIJK34phme9XIYRqstHW_gHr2w' -GoogleAPIKey $googleAPIKey
 ```
 
-Returns Geocoding information about the provided place.
+Retrieves geocoding information for the specified place ID.
 
 ## PARAMETERS
 
@@ -194,44 +193,26 @@ Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 This function does not support pipeline input because of this issue:
     https://github.com/PowerShell/PowerShell/issues/10188
 
-LAT LONG LOOKUP
-    Required parameters
-        address
-        key
-    Optional parameters
-        bounds
-        language
-        region
-        components
-    Example:
-        https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-Reverse geocoding (address lookup)
-    Required parameters
-        latlng
-        key
-    Optional parameters
-        language
-        result_type
-        location_type
-    Example:
-        https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+Direct API Example:
+    https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
 
-How to get a Google API Key:
-    https://github.com/techthoughts2/pwshPlaces/blob/main/docs/GoogleMapsAPI.md#how-to-get-a-google-maps-api-key
+Ensure you have a valid Google API Key.
+    How to get a Google API Key:
+        https://pwshplaces.readthedocs.io/en/latest/GoogleMapsAPI/#how-to-get-a-google-maps-api-key
 
 This function includes Google Maps features and content; use of Google Maps features and content is subject to the terms of service and Google privacy (linked below).
 
 ## RELATED LINKS
 
-[https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Invoke-GMapGeoCode.md](https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Invoke-GMapGeoCode.md)
+[https://pwshplaces.readthedocs.io/en/latest/Invoke-GMapGeoCode](https://pwshplaces.readthedocs.io/en/latest/Invoke-GMapGeoCode)
+
+[https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/](https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Google-Maps-Examples/)
 
 [https://developers.google.com/maps/documentation/geocoding/overview](https://developers.google.com/maps/documentation/geocoding/overview)
 
-[https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters](https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters)
+[https://developers.google.com/maps/documentation/geocoding/requests-geocoding](https://developers.google.com/maps/documentation/geocoding/requests-geocoding)
 
-[https://developers.google.com/maps/documentation/geocoding/overview#geocoding-lookup](https://developers.google.com/maps/documentation/geocoding/overview#geocoding-lookup)
-
-[https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding](https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding)
+[https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding](https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding)
 
 [https://developers.google.com/maps/faq#languagesupport](https://developers.google.com/maps/faq#languagesupport)
 

@@ -1,26 +1,27 @@
 ﻿<#
 .SYNOPSIS
-    Engages Bing Maps API to return address and geographic coordinates based on provided query parameters.
+    Converts addresses to geographic coordinates and vice versa using Bing Maps API.
 .DESCRIPTION
-    Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates.
-    This function can take in an address and return coordinate information.
-    You can also provide coordinates to return multiple nearby address results.
+    Invoke-BingGeoCode performs geocoding by converting addresses into geographic coordinates
+    (latitude and longitude) and reverse geocoding by turning coordinates into human-readable addresses.
+    This function is ideal for applications needing to translate address data into geographic locations
+    or retrieve address information from coordinate points.
 .EXAMPLE
     Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -BingMapsAPIKey $bingAPIKey
 
-    Performs Geocoding (latitude/longitude lookup) on provided address.
+    Geocodes the provided address, returning its latitude and longitude.
 .EXAMPLE
     Invoke-BingGeoCode -Latitude '29.7030' -Longitude '-98.1245' -BingMapsAPIKey $bingAPIKey
 
-    Performs Reverse geocoding (address lookup) on provided coordinates and can return multiple address results.
+    Performs reverse geocoding on the provided coordinates to find nearby addresses.
 .EXAMPLE
     Invoke-BingGeoCode -Query 'The Alamo' -BingMapsAPIKey $bingAPIKey
 
-    Searches for provided query and if a match is found will return Geocoding (latitude/longitude lookup) of the results.
+    Searches for 'The Alamo' and returns geocoded latitude and longitude if found.
 .EXAMPLE
     Invoke-BingGeoCode -AddressLine '148 S Castell Ave' -City 'New Braunfels' -State TX -PostalCode 78130 -Country us -Language en -MaxResults 20 -BingMapsAPIKey $bingAPIKey
 
-    Performs Geocoding (latitude/longitude lookup) on provided address. Results are biased to the United States country. Results are returned in English. Up to 20 results are returned.
+    Geocodes the address with a bias towards the United States, returning up to 20 results in English.
 .EXAMPLE
     $invokeBingGeoCodeSplat = @{
         AddressLine    = '148 S Castell Ave'
@@ -34,7 +35,7 @@
     }
     Invoke-BingGeoCode @invokeBingGeoCodeSplat
 
-    Performs Geocoding (latitude/longitude lookup) on provided address. Results are biased to the United States country. Results are returned in English. Up to 20 results are returned.
+    Geocodes the address with a bias towards the United States, returning up to 20 results in English.
 .PARAMETER AddressLine
     A string specifying the street line of an address.
 .PARAMETER City
@@ -50,7 +51,7 @@
 .PARAMETER Longitude
     Geographic coordinate that specifies the east–west position of a point on the Earth's surface.
 .PARAMETER Query
-    A string that contains information about a location, such as an address or landmark name.
+    Specifies the search term string, such as an address, business name, or landmark name.
 .PARAMETER Language
     The language in which to return results.
 .PARAMETER MaxResults
@@ -62,11 +63,12 @@
 .NOTES
     Author: Jake Morrison - @jakemorrison - https://www.techthoughts.info/
 
-    Example:
+    Direct API Example:
         http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}
 
-    How to get a Bing Maps API Key:
-        https://github.com/techthoughts2/pwshPlaces/blob/main/docs/BingMapsAPI.md#how-to-get-a-bing-maps-api-key
+    Ensure you have a valid Bing Maps API Key.
+        How to get a Bing Maps API Key:
+            https://pwshplaces.readthedocs.io/en/latest/BingMapsAPI/#how-to-get-a-bing-maps-api-key
 
     While the Bing Location API does support a text query option, I have found it to be unreliable.
     For GeoCode info stick to Addresses and Lat/Long for reverse Geocoding.
@@ -74,7 +76,9 @@
 .COMPONENT
     pwshPlaces
 .LINK
-    https://github.com/techthoughts2/pwshPlaces/blob/master/docs/Invoke-BingGeoCode.md
+    https://pwshplaces.readthedocs.io/en/latest/Invoke-BingGeoCode
+.LINK
+    https://pwshplaces.readthedocs.io/en/latest/pwshPlaces-Bing-Maps-Examples/
 .LINK
     https://docs.microsoft.com/bingmaps/rest-services/locations/find-a-location-by-address
 .LINK
@@ -184,7 +188,7 @@ function Invoke-BingGeoCode {
             $fQuery = '&query={0}' -f [uri]::EscapeDataString($Query)
             $uri += $fQuery
         } #textquery
-    } #switch_parametersetname
+    } #switch_ParameterSetName
 
     if ($MaxResults) {
         Write-Debug -Message ('MaxResults: {0}' -f $MaxResults)
@@ -216,7 +220,7 @@ function Invoke-BingGeoCode {
     }
 
     if ($results.statusDescription -ne 'OK') {
-        Write-Warning -Message 'Did not get a succcessful return from Bing Location API endpoint'
+        Write-Warning -Message 'Did not get a successful return from Bing Location API endpoint'
         $finalResults = $results
     }
     elseif (-not ($results.resourceSets.estimatedTotal -ge 1)) {
