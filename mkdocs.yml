@@ -14,7 +14,7 @@ repo_url: https://github.com/techthoughts2/pwshPlaces
 # repo_name:
 # edit_uri: edit/main/docs/
 # edit_uri_template:
-site_description: Search, discover, and identify PowerShell cloud commands across multiple cloud providers. # meta tag to the generated HTML header
+site_description: pwshPlaces is a PowerShell module that can help you discover places and search for points of interest around the globe. # meta tag to the generated HTML header
 site_author: Jake Morrison # meta tag to the generated HTML header
 copyright: "pwshPlaces is licensed under the <a href='https://github.com/techthoughts2/pwshPlaces/blob/main/LICENSE'>MIT license"
 # remote_branch:
