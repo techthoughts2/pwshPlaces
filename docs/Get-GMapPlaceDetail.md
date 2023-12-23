@@ -49,10 +49,11 @@ Retrieves detailed place information including contact details for the specified
 
 ### EXAMPLE 3
 ```
-Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -Language en -GoogleAPIKey $googleAPIKey
+Get-GMapPlaceDetail -PlaceID 'ChIJf9Yxhme9XIYRkXo-Bl62Q10' -Contact -Atmosphere -ReviewSort Newest -Language en -GoogleAPIKey $googleAPIKey
 ```
 
 Returns extensive place details including contact info, reviews, ratings, and pricing, in English, for the given place ID.
+Reviews are sorted by newest.
 
 ### EXAMPLE 4
 ```
@@ -60,6 +61,7 @@ $getGMapPlaceDetailsSplat = @{
     PlaceID      = 'ChIJf9Yxhme9XIYRkXo-Bl62Q10'
     Contact      = $true
     Atmosphere   = $true
+    ReviewSort   = 'Newest'
     Language     = 'en'
     GoogleAPIKey = $googleAPIKey
 }
@@ -67,6 +69,7 @@ Get-GMapPlaceDetail @getGMapPlaceDetailsSplat
 ```
 
 Returns extensive place details including contact info, reviews, ratings, and pricing, in English, for the given place ID.
+Reviews are sorted by newest.
 
 ## PARAMETERS
 
