@@ -9,7 +9,7 @@ $PathToManifest = [System.IO.Path]::Combine('..', '..', 'Artifacts', "$ModuleNam
 #-------------------------------------------------------------------------
 Import-Module $PathToManifest -Force
 #-------------------------------------------------------------------------
-Describe 'Integration Tests' -Tag Infrastructure {
+Describe 'Integration Tests' -Tag Integration {
     # for local dev testing only
     # BeforeEach {
     #     $env:GoogleAPIKey = ''
