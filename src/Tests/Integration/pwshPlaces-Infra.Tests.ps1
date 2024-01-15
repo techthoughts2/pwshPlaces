@@ -15,6 +15,9 @@ Describe 'Integration Tests' -Tag Integration {
     #     $env:GoogleAPIKey = ''
     #     $env:BingAPIKey = ''
     # }
+    BeforeEach {
+        Start-Sleep -Milliseconds (Get-Random -Minimum 550 -Maximum 1550)
+    }
     Context 'Google Maps Function Tests' {
 
         Context 'Find-GMapPlace' {
@@ -34,7 +37,7 @@ Describe 'Integration Tests' -Tag Integration {
                 $eval.name      | Should -BeExactly "Krause's Cafe"
                 $eval.Open      | Should -Not -BeNullOrEmpty
                 $eval.rating    | Should -Not -BeNullOrEmpty
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Find-GMapPlace
@@ -64,7 +67,7 @@ Describe 'Integration Tests' -Tag Integration {
                 $eval.price_level           | Should -Not -BeNullOrEmpty
                 $eval.Latitude              | Should -Not -BeNullOrEmpty
                 $eval.Longitude             | Should -Not -BeNullOrEmpty
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Get-GMapPlaceDetails
@@ -78,7 +81,7 @@ Describe 'Integration Tests' -Tag Integration {
                 }
                 $eval = Invoke-GMapGeoCode @invokeGMapGeoCodeSplat
                 ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 1
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
             It 'should return the expected results for reverse geocoding' {
@@ -89,7 +92,7 @@ Describe 'Integration Tests' -Tag Integration {
                 }
                 $eval = Invoke-GMapGeoCode @invokeGMapGeoCodeSplat
                 ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 1
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
             It 'should return expected results for place lookup' {
@@ -102,7 +105,7 @@ Describe 'Integration Tests' -Tag Integration {
                 $eval.City      | Should -BeExactly 'New Braunfels'
                 $eval.Latitude  | Should -Not -BeNullOrEmpty
                 $eval.Longitude | Should -Not -BeNullOrEmpty
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Invoke-GMapGeoCode
@@ -125,7 +128,7 @@ Describe 'Integration Tests' -Tag Integration {
                 }
                 $eval = Search-GMapNearbyPlace @searchGMapNearbyPlaceSplat
                 ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 2
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Search-GMapNearbyPlace
@@ -147,7 +150,7 @@ Describe 'Integration Tests' -Tag Integration {
                 }
                 $eval = Search-GMapText @searchGMapTextSplat
                 ($eval.place_id | Measure-Object).Count | Should -BeGreaterOrEqual 8
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Search-GMapText
@@ -167,7 +170,7 @@ Describe 'Integration Tests' -Tag Integration {
                 }
                 $eval = Invoke-BingGeoCode @invokeBingGeoCodeSplat
                 ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
             It 'should return the expected results for reverse geocoding' {
@@ -178,7 +181,7 @@ Describe 'Integration Tests' -Tag Integration {
                 }
                 $eval = Invoke-BingGeoCode @invokeBingGeoCodeSplat
                 ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Invoke-GMapGeoCode
@@ -196,7 +199,7 @@ Describe 'Integration Tests' -Tag Integration {
                 }
                 $eval = Find-BingPlace @findBingPlaceSplat
                 ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Find-BingPlace
@@ -214,7 +217,7 @@ Describe 'Integration Tests' -Tag Integration {
                 }
                 $eval = Search-BingNearbyPlace @searchBingNearbyPlaceSplat
                 ($eval.name | Measure-Object).Count | Should -BeGreaterOrEqual 1
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Find-BingPlace
@@ -232,7 +235,7 @@ Describe 'Integration Tests' -Tag Integration {
                 $eval.TimeZoneShort | Should -BeExactly 'CST'
                 $eval.dstRule.dstStartMonth | Should -BeExactly 'Mar'
                 $eval.dstRule.dstEndMonth | Should -BeExactly 'Nov'
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
             It 'should return the expected results for point' {
@@ -247,7 +250,7 @@ Describe 'Integration Tests' -Tag Integration {
                 $eval.TimeZoneShort | Should -BeExactly 'CST'
                 $eval.dstRule.dstStartMonth | Should -BeExactly 'Mar'
                 $eval.dstRule.dstEndMonth | Should -BeExactly 'Nov'
-                Start-Sleep -Milliseconds (Get-Random -Minimum 250 -Maximum 1000)
+
             } #it
 
         } #context_Find-BingPlace
