@@ -2,7 +2,7 @@
 Module Name: pwshPlaces
 Module Guid: 9a9914bd-d115-4f42-bb5d-19c5e5561a3f
 Download Help Link: NA
-Help Version: 1.0.0
+Help Version: 1.0.1
 Locale: en-US
 ---
 
