@@ -304,7 +304,7 @@ function Search-GMapText {
     $uri += $fAPIKey
     Write-Debug -Message ('Final URI: {0}' -f $uri)
 
-    $allResults = [System.Collections.ArrayList]::new()
+    $allResults = New-Object System.Collections.Generic.List[object]
 
     $invokeRestMethodSplat = @{
         Uri         = $uri
