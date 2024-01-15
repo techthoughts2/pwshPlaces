@@ -22,14 +22,14 @@ reported the issue. Please try to include as much information as you can. Detail
 
 Contributions via pull requests are much appreciated. Before sending a pull request, please ensure that:
 
-1. You are working against the latest source on the *dev* branch.
+1. You are working against the latest source on the *Enhancements* branch.
 2. You check existing open, and recently merged, pull requests to make sure someone else hasn't addressed the problem already.
 3. You open an issue to discuss any significant work - I'd hate for your time to be wasted.
 
 To send a pull request, please:
 
 1. Fork the repository.
-2. Checkout the *dev* branch
+2. Checkout the *Enhancements* branch
 3. Modify the source; please focus on the specific change you are contributing. Please refrain from code styling changes, it will be harder to focus on your change.
 4. Ensure local tests pass.
 5. Commit to your fork using clear commit messages.

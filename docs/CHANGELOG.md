@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Updated links in `psd1` manifest
 - Misc
     - Added new pwshPlaces logo and icons
+    - Updated CONTRIBUTING guidelines
 
 ## [1.0.0]
 
