@@ -12,6 +12,11 @@
 
 pwshPlaces is a PowerShell module that integrates with leading mapping services like Google Maps and Bing Maps. Offering a suite of commands for interacting with maps, it enables you to perform searches, read reviews, and retrieve detailed information about locations worldwide. From discovering nearby restaurants to geocoding addresses, pwshPlaces equips you with a wealth of geographical data, accessible through simple and intuitive PowerShell commands.
 
+<p align="center">
+    <img src="assets/pwshPlaces.png" alt="pwshPlaces Logo" >
+</p>
+
+
 ## Why pwshPlaces?
 
 pwshPlaces streamlines your interaction with Google Maps and Bing Maps, transforming complex API requirements into simple PowerShell commands. Unlike the often overwhelming and visually dense web interfaces, pwshPlaces delivers essential information efficiently, enabling rapid decision-making based on concise and relevant data. Quickly compare restaurants, parks, or any places of interest with just a few lines of code, receiving straightforward, concise data like ratings and locations.
