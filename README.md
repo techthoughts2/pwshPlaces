@@ -7,6 +7,10 @@
 [psgallery-v1]:    https://www.powershellgallery.com/packages/pwshPlaces/0.8.1
 [license-badge]:   https://img.shields.io/github/license/techthoughts2/pwshPlaces
 
+<p align="center">
+    <img src="docs/assets/pwshPlaces.png" alt="pwshPlaces Logo" >
+</p>
+
 Branch | Windows - PowerShell | Windows - pwsh | Linux | MacOS
 --- | --- | --- | --- | --- |
 main | [![Build Status Windows PowerShell main](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows.yml/badge.svg?branch=main)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows.yml) | [![Build Status Windows pwsh main](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows_Core.yml/badge.svg?branch=main)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Windows_Core.yml) | [![Build Status Linux main](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Linux.yml/badge.svg?branch=main)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_Linux.yml) | [![Build Status MacOS main](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_MacOS.yml/badge.svg?branch=main)](https://github.com/techthoughts2/pwshPlaces/actions/workflows/wf_MacOS.yml)

@@ -12,7 +12,7 @@
     RootModule        = 'pwshPlaces.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.0.0'
+    ModuleVersion     = '1.0.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -143,16 +143,16 @@
             )
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri   = 'https://github.com/techthoughts2/pwshPlaces/blob/main/LICENSE'
 
             # A URL to the main website for this project.
             ProjectUri   = 'https://github.com/techthoughts2/pwshPlaces'
 
             # A URL to an icon representing this module.
-            # IconUri = ''
+            IconUri      = 'https://github.com/techthoughts2/pwshPlaces/raw/main/docs/assets/pwshPlaces_icon.png'
 
             # ReleaseNotes of this module
-            ReleaseNotes = 'https://github.com/techthoughts2/pwshPlaces/blob/master/.github/CHANGELOG.md'
+            ReleaseNotes = 'https://github.com/techthoughts2/pwshPlaces/blob/main/docs/CHANGELOG.md'
 
             # Prerelease string of this module
             # Prerelease = ''
